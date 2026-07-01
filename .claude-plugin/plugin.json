@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "sommelier",
   "displayName": "Sommelier",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Verification-gated orchestration skills — turn a big task into a PRD + file-scoped parallel tickets, pair each with the cheapest model tier that passes, and gate merges on re-measured evidence. Self-tested across four rounds; its verification rule is the one claim proven to beat a placebo (hidden-pytest, p<=1e-4). Broader speed/orchestration claims stay unproven, and every round is published.",
   "author": {
     "name": "AppSoApp",

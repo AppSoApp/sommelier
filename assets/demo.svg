@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" role="img" aria-label="sommelier demo: /sommelier-plan produces file-scoped tickets, verifies, and gates the merge">
+  <style>
+    .win { fill:#1e1420; }
+    .bar { fill:#2a1c2e; }
+    text { font-size:15px; fill:#e9e2e6; }
+    .dim { fill:#9a8f95; }
+    .gold { fill:#d7b24a; }
+    .wine { fill:#e0688a; }
+    .ok  { fill:#5bbf8f; }
+    .cap { font-size:12px; fill:#8a7f85; }
+    .l { opacity:0; }
+    .l1{animation:r1 10s infinite} .l2{animation:r2 10s infinite} .l3{animation:r3 10s infinite}
+    .l4{animation:r4 10s infinite} .l5{animation:r5 10s infinite} .l6{animation:r6 10s infinite}
+    .l7{animation:r7 10s infinite} .l8{animation:r8 10s infinite} .l9{animation:r9 10s infinite}
+    .caret{animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    @keyframes r1{0%,4%{opacity:0}6%,100%{opacity:1}}
+    @keyframes r2{0%,15%{opacity:0}17%,100%{opacity:1}}
+    @keyframes r3{0%,24%{opacity:0}26%,100%{opacity:1}}
+    @keyframes r4{0%,32%{opacity:0}34%,100%{opacity:1}}
+    @keyframes r5{0%,42%{opacity:0}44%,100%{opacity:1}}
+    @keyframes r6{0%,52%{opacity:0}54%,100%{opacity:1}}
+    @keyframes r7{0%,62%{opacity:0}64%,100%{opacity:1}}
+    @keyframes r8{0%,74%{opacity:0}76%,100%{opacity:1}}
+    @keyframes r9{0%,86%{opacity:0}88%,100%{opacity:1}}
+  </style>
+
+  <rect class="win" x="0" y="0" width="760" height="430" rx="12"/>
+  <rect class="bar" x="0" y="0" width="760" height="34" rx="12"/>
+  <rect class="bar" x="0" y="22" width="760" height="12"/>
+  <circle cx="20" cy="17" r="5" fill="#e0688a"/>
+  <circle cx="38" cy="17" r="5" fill="#d7b24a"/>
+  <circle cx="56" cy="17" r="5" fill="#5bbf8f"/>
+  <text x="380" y="22" text-anchor="middle" class="cap">claude code — 🍷 sommelier</text>
+
+  <!-- prompt -->
+  <text class="l l1" x="22" y="70"><tspan class="gold">❯</tspan> <tspan>/sommelier-plan</tspan> <tspan class="dim">add rate limiting to the public API</tspan><tspan class="caret" dx="4">▋</tspan></text>
+
+  <!-- output -->
+  <text class="l l2" x="22" y="104"><tspan class="wine">🍷 PRD frozen</tspan> <tspan class="dim">· 4 tickets · file ownership disjoint → safe to run in parallel</tspan></text>
+
+  <text class="l l3" x="34" y="140"><tspan class="gold">① design</tspan>   ticket <tspan class="wine">limiter</tspan>  <tspan class="dim">[src/ratelimit/tokenBucket.ts]</tspan>  <tspan class="dim">→</tspan> sonnet</text>
+  <text class="l l4" x="34" y="166"><tspan class="dim">           ticket</tspan> <tspan class="wine">mw</tspan>       <tspan class="dim">[src/middleware/rateLimit.ts]</tspan>   <tspan class="dim">→</tspan> sonnet</text>
+  <text class="l l5" x="34" y="192"><tspan class="dim">           ticket</tspan> <tspan class="wine">wire</tspan>     <tspan class="dim">[src/api/router.ts]</tspan>             <tspan class="dim">→</tspan> sonnet</text>
+
+  <text class="l l6" x="34" y="228"><tspan class="gold">② verify</tspan>   <tspan>re-measured the metric myself — not the "done" it reported</tspan></text>
+  <text class="l l7" x="34" y="254"><tspan class="gold">③ delegate</tspan> <tspan>cheapest tier that still passes the gate</tspan> <tspan class="dim">(opus only on the gate)</tspan></text>
+
+  <text class="l l8" x="22" y="292"><tspan class="ok">✓ gate</tspan> <tspan class="dim">4/4 APPROVE (evidence + review) → merge · per-feature commit</tspan></text>
+  <text class="l l9" x="22" y="326"><tspan class="dim">critic:</tspan> <tspan>"admin routes uncovered"</tspan> <tspan class="dim">→ 1 follow-up ticket queued</tspan> <tspan class="caret" dx="4">▋</tspan></text>
+
+  <text x="22" y="404" class="cap">Illustrative — a sommelier composes the flight, tastes every pour, sends back what's corked.</text>
+</svg>

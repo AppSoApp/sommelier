@@ -19,6 +19,10 @@ merged until the numbers have been re-poured by hand.*
 [![benchmarks](https://img.shields.io/badge/benchmarks-honest-c9a227)](./BENCHMARKS.md)
 [![stars](https://img.shields.io/github/stars/AppSoApp/sommelier?style=social)](https://github.com/AppSoApp/sommelier)
 
+<br>
+
+<img src="./assets/demo.svg" alt="sommelier demo — /sommelier-plan turns a task into file-scoped tickets, verifies each claim, and gates the merge" width="680">
+
 </div>
 
 ---
@@ -134,6 +138,24 @@ The plugin also ships a slash command for a one-shot plan (no code, just the tic
 It returns a frozen PRD + file-scoped tickets (contract · re-measured metric · tier) following the
 `sommelier-pairing` discipline.
 
+## Run the whole discipline (example workflow)
+
+The `/sommelier-plan` command stops at the plan. To actually *execute* it — dispatch a fleet,
+gate each ticket on re-measured evidence, run the completeness critic — there's a runnable
+[`Workflow`](https://code.claude.com/docs/en/claude-code) script:
+
+**[`examples/sommelier-workflow.example.js`](./examples/sommelier-workflow.example.js)**
+
+```
+run examples/sommelier-workflow.example.js with the Workflow tool
+```
+
+It encodes all three moves as code: it **throws** if two tickets claim the same file (① disjoint
+ownership), runs one **Sonnet** implementer per ticket in parallel (③ tiers), has an **Opus** gate
+**re-measure each metric** instead of trusting the implementer's "done" (② don't settle), then a
+completeness critic. Merge happens only on evidence + APPROVE. Pass your own `{ task, tickets }`
+via `args` — see [`examples/README.md`](./examples/README.md).
+
 ## When NOT to use it
 
 A single-file change or a one-line fix. **YAGNI** — just do it. A fleet is for tasks too big to hold
@@ -218,6 +240,7 @@ taste (verify) every claim, pour (assign) each ticket to the bottle that fits, s
 - **스킬은 알아서 로드**: "이거 계획 짜줘 / 쪼개줘 / 마이그레이션 해줘" 같은 큰 작업을 시키면 Claude가 스킬 `description`을 보고 `sommelier-pairing`을 자동으로 불러옵니다. 강제하려면 *"sommelier-pairing 스킬 써서 계획해줘"* 라고 하면 됩니다.
 - **커맨드로 즉석 계획**(코드는 안 건드림): `/sommelier-plan 공개 API에 rate limiting 추가` → 고정된 PRD + 파일 단위 티켓(계약·재측정 지표·모델 티어)을 돌려줍니다.
 - **실제 fleet 구동**엔 `sommelier-pairing-tiers`(구체 Claude 별칭 `'sonnet'/'opus'/'haiku'` 고정) 사용.
+- **계획을 넘어 직접 실행**하려면 실행 가능한 워크플로 예제 [`examples/sommelier-workflow.example.js`](./examples/sommelier-workflow.example.js): 3무브를 코드로 인코딩 — 두 티켓이 같은 파일을 잡으면 **에러**(①), Sonnet 구현자 병렬 dispatch(③), Opus 게이트가 지표를 **직접 재측정**(②), 완결성 크리틱, 증거+APPROVE만 머지. `run examples/sommelier-workflow.example.js with the Workflow tool` 로 실행.
 
 **언제 쓰나** → 한 컨텍스트에 담기 힘든 큰 작업, 또는 보고서 숫자가 계획을 좌우하는데 그 숫자가 틀릴 수 있을 때. 한 줄 수정·단일 파일 변경엔 쓰지 마세요(YAGNI).
 
