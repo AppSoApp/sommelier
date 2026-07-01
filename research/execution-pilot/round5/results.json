@@ -1,0 +1,20 @@
+{
+  "cost": {
+    "n_tasks": 24,
+    "arms": {
+      "all_opus":  { "impl_tokens": 30374, "gate_tokens": 28086, "bug_fix_pct": 50 },
+      "sommelier": { "impl_tokens_sonnet": 24307, "gate_tokens_opus": 32572, "bug_fix_pct": 58 }
+    },
+    "output_prices_per_mtok": { "opus": 25, "sonnet": 15, "haiku": 5 },
+    "output_cost_usd": { "all_opus": 1.4615, "sommelier": 1.1789 },
+    "sommelier_cheaper_pct": 19,
+    "note": "Token COUNT is ~equal (58460 vs 56879); the saving is cheaper tokens (impl moved Opus->Sonnet), not fewer. Earlier draft said 36% using a stale Opus price of $75/M; corrected to 19% at $25/M."
+  },
+  "speed": {
+    "design": "3 projects x 8 independent functions; projects run sequentially, functions within a project serial (1 agent) vs parallel (8 agents).",
+    "serial_ms": 12333,
+    "parallel_ms": 21624,
+    "parallel_vs_serial": "~1.8x SLOWER",
+    "note": "On tiny units of work, per-agent spawn overhead dominates. Parallelism only wins when each ticket is large enough to amortize the fan-out overhead. Wall-clock is load-sensitive; indicative."
+  }
+}

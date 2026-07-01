@@ -333,6 +333,9 @@ decomposable, verification-critical work. On small tasks, plain single-agent wor
 cheaper and faster — exactly what the skill's own YAGNI rule says: *don't bring a fleet
 to a one-liner.*
 
+Harness + data frozen under
+[`research/execution-pilot/round5/`](./research/execution-pilot/round5/).
+
 ## Methodology & threats to validity
 
 - **Responders:** Claude Haiku. **Judges:** Claude Sonnet (structured rubric).
