@@ -6,14 +6,14 @@
     "email": "appsoapplication@gmail.com"
   },
   "description": "AppSoApp's Claude Code plugins.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "plugins": [
     {
       "name": "sommelier",
       "displayName": "Sommelier",
       "source": "./",
-      "description": "Verification-gated orchestration skills (PRD + file-scoped parallel tickets, tier-paired, evidence-gated). Self-tested with published null results.",
-      "version": "1.0.0",
+      "description": "Verification-gated orchestration skills (PRD + file-scoped parallel tickets, tier-paired, evidence-gated). Self-tested across four rounds; verification rule proven vs placebo (hidden-pytest, p<=1e-4), broader claims unproven, all rounds published.",
+      "version": "1.0.1",
       "author": { "name": "AppSoApp" },
       "homepage": "https://github.com/AppSoApp/sommelier",
       "repository": "https://github.com/AppSoApp/sommelier",

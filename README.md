@@ -90,21 +90,23 @@ Task: "Migrate off the legacy auth-core module. A report says it's 290KB, 7000 l
 
 ## Benchmark (the honest one)
 
-The fairest test we ran — a **paired n=48 study with a length-matched placebo**, planted-lie
-detection probe, Wilson 95% CIs. Every interval overlaps:
+The strongest test — **executed code, graded by a hidden `pytest` (no LLM judge)**,
+pre-registered and paired. Each of 55 tasks hides a real bug behind a `# CERTIFIED
+correct` label. Does the arm re-check the label and fix the bug?
 
 ```
-Planted false-number detection (paired, n=21 on this probe, Wilson 95% CI)
+Bug-fix rate behind a "# CERTIFIED" label  (n=55, paired, hidden pytest)
 
-length-matched placebo   52%   [31–73]  ─┐  CIs fully overlap
-sommelier (this skill)   57%   [36–76]  ─┘  → +5pt is NOT significant
+no-skill                 0%   ░░░░░░░░░░░░░░░░░░░░
+length-matched placebo   0–2% ░░░░░░░░░░░░░░░░░░░░
+sommelier verify rule    29%  ███████░░░░░░░░░░░░░  (haiku)
+sommelier verify rule    44%  ███████████░░░░░░░░░  (sonnet)   McNemar p ≤ 10⁻⁴ ✅
 ```
 
-The skill beat the placebo on **zero** ground-truth probes, and in a later
-**mechanically-graded execution test** (hidden pytest, no LLM judge) **no arm — skill included —
-fixed a bug hidden behind a `# CERTIFIED correct` comment (0%)**. We publish the losses on
-purpose. Full numbers across all three rounds, with the study where the skill scored *worse*, are
-in [`BENCHMARKS.md`](./BENCHMARKS.md). *(No arm is relabeled or composited across studies.)*
+That is the **one** claim that beat a length-matched placebo. On *plan-text* probes the
+skill did **not** beat the placebo (every CI overlapped). We publish the wins and the
+losses — all four rounds are in [`BENCHMARKS.md`](./BENCHMARKS.md). *(No arm is relabeled
+or composited across studies.)*
 
 ## The two skills
 
@@ -153,6 +155,38 @@ cp -r sommelier/skills/sommelier-pairing-tiers  ~/.claude/skills/
 ```
 
 The agent loads a skill by its `description` when the task matches — see each `SKILL.md` for triggers.
+
+---
+
+## 🇰🇷 한국어 설명
+
+**sommelier**는 Claude용 오케스트레이션 스킬입니다. 소믈리에가 요리를 하지 않듯, **오케스트레이터는 코드를 직접 짜지 않습니다** — 큰 작업을 **PRD + 파일 단위 병렬 티켓**으로 쪼개고, 각 티켓을 **가장 싼 모델 티어**에 페어링하고, **재측정한 증거가 있을 때만** 머지합니다.
+
+### 세 가지 무브
+| 무브 | 코드네임 | 하는 일 |
+|------|----------|---------|
+| ① **설계** | **Tekton** | 계획은 산문이 아니라 **파일 단위 티켓**. 티켓 = 파일소유 + 단일계약 + 성공지표 + 모델티어. 파일이 겹치지 않으면 안전하게 병렬. |
+| ② **불신** | **Sim Francisco** | 라벨을 믿지 않는다 — 모든 숫자·`# CERTIFIED` 인증을 **직접 다시 재서** `VERIFIED / REFUTED / PARTIAL` 판정. REFUTED면 그 자리에서 코드를 고친다. |
+| ③ **위임** | **Custom Universe** | 티켓마다 모델 티어를 붙인다 — 게이트를 통과하는 **가장 겸손한 병(가장 싼 모델)**. |
+
+바탕 원칙: **YAGNI**(요청된 것만) + **Karpathy 미니멀리즘**(가장 단순한 baseline, 추측 말고 측정).
+
+### 정직한 검증 결과 (핵심)
+이 스킬은 **자기 자신을 4라운드 적대적으로 검증**하고 결과를 전부 공개했습니다(음성 결과 포함).
+- **입증된 것 (딱 하나)**: 개선된 **검증 규칙**이 `# CERTIFIED`로 인증된 버그를 잡는 비율을 **0% → 29%(haiku)/44%(sonnet)** 로 끌어올림. 길이 맞춘 placebo 대비 **McNemar p ≤ 10⁻⁴**, 사전등록·**LLM 심판 없는 hidden pytest** 기계채점.
+- **미입증**: 병렬 오케스트레이션·티어 위임·속도/비용 이득은 아직 실측으로 증명되지 않음(설계상 그렇게 동작할 뿐).
+- 자세한 수치와 스킬이 **진** 라운드까지 전부 → [`BENCHMARKS.md`](./BENCHMARKS.md).
+
+> 요약: "통계로 무장한 인기 제품"보다 드문 것 — **스스로를 검증하고 음성 결과까지 공개한 스킬**. 그 투명성이 이 스킬의 핵심 원칙(재측정·정직)을 제품이 스스로 지킨 증거입니다.
+
+### 설치
+```
+/plugin marketplace add AppSoApp/sommelier
+/plugin install sommelier@appsoapp
+```
+스킬 2종 + `/sommelier-plan` 커맨드가 함께 번들됩니다. 언제 쓰나 → 한 컨텍스트에 담기 힘든 큰 작업, 또는 보고서 숫자가 계획을 좌우하는데 그 숫자가 틀릴 수 있을 때. 한 줄 수정·단일 파일 변경엔 쓰지 마세요(YAGNI).
+
+---
 
 ## Credits
 
