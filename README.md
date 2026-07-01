@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="./assets/logo.svg" alt="sommelier" width="360">
+
 # 🍷 sommelier
 
 **She cooks nothing. She composes the pairing, tastes every pour, and sends back what's corked.**
@@ -108,6 +110,17 @@ numbers, CIs, and the study where the skill scored worse are in [`BENCHMARKS.md`
 
 Both dispatch by tier **alias** (`'sonnet'` / `'opus'` / `'haiku'`), so the pour always resolves to
 the latest bottle in that tier — no chasing version bumps.
+
+## Command
+
+The plugin also ships a slash command for a one-shot plan (no code, just the tickets):
+
+```
+/sommelier-plan migrate off the legacy auth-core module
+```
+
+It returns a frozen PRD + file-scoped tickets (contract · re-measured metric · tier) following the
+`sommelier-pairing` discipline.
 
 ## When NOT to use it
 
