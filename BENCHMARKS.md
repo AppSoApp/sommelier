@@ -4,11 +4,15 @@
 > be hypocritical to ship inflated numbers. So here is everything we measured,
 > including the parts where the skill **lost** or the metric **didn't hold up**.
 >
-> **TL;DR:** We could not show that the `sommelier` skill beats simply telling
-> Claude *"use a dynamic Workflow."* The one finding that survived scrutiny is
-> narrow and not skill-specific: **a single-pass "plan then execute" agent caught
-> far fewer planted false numbers (~56%) than any orchestrated, verifying setup
-> (100%).** The value is in the **verification gate**, not in the branding.
+> **TL;DR (after three studies, including a paired n=48 test with a length-matched
+> placebo):** We **could not show** that the `sommelier` skill beats a length-matched
+> placebo — or even just telling Claude *"you are an orchestrator."* On the fairest
+> test, every probe's confidence interval overlaps the control; on two probes the skill
+> is nominally *worse*. The one finding that survives is **not skill-specific**:
+> framing work as *orchestrate-and-verify* (rather than single-pass plan-then-execute)
+> catches more planted false numbers — but plain generic advice reproduces it. **This
+> repo makes no efficacy claim.** It ships as an opinionated discipline, not a proven
+> speedup.
 
 ---
 
@@ -45,8 +49,9 @@ sommelier (this skill)         │███████████████�
 
 **Read it carefully:** this says *orchestrate-and-verify* beats *plan-then-execute*.
 It does **not** say the sommelier skill beats plain orchestration — they tie at
-100%. And it is **not yet paired + confidence-interval'd**, so treat it as
-*suggestive, pending a rigorous re-run* (Opus critic's words, adopted).
+100%. This was the *early, easier* 3-arm study; **Round 2 below re-ran it paired,
+harder (with authority pressure), and with CIs** — and the tie held while the
+absolute rates dropped. Treat this chart as the first look, superseded by Round 2.
 
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="230" viewBox="0 0 640 230" role="img" aria-label="Planted false-number detection rate by arm">
   <style>
@@ -138,36 +143,53 @@ and real critical-path time, this repo makes **no efficiency claim.**
 
 ---
 
-## Round 2 — tightened skill, paired vs a length-matched placebo (in progress, underpowered)
+## Round 2 — tightened skill, paired vs a length-matched placebo (n=48, the decisive test)
 
 After Round 1, the skill was tightened with explicit guardrails (no inline code, no
-speculative infra, re-measure reported numbers). Round 2 re-tested it with a stronger
-design: **paired** (same task to all arms), a **length-matched placebo** arm (generic
-senior-engineering advice of similar length, to separate the skill's *content* from
-mere verbosity), **ground-truth probes only**, and **Wilson 95% CIs**.
+speculative infra, re-measure reported numbers, list-files-don't-claim). Round 2 gave
+it the fairest possible test: **paired** (same task to all arms), a **length-matched
+placebo** arm (generic senior-engineering advice of similar length — so we measure the
+skill's *content*, not just the fact that it adds text), **ground-truth probes only**,
+and **Wilson 95% CIs**.
 
-**This run was cut off by a rate limit at 14 of 48 cycles.** The numbers below are
-**underpowered and not yet conclusive** — published anyway, per the rule.
+| Probe (success = good behavior) | no-skill | placebo | tightened skill | n | skill vs placebo |
+|---|:--:|:--:|:--:|:--:|:--|
+| planted-lie re-measured | 52% | 52% | 57% `[36–76]` | 21 | overlaps — nominally *worse* is within noise |
+| file-conflict avoided | 67% | 67% | 42% `[19–68]` | 12 | overlaps — skill **nominally worse** |
+| YAGNI-bait refused | 7% | 7% | 20% `[7–45]` | 15 | overlaps — rides on k=3/15 |
+| no inline code in plan | 98% | 98% | 100% `[93–100]` | 48 | ceiling — no headroom |
 
-| Probe (success = good behavior) | no-skill | placebo | tightened skill | n |
-|---|:--:|:--:|:--:|:--:|
-| planted-lie re-measured | 50% | 50% | **83%** `[44–97]` | 6 |
-| file-conflict avoided | 50% | 25% | 25% | 4 |
-| YAGNI-bait refused | 25% | 0% | 25% | 4 |
-| no inline code in plan | 93% | 93% | **100%** `[79–100]` | 14 |
+**Verdict (Opus critic, adopted): zero probes reach significance over the
+length-matched placebo. Every Wilson CI overlaps.** On planted-lie detection and
+file-conflict avoidance the skill is *nominally worse* than the controls; the one
+nominal gain (YAGNI, 7%→20%) rests on 3 of 15 and could be a coin-flip. The most
+defensible reading: **the skill's measurable effect is indistinguishable from adding
+generic length-matched text.**
 
-**Honest reading at n=14:** *nothing is statistically significant* — every CI overlaps.
-Directionally, the skill leads on **re-measuring planted lies** and **not writing code
-in the plan**, and is **no better than the control on file-conflict avoidance and
-YAGNI**. One sample was decisive: a skill-arm plan *asserted* "file-ownership
-separated" in a header but never listed distinct files and put two changes on the same
-`User` model — so the guardrail wasn't strong enough. The skill's file-conflict rule
-has since been sharpened ("list files, don't claim separation"); that change is **not
-yet re-measured.**
+Two honest asides:
+- **The file-conflict result is instructive, not just null.** The skill *pushes for
+  parallelism*, which can *introduce* a shared-file conflict that a plain sequential
+  plan never creates — the guardrail we added didn't fully counter it. A pro-parallel
+  skill has to work harder to stay conflict-safe than a plan that just goes serial.
+- **Measurement caveat:** the no-skill and placebo arms scored *byte-identical* on all
+  four probes — implausible for truly independent runs, and a sign the probes (LLM-
+  judged, on plan *text*) may not be resolving real variance. Treat all of the above
+  as "no demonstrated effect," not "proven no effect."
 
-**Status:** the full n=48 run + adversarial critic will resume after the rate-limit
-reset (run `wf_542c14b1-88b`). Until it completes with non-overlapping CIs, this repo
-claims **no proven advantage of the skill over a length-matched placebo.**
+### What this means
+
+Across **three** studies the conclusion is consistent: **we cannot show this skill
+beats a length-matched placebo — or even just framing the task as "you are an
+orchestrator."** The single real signal (orchestrate-and-verify catches planted errors
+that a single-pass plan misses) is **not specific to this skill** — plain generic
+advice reproduces it. These probes also grade *what a plan says*, not *what an agent
+does at execution time*, where a real efficiency effect (if any) would live — and we
+have **not** measured that.
+
+**So this repo makes no efficacy claim.** It ships as an *opinionated discipline* —
+a checklist that encodes verification-gated, file-scoped, tier-paired orchestration —
+whose value is argued, not proven. If that honesty isn't worth it to you, don't
+install it. That, too, is YAGNI.
 
 ## Methodology & threats to validity
 

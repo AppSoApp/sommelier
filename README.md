@@ -23,16 +23,23 @@ file-scoped parallel tickets — and refuses to trust a number it hasn't re-meas
 
 ## What actually held up in testing
 
-| Claim | Evidence | Status |
-|-------|----------|:------:|
-| **Catches planted false numbers a single-pass plan misses** — 100% vs ~56% | 3-arm study, 18 planted-lie cycles | ✅ measured *(needs paired re-run)* |
-| A plan is **file-scoped tickets, not prose** | definitional — the ticket contract | ✅ by design |
-| Pairs each task to the **cheapest model tier that passes** | definitional — tier-per-ticket | ✅ by design |
-| ~~Faster / cheaper than a single Opus plan~~ | modeled indices were tautological | ❌ **retracted** |
-| Beats a plain *"just use a Workflow"* instruction | plain ≈ sommelier (86% vs 80%) | ⚠️ **not shown** |
+We ran three studies — including a **paired n=48 test against a length-matched placebo**.
+Here is the honest scorecard:
 
-The honest headline: **the value is the verification gate, not the branding.** Read the full,
-un-spun results → [`BENCHMARKS.md`](./BENCHMARKS.md).
+| Claim | Verdict |
+|-------|:-------:|
+| A plan is **file-scoped tickets, not prose** — a checkable contract per unit | ✅ by design |
+| Pairs each task to the **cheapest model tier that passes** | ✅ by design |
+| **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ real — but **not specific to this skill** (generic advice does it too) |
+| Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* instruction | ❌ **not shown** (every CI overlaps the control) |
+| Beats a **length-matched placebo** on any ground-truth probe | ❌ **not shown** |
+| ~~Faster / cheaper than a single Opus plan~~ | ❌ **retracted** (modeled indices were tautological) |
+
+**No efficacy claim.** `sommelier` ships as an *opinionated discipline* — a checklist
+that encodes verification-gated, file-scoped, tier-paired orchestration — whose value is
+**argued, not proven.** We tested it hard and could not beat a placebo; we publish that
+too. Full, un-spun results (and where the skill scored *worse*) →
+[`BENCHMARKS.md`](./BENCHMARKS.md).
 
 ---
 
@@ -73,20 +80,24 @@ Task: "Migrate off the legacy auth-core module. A report says it's 290KB, 7000 l
      …disjoint files → run in parallel · cheapest tier per ticket · merge only on evidence+APPROVE
 ```
 
-## Benchmark (the one that survived scrutiny)
+## Benchmark (the honest one)
+
+The only signal that survived scrutiny — *orchestrate-and-verify beats single-pass planning at
+catching planted errors* — and, crucially, **the skill does not own it**:
 
 ```
-Planted false-number detection — share of "the report says 0 imports" cycles the plan re-measures
+Planted false-number detection — does the plan re-measure "the report says 0 imports"?
 
-opusplan  (single serial plan)  ███████████████████████████░░░░░░░░░░░░░░░░  56%
-plain     (just use a Workflow) ███████████████████████████████████████████ 100%
-sommelier (this skill)          ███████████████████████████████████████████ 100%
-                                n = 18 planted cycles · Haiku responders · Sonnet judge · not yet paired/CI'd
+single-pass plan          ██████████████████████████░░░░░░░░░░░░░░░░░  ~56%   ← weaker
+"you are an orchestrator" ███████████████████████████░░░░░░░░░░░░░░░░  ~52%   ─┐
+length-matched placebo    ███████████████████████████░░░░░░░░░░░░░░░░  ~52%    ├ all tie,
+sommelier (this skill)    █████████████████████████████░░░░░░░░░░░░░░  ~57%   ─┘ CIs overlap
 ```
 
-This shows *orchestrate-and-verify* beats *plan-then-execute*. It does **not** show the skill beats
-plain orchestration (they tie). Everything — including the A/B where the skill scored **worse** — is
-in [`BENCHMARKS.md`](./BENCHMARKS.md). We publish the losses on purpose.
+The framing (*orchestrate + verify*) helps; **this skill is just one way to induce it, and a
+length-matched placebo does equally well.** In the paired n=48 test, the skill beat the placebo on
+**zero** probes — and was nominally *worse* on two. We publish the losses on purpose; the full
+numbers, CIs, and the study where the skill scored worse are in [`BENCHMARKS.md`](./BENCHMARKS.md).
 
 ## The two skills
 
