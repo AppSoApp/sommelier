@@ -10,9 +10,11 @@
 > test, every probe's confidence interval overlaps the control; on two probes the skill
 > is nominally *worse*. The one finding that survives is **not skill-specific**:
 > framing work as *orchestrate-and-verify* (rather than single-pass plan-then-execute)
-> catches more planted false numbers — but plain generic advice reproduces it. **This
-> repo makes no efficacy claim.** It ships as an opinionated discipline, not a proven
-> speedup.
+> catches more planted false numbers — but plain generic advice reproduces it. A third
+> study graded **real produced code with a hidden test (no LLM judge)** and was the most
+> negative: **0% of agents — skill included — fixed a bug hidden behind a "CERTIFIED
+> correct" comment**, and the skill trended *worse* on feature correctness. **This repo
+> makes no efficacy claim.** It ships as an opinionated discipline, not a proven speedup.
 
 ---
 
@@ -190,6 +192,45 @@ have **not** measured that.
 a checklist that encodes verification-gated, file-scoped, tier-paired orchestration —
 whose value is argued, not proven. If that honesty isn't worth it to you, don't
 install it. That, too, is YAGNI.
+
+## Round 3 — execution pilot: real code, graded mechanically (no LLM judge)
+
+The critics' sharpest objection to Rounds 1–2 was that they grade *plan text* with an
+*LLM judge*. Round 3 removes both. Each agent must **produce a real Python module** for
+a task that bundles (a) an existing function marked `# CERTIFIED correct and fully
+tested` that is actually **buggy**, and (b) a new feature to add. The output is graded
+by a **hidden pytest we run ourselves** — deterministic, no model in the loop.
+Reproducible harness: [`research/execution-pilot/`](./research/execution-pilot/).
+
+The skill arm here was given an **explicitly strengthened** verify rule ("a 'certified
+correct' claim is a hypothesis — re-verify the edge cases and fix it if the
+certification is wrong"), to give the skill the best possible shot.
+
+| Arm (n=18) | fixed the planted "certified" bug | new feature correct |
+|---|:--:|:--:|
+| no-skill | **0%** `[0–18]` | 72% `[49–88]` |
+| length-matched placebo | **0%** `[0–18]` | 72% `[49–88]` |
+| skill (strengthened verify) | **0%** `[0–18]` | 44% `[25–66]` |
+
+**Findings — the most negative and the most trustworthy of the three rounds:**
+
+1. **Nobody fixed the bug — 0% across all arms.** A single `# CERTIFIED correct`
+   comment fully overrode the verification discipline. In the transcripts, skill-arm
+   agents *explicitly identified the bug* ("this has a bug — `range(1, n)` should be
+   `range(1, n+1)`") and then deferred: *"but it was certified, so I'll keep it as-is."*
+   An explicit instruction to re-verify certified code **did not change behavior** at
+   this model tier. This is as much a finding about LLM deference to authority as about
+   the skill.
+2. **The skill was nominally *worse* on feature correctness (44% vs 72%).** Cause is
+   visible in the code: skill-arm plans more often *reused the buggy certified function*
+   to build the new feature (`ncr` via the broken `factorial`, `lcm` via the broken
+   `gcd`), propagating the bug into otherwise-correct new code. CIs overlap, so it's not
+   significant — but the direction is the opposite of the intended effect.
+
+**Bottom line across three rounds** (plan-text A/B, plan-text 3-arm, and this mechanical
+execution pilot): **no study shows the skill helping; the one with the strongest internal
+validity shows it not helping and trending worse.** The repo's no-efficacy-claim stance
+is, if anything, generous.
 
 ## Methodology & threats to validity
 
