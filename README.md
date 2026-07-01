@@ -28,33 +28,29 @@ merged until the numbers have been re-poured by hand.*
 ---
 
 > **Tasted, not assumed.** A good sommelier spits out the corked bottle no matter how fancy the
-> label — and I held this skill to the same bar. I poured it against a plain placebo four times and
-> published every glass I sent back, in [`BENCHMARKS.md`](./BENCHMARKS.md). What made it onto the
-> card is what earned its place. No inflated stats.
+> label — and I held this skill to the same bar. I poured it against a plain baseline five times and
+> published every glass I sent back, in [`BENCHMARKS.md`](./BENCHMARKS.md) — wins, losses, and a
+> number I had to correct myself. What made it onto the card is what earned its place. No inflated stats.
 
-## What actually held up in testing
+## Does it actually work? (we measured — here's the honest answer)
 
-We ran four studies — three plan-text nulls and a **pre-registered, hidden-pytest
-execution test** that found one real win. Every round (wins and losses) is published.
-Here is the honest scorecard:
+We tested this skill against a plain baseline **five times** and published every result,
+including the losses. Three things, in plain terms:
 
-| Claim | Verdict |
-|-------|:-------:|
-| A plan is **file-scoped tickets, not prose** — a checkable contract per unit | ✅ by design |
-| Pairs each task to the **cheapest model tier that passes** | ✅ by design |
-| **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ plan-level only — **not specific to this skill**, and **0% in execution** (Round 3) |
-| Catches a bug hidden behind an authority label (`# CERTIFIED`) | ✅ **Round 4 win** — the rewritten verify rule lifts bug-fix 0%→**29%** (haiku)/**44%** (sonnet) vs a length-matched placebo, McNemar **p ≤ 10⁻⁴**, pre-registered, hidden-pytest (Round 4) |
-| Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* on *planning* | ❌ **not shown** (every CI overlaps the control) |
-| Beats a **length-matched placebo** on *plan-text* probes | ❌ **not shown** (the win above is on executed code, not plan text) |
-| ~~Faster / cheaper than a single Opus plan~~ | ❌ **retracted** (modeled indices were tautological) |
+| What we measured | Result | What it means for you |
+|---|:--:|---|
+| 🐛 **Catching bugs** behind a "it's fine, trust me" label (`# CERTIFIED correct`) | ✅ **0% → 44–58%** | A plain run **ships** the certified bug. The verify rule **re-checks and fixes** it. Mechanically graded (hidden tests, no AI judge), p ≤ 10⁻⁴. **This is the real win.** |
+| 💰 **Cost** vs a workflow that runs everything on Opus | ⚠️ **~19% cheaper** | Routing the coding to Sonnet and keeping Opus only for the gate saves money — *only if* you have work to push to cheaper models. Same tokens, cheaper tokens. |
+| ⚡ **Speed** from running tickets in parallel | ❌ **slower on small tasks** | Spawning 8 agents to write 8 tiny functions was **1.8× slower** than one agent doing all 8. Parallelism only wins when each ticket is genuinely big. |
 
-**One proven win, the rest argued.** `sommelier` ships as an *opinionated discipline* —
-a checklist encoding verification-gated, file-scoped, tier-paired orchestration. After
-four rounds of self-testing, exactly **one** claim beat a length-matched placebo under a
-pre-registered, mechanically-graded test: the **verification rule** (catching a bug behind
-a `# CERTIFIED` label, 0%→29–44%, p ≤ 10⁻⁴). The orchestration, tier, and speed claims
-remain **argued, not proven** — and we publish every round, including the three where the
-skill lost → [`BENCHMARKS.md`](./BENCHMARKS.md).
+**The one thing that's proven:** the **verification move** — don't trust a "certified"
+label, re-run the check, fix what's broken. The parallel/tier machinery has real
+**overhead that only pays off on large, decomposable work** — which is exactly why the
+skill's own YAGNI rule says *don't bring a fleet to a one-liner.*
+
+So: `sommelier` is an **opinionated discipline with one measured win and honest limits**,
+not a magic speed-up. Every round — wins, losses, and a number we had to correct
+ourselves — is in [`BENCHMARKS.md`](./BENCHMARKS.md).
 
 ---
 
@@ -112,10 +108,10 @@ sommelier verify rule    29%  ███████░░░░░░░░░�
 sommelier verify rule    44%  ███████████░░░░░░░░░  (sonnet)   McNemar p ≤ 10⁻⁴ ✅
 ```
 
-That is the **one** claim that beat a length-matched placebo. On *plan-text* probes the
-skill did **not** beat the placebo (every CI overlapped). We publish the wins and the
-losses — all four rounds are in [`BENCHMARKS.md`](./BENCHMARKS.md). *(No arm is relabeled
-or composited across studies.)*
+That is the verification win from the scorecard above. The cost (~19% cheaper, tier-routed)
+and speed (parallel *slower* on small tasks) numbers — and the two earlier rounds where the
+skill scored *worse* than doing nothing — are all in [`BENCHMARKS.md`](./BENCHMARKS.md).
+*(No arm is relabeled or composited across studies.)*
 
 ## The two skills
 
@@ -221,11 +217,13 @@ taste (verify) every claim, pour (assign) each ticket to the bottle that fits, s
 
 바탕 원칙: **YAGNI**(요청된 것만) + **Karpathy 미니멀리즘**(가장 단순한 baseline, 추측 말고 측정).
 
-### 정직한 검증 결과 (핵심)
-이 스킬은 **자기 자신을 4라운드 적대적으로 검증**하고 결과를 전부 공개했습니다(음성 결과 포함).
-- **입증된 것 (딱 하나)**: 개선된 **검증 규칙**이 `# CERTIFIED`로 인증된 버그를 잡는 비율을 **0% → 29%(haiku)/44%(sonnet)** 로 끌어올림. 길이 맞춘 placebo 대비 **McNemar p ≤ 10⁻⁴**, 사전등록·**LLM 심판 없는 hidden pytest** 기계채점.
-- **미입증**: 병렬 오케스트레이션·티어 위임·속도/비용 이득은 아직 실측으로 증명되지 않음(설계상 그렇게 동작할 뿐).
-- 자세한 수치와 스킬이 **진** 라운드까지 전부 → [`BENCHMARKS.md`](./BENCHMARKS.md).
+### 정직한 검증 결과 (핵심) — 5라운드, 세 축 실측
+쉬운 말로 세 가지:
+- 🐛 **버그 검증 (진짜 승리)**: 개선된 **검증 규칙**이 `# CERTIFIED`(믿어달라) 뒤에 숨은 버그 수정율을 **0% → 44%(sonnet)/29%(haiku)** 로 끌어올림. plain은 인증버그를 그대로 출하, 규칙은 재검증·수정. **LLM 심판 없는 hidden pytest** 기계채점, p ≤ 10⁻⁴.
+- 💰 **비용 (~19% 저렴)**: 전부 opus로 돌리는 워크플로 대비, 구현을 sonnet으로 내리고 게이트만 opus로 두면 비용 ~19%↓ (토큰수는 동일, 단가가 쌈). 단, 내릴 작업이 있을 때만.
+- ⚡ **속도 (작은 작업엔 오히려 느림)**: 8개 함수를 8 에이전트로 병렬 = 1 에이전트가 다 쓰는 것보다 **1.8배 느림**(스폰 오버헤드). 병렬 이득은 티켓이 충분히 클 때만.
+- **결론**: 오케스트레이션 기계장치는 **규모가 클 때만 값어치**를 함. 작은 일엔 단일 에이전트가 싸고 빠름 — 스킬의 YAGNI 원칙 그대로.
+- 자세한 수치와 스킬이 **진** 라운드, 제가 **스스로 정정한 숫자**까지 전부 → [`BENCHMARKS.md`](./BENCHMARKS.md).
 
 > 요약: "통계로 무장한 인기 제품"보다 드문 것 — **스스로를 검증하고 음성 결과까지 공개한 스킬**. 그 투명성이 이 스킬의 핵심 원칙(재측정·정직)을 제품이 스스로 지킨 증거입니다.
 

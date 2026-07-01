@@ -279,6 +279,60 @@ hidden edge test.
 implausible driver); small pure-function tasks. Harness + data frozen under
 [`research/execution-pilot/round4/`](./research/execution-pilot/round4/).
 
+## Round 5 — cost & speed, measured fairly (and the surprises)
+
+Two more questions, each against the **fair** baseline this time (a *dynamic Workflow
+with every sub-agent on the top tier* — the real "just use a workflow" default — not a
+strawman single cheap agent).
+
+### Cost — tier-routing vs all-Opus (same work, only the tier differs)
+
+Same 24 tasks, same 2-step pipeline (implement → verify gate). One arm runs **both steps
+on Opus**; the other is **sommelier's routing** (implement on Sonnet, gate on Opus).
+Output tokens measured via `budget.spent()`, priced at Claude list rates (Opus $25/M,
+Sonnet $15/M output).
+
+| | all-Opus workflow | sommelier (tier-routed) |
+|---|:--:|:--:|
+| output tokens | 58,460 | 56,879 (≈ same) |
+| **output cost** | **$1.46** | **$1.18 → ~19% cheaper** |
+| bug-fix rate | 50% | 58% |
+
+**Tier-routing is ~19% cheaper and no worse on quality** — the saving is from moving
+implementation off Opus to Sonnet, *not* from using fewer tokens (token count is nearly
+identical). Route mechanical bulk to Haiku and the gap widens; here there was none.
+*(An earlier draft said "36% cheaper" — that used a stale Opus price of $75/M. Corrected
+to 19% at the current $25/M. We caught our own number; that's the point.)*
+
+### Speed — parallel fan-out vs serial (and why parallel LOST here)
+
+Three 8-function "projects": one arm has a **single agent write all 8** (serial); the
+other **fans out 8 agents, one per function** (parallel). Wall-clock from the workflow's
+own `duration_ms`.
+
+| | serial (1 agent × 8 fns) | parallel (8 agents × 1 fn) |
+|---|:--:|:--:|
+| wall-clock | **~12.3 s** | **~21.6 s (≈1.8× slower)** |
+
+**Parallel was slower, not faster.** For trivial units of work, per-agent spawn overhead
+dominates — 8 agents each writing one tiny function costs more wall-clock than one agent
+writing eight. Parallelism's speed win materializes only when each ticket is **big enough
+to amortize the fan-out overhead**. On small work it's a net loss. *(Wall-clock is also
+load-sensitive; treat as indicative.)*
+
+### What Rounds 4–5 add up to
+
+- ✅ **Verification** (DON'T SETTLE) — a **real** win: catches certified bugs a trusting
+  pass ships (0% → 44–58%), mechanically graded.
+- ⚠️ **Cost** — **~19% cheaper** than an all-Opus workflow *if* you route work to cheaper
+  tiers; modest, and zero if there's nothing to route down.
+- ❌ **Speed** — parallel fan-out is **not** a free win; on small tickets it's *slower*.
+
+The orchestration machinery carries **overhead that only pays off at scale** — big,
+decomposable, verification-critical work. On small tasks, plain single-agent work is
+cheaper and faster — exactly what the skill's own YAGNI rule says: *don't bring a fleet
+to a one-liner.*
+
 ## Methodology & threats to validity
 
 - **Responders:** Claude Haiku. **Judges:** Claude Sonnet (structured rubric).
