@@ -25,7 +25,8 @@ file-scoped parallel tickets — and refuses to trust a number it hasn't re-meas
 
 ## What actually held up in testing
 
-We ran three studies — including a **paired n=48 test against a length-matched placebo**.
+We ran four studies — three plan-text nulls and a **pre-registered, hidden-pytest
+execution test** that found one real win. Every round (wins and losses) is published.
 Here is the honest scorecard:
 
 | Claim | Verdict |
@@ -33,16 +34,18 @@ Here is the honest scorecard:
 | A plan is **file-scoped tickets, not prose** — a checkable contract per unit | ✅ by design |
 | Pairs each task to the **cheapest model tier that passes** | ✅ by design |
 | **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ plan-level only — **not specific to this skill**, and **0% in execution** (Round 3) |
-| Overrides an authority label (`# CERTIFIED`) to catch the bug behind it | ❌ **refuted in execution** — 0% all arms, skill nominally *worse* (Round 3) |
-| Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* instruction | ❌ **not shown** (every CI overlaps the control) |
-| Beats a **length-matched placebo** on any ground-truth probe | ❌ **not shown** |
+| Catches a bug hidden behind an authority label (`# CERTIFIED`) | ✅ **v1.1 win** — the rewritten verify rule lifts bug-fix 0%→**29%** (haiku)/**44%** (sonnet) vs a length-matched placebo, McNemar **p ≤ 10⁻⁴**, pre-registered, hidden-pytest (Round 4) |
+| Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* on *planning* | ❌ **not shown** (every CI overlaps the control) |
+| Beats a **length-matched placebo** on *plan-text* probes | ❌ **not shown** (the win above is on executed code, not plan text) |
 | ~~Faster / cheaper than a single Opus plan~~ | ❌ **retracted** (modeled indices were tautological) |
 
-**No efficacy claim.** `sommelier` ships as an *opinionated discipline* — a checklist
-that encodes verification-gated, file-scoped, tier-paired orchestration — whose value is
-**argued, not proven.** We tested it hard and could not beat a placebo; we publish that
-too. Full, un-spun results (and where the skill scored *worse*) →
-[`BENCHMARKS.md`](./BENCHMARKS.md).
+**One proven win, the rest argued.** `sommelier` ships as an *opinionated discipline* —
+a checklist encoding verification-gated, file-scoped, tier-paired orchestration. After
+four rounds of self-testing, exactly **one** claim beat a length-matched placebo under a
+pre-registered, mechanically-graded test: the **verification rule** (catching a bug behind
+a `# CERTIFIED` label, 0%→29–44%, p ≤ 10⁻⁴). The orchestration, tier, and speed claims
+remain **argued, not proven** — and we publish every round, including the three where the
+skill lost → [`BENCHMARKS.md`](./BENCHMARKS.md).
 
 ---
 

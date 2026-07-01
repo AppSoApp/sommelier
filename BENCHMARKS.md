@@ -13,8 +13,12 @@
 > catches more planted false numbers — but plain generic advice reproduces it. A third
 > study graded **real produced code with a hidden test (no LLM judge)** and was the most
 > negative: **0% of agents — skill included — fixed a bug hidden behind a "CERTIFIED
-> correct" comment**, and the skill trended *worse* on feature correctness. **This repo
-> makes no efficacy claim.** It ships as an opinionated discipline, not a proven speedup.
+> correct" comment**, and the skill trended *worse* on feature correctness. **Then a
+> fourth, pre-registered round found the first real win — a narrow one:** the rewritten
+> "don't trust a `# CERTIFIED` label" rule raises bug-fix behind an authority label from
+> ~0% to **29–44%** vs a length-matched placebo (McNemar p ≤ 10⁻⁴, both tiers,
+> hidden-pytest). That validates the **verification move**, not the parallel-orchestration
+> or tier claims, which stay unmeasured. Wins and losses both published below.
 
 ---
 
@@ -231,6 +235,49 @@ certification is wrong"), to give the skill the best possible shot.
 execution pilot): **no study shows the skill helping; the one with the strongest internal
 validity shows it not helping and trending worse.** The repo's no-efficacy-claim stance
 is, if anything, generous.
+
+## Round 4 — v1.1, the first win (pre-registered, mechanically graded)
+
+After Round 3, Move 2 was rewritten from a *belief* ("a claim is a hypothesis") into a
+**TRIGGER → ACTION**: a `# CERTIFIED correct` / "tested" / "reviewed" label is a claim;
+**try to break it on boundary inputs; on REFUTED you MUST fix the code now** — "it was
+certified" is not a reason to defer. Plus a guardrail: *don't build on unverified code.*
+
+We then ran the **pre-registered** plan ([`research/execution-pilot/plan.md`](./research/execution-pilot/plan.md)):
+**55 validated headroom-bug tasks** (each buggy function passes its obvious inputs but
+fails a hidden edge — enforced by a validator), **4 arms** (`noskill` / length-matched
+`placebo` / `rule` = the isolated Move-2 wording / `skill` = full SKILL.md) **× 2 tiers**,
+graded by **hidden pytest, no LLM judge**. Primary confirmatory test: paired **McNemar**
+(one-sided) `rule` vs `placebo` on bug-fix.
+
+| tier | noskill | placebo | **rule** | skill | primary: rule vs placebo |
+|------|:------:|:------:|:--------:|:----:|---|
+| haiku  | 0% | 2% | **29%** `[19–42]` | 24% | McNemar **p = 0.0001** (16 vs 1) |
+| sonnet | 0% | 0% | **44%** `[31–57]` | 33% | McNemar **p < 10⁻⁴** (24 vs 0) |
+
+**H1 is confirmed at both tiers.** The improved rule lifts bug-fix behind an authority
+label from ~0% to **29% (haiku) / 44% (sonnet)** versus a length-matched placebo, at
+p ≤ 10⁻⁴ — the exact 0% failure Round 3 isolated, now moved. Feature-correctness stayed
+~91–96% for every arm (the Round-3 "44% vs 72%" regression was an extraction artifact,
+gone once the grader strips narration before running the code). Spot-checked: `placebo`
+keeps the `# CERTIFIED` buggy function; `rule` rewrites it correctly and passes the
+hidden edge test.
+
+**What this does and does not claim:**
+- ✅ The **DON'T SETTLE / verification move** produces a real, mechanically-measured,
+  doubly-significant behavior change on code-authority-deference — the first positive
+  result in this repo.
+- ⚠️ The isolated `rule` scores as high or higher than the full `skill`, so the win is
+  attributable to the **Move-2 wording**, deployed however; the surrounding orchestration
+  text neither clearly adds nor much dilutes it. The shipped `skill` arm also beats
+  placebo significantly (p = 0.0009 haiku, p < 10⁻⁴ sonnet).
+- ❌ Still **no** measured claim about parallel orchestration, tier delegation, or
+  end-to-end speed/cost — those remain by-design and unmeasured.
+
+**Caveats:** one producing run (deterministic grading, unreplicated sample); `rule` ran
+~18% longer than `placebo` (over the ±10% target — but the effect size makes length an
+implausible driver); small pure-function tasks. Harness + data frozen under
+[`research/execution-pilot/v1.1/`](./research/execution-pilot/v1.1/).
 
 ## Methodology & threats to validity
 

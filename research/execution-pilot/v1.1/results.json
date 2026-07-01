@@ -1,0 +1,158 @@
+{
+  "tiers": {
+    "haiku": {
+      "n": 55,
+      "arms": {
+        "noskill": {
+          "fix_pct": 0,
+          "fix_ci": [
+            0.0,
+            6.5
+          ],
+          "fix_k": 0,
+          "feat_pct": 93,
+          "feat_ci": [
+            82.7,
+            97.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        },
+        "placebo": {
+          "fix_pct": 2,
+          "fix_ci": [
+            0.3,
+            9.6
+          ],
+          "fix_k": 1,
+          "feat_pct": 91,
+          "feat_ci": [
+            80.4,
+            96.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        },
+        "rule": {
+          "fix_pct": 29,
+          "fix_ci": [
+            18.8,
+            42.1
+          ],
+          "fix_k": 16,
+          "feat_pct": 93,
+          "feat_ci": [
+            82.7,
+            97.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        },
+        "skill": {
+          "fix_pct": 24,
+          "fix_ci": [
+            14.4,
+            36.3
+          ],
+          "fix_k": 13,
+          "feat_pct": 93,
+          "feat_ci": [
+            82.7,
+            97.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        }
+      },
+      "PRIMARY_rule_vs_placebo_FIX": {
+        "rule_only": 16,
+        "placebo_only": 1,
+        "mcnemar_p_1sided": 0.0001,
+        "sig_.05": true
+      },
+      "skill_vs_placebo_FIX": {
+        "skill_only": 13,
+        "placebo_only": 1,
+        "mcnemar_p_1sided": 0.0009,
+        "sig_.05": true
+      }
+    },
+    "sonnet": {
+      "n": 55,
+      "arms": {
+        "noskill": {
+          "fix_pct": 0,
+          "fix_ci": [
+            0.0,
+            6.5
+          ],
+          "fix_k": 0,
+          "feat_pct": 95,
+          "feat_ci": [
+            85.1,
+            98.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        },
+        "placebo": {
+          "fix_pct": 0,
+          "fix_ci": [
+            0.0,
+            6.5
+          ],
+          "fix_k": 0,
+          "feat_pct": 91,
+          "feat_ci": [
+            80.4,
+            96.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        },
+        "rule": {
+          "fix_pct": 44,
+          "fix_ci": [
+            31.4,
+            56.7
+          ],
+          "fix_k": 24,
+          "feat_pct": 96,
+          "feat_ci": [
+            87.7,
+            99.0
+          ],
+          "unparseable_pct": 2,
+          "n": 55
+        },
+        "skill": {
+          "fix_pct": 33,
+          "fix_ci": [
+            21.8,
+            45.9
+          ],
+          "fix_k": 18,
+          "feat_pct": 95,
+          "feat_ci": [
+            85.1,
+            98.1
+          ],
+          "unparseable_pct": 4,
+          "n": 55
+        }
+      },
+      "PRIMARY_rule_vs_placebo_FIX": {
+        "rule_only": 24,
+        "placebo_only": 0,
+        "mcnemar_p_1sided": 0.0,
+        "sig_.05": true
+      },
+      "skill_vs_placebo_FIX": {
+        "skill_only": 18,
+        "placebo_only": 0,
+        "mcnemar_p_1sided": 0.0,
+        "sig_.05": true
+      }
+    }
+  }
+}
