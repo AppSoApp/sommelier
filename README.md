@@ -161,6 +161,27 @@ cp -r sommelier/skills/sommelier-pairing-tiers  ~/.claude/skills/
 
 The agent loads a skill by its `description` when the task matches — see each `SKILL.md` for triggers.
 
+## How it works in Claude Code
+
+Install once, then you don't have to do anything special — the skill pours itself when it fits.
+
+- **Check it's on the shelf.** `/plugin` opens the manager (sommelier should be enabled), and
+  `/help` lists the `/sommelier-plan` command.
+- **Skills load themselves.** When you ask Claude to *plan / break down / migrate / refactor*
+  something big, Claude reads each skill's `description`, matches `sommelier-pairing`, and announces
+  it before working. Want to force it? Just say so: *"use the sommelier-pairing skill to plan this."*
+- **A plan on demand, no code touched:**
+  ```
+  /sommelier-plan add rate limiting to the public API
+  ```
+  You get back a frozen PRD + file-scoped tickets — each with a contract, a re-measured success
+  metric, and a model tier — ready to hand to a fleet.
+- **Driving a real fleet?** Use `sommelier-pairing-tiers`; it pins concrete Claude aliases
+  (`'sonnet'` / `'opus'` / `'haiku'`) for a Workflow-driven dispatch.
+
+That's the whole ritual: install once, then plan big work the way a sommelier composes a flight —
+taste (verify) every claim, pour (assign) each ticket to the bottle that fits, send back what's corked.
+
 ---
 
 ## 🇰🇷 한국어 설명
@@ -186,12 +207,19 @@ The agent loads a skill by its `description` when the task matches — see each 
 
 > 요약: "통계로 무장한 인기 제품"보다 드문 것 — **스스로를 검증하고 음성 결과까지 공개한 스킬**. 그 투명성이 이 스킬의 핵심 원칙(재측정·정직)을 제품이 스스로 지킨 증거입니다.
 
-### 설치
+### 설치 & 사용 (Claude Code)
 ```
 /plugin marketplace add AppSoApp/sommelier
 /plugin install sommelier@appsoapp
 ```
-스킬 2종 + `/sommelier-plan` 커맨드가 함께 번들됩니다. 언제 쓰나 → 한 컨텍스트에 담기 힘든 큰 작업, 또는 보고서 숫자가 계획을 좌우하는데 그 숫자가 틀릴 수 있을 때. 한 줄 수정·단일 파일 변경엔 쓰지 마세요(YAGNI).
+스킬 2종 + `/sommelier-plan` 커맨드가 함께 번들됩니다. 설치 후 특별히 할 건 없습니다:
+
+- **설치 확인**: `/plugin`(플러그인 매니저에서 sommelier 활성화 확인), `/help`(커맨드 목록).
+- **스킬은 알아서 로드**: "이거 계획 짜줘 / 쪼개줘 / 마이그레이션 해줘" 같은 큰 작업을 시키면 Claude가 스킬 `description`을 보고 `sommelier-pairing`을 자동으로 불러옵니다. 강제하려면 *"sommelier-pairing 스킬 써서 계획해줘"* 라고 하면 됩니다.
+- **커맨드로 즉석 계획**(코드는 안 건드림): `/sommelier-plan 공개 API에 rate limiting 추가` → 고정된 PRD + 파일 단위 티켓(계약·재측정 지표·모델 티어)을 돌려줍니다.
+- **실제 fleet 구동**엔 `sommelier-pairing-tiers`(구체 Claude 별칭 `'sonnet'/'opus'/'haiku'` 고정) 사용.
+
+**언제 쓰나** → 한 컨텍스트에 담기 힘든 큰 작업, 또는 보고서 숫자가 계획을 좌우하는데 그 숫자가 틀릴 수 있을 때. 한 줄 수정·단일 파일 변경엔 쓰지 마세요(YAGNI).
 
 ---
 
