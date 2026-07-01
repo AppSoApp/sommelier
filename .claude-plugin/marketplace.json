@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "appsoapp",
+  "owner": {
+    "name": "AppSoApp",
+    "email": "appsoapplication@gmail.com"
+  },
+  "description": "AppSoApp's Claude Code plugins.",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "sommelier",
+      "displayName": "Sommelier",
+      "source": "./",
+      "description": "Verification-gated orchestration skills (PRD + file-scoped parallel tickets, tier-paired, evidence-gated). Self-tested with published null results.",
+      "version": "1.0.0",
+      "author": { "name": "AppSoApp" },
+      "homepage": "https://github.com/AppSoApp/sommelier",
+      "repository": "https://github.com/AppSoApp/sommelier",
+      "license": "MIT",
+      "keywords": ["orchestration", "skills", "verification", "yagni", "workflow"],
+      "category": "productivity"
+    }
+  ]
+}

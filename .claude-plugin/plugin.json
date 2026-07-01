@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schemastore.org/claude-code-plugin-manifest.json",
+  "name": "sommelier",
+  "displayName": "Sommelier",
+  "version": "1.0.0",
+  "description": "Verification-gated orchestration skills — turn a big task into a PRD + file-scoped parallel tickets, pair each with the cheapest model tier that passes, and gate merges on re-measured evidence. Self-tested; ships its own null results. No efficacy claims.",
+  "author": {
+    "name": "AppSoApp",
+    "email": "appsoapplication@gmail.com",
+    "url": "https://github.com/AppSoApp"
+  },
+  "homepage": "https://github.com/AppSoApp/sommelier",
+  "repository": "https://github.com/AppSoApp/sommelier",
+  "license": "MIT",
+  "keywords": ["orchestration", "skills", "verification", "yagni", "parallel", "workflow", "planning"],
+  "skills": "./skills/"
+}

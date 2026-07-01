@@ -99,4 +99,4 @@ to budget, not agent depth.
 | Everything on the top tier | Push mechanical work down; top tier only for gates. |
 
 *Honest evaluation of this skill — including where it lost — is in
-[`BENCHMARKS.md`](../BENCHMARKS.md).*
+[`BENCHMARKS.md`](../../BENCHMARKS.md).*

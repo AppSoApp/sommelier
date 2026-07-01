@@ -8,7 +8,7 @@
 file-scoped parallel tickets — and refuses to trust a number it hasn't re-measured itself.*
 
 [![license](https://img.shields.io/badge/license-MIT-black)](./LICENSE)
-[![skill](https://img.shields.io/badge/type-Agent%20Skill-7b1e3a)](./sommelier-pairing/SKILL.md)
+[![skill](https://img.shields.io/badge/type-Agent%20Skill-7b1e3a)](./skills/sommelier-pairing/SKILL.md)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-ready-7b1e3a)](https://claude.com/claude-code)
 [![benchmarks](https://img.shields.io/badge/benchmarks-honest-c9a227)](./BENCHMARKS.md)
 [![stars](https://img.shields.io/github/stars/AppSoApp/sommelier?style=social)](https://github.com/AppSoApp/sommelier)
@@ -103,8 +103,8 @@ numbers, CIs, and the study where the skill scored worse are in [`BENCHMARKS.md`
 
 | Skill | Model tiers | Use it when |
 |-------|-------------|-------------|
-| [`sommelier-pairing`](./sommelier-pairing/SKILL.md) | **generalized** (mid / top / cheapest) | You want the pairing portable across any cellar. |
-| [`sommelier-pairing-tiers`](./sommelier-pairing-tiers/SKILL.md) | **pinned** (Sonnet pours / Opus tastes / Haiku serves bread) | You run a fleet on concrete Claude tiers. |
+| [`sommelier-pairing`](./skills/sommelier-pairing/SKILL.md) | **generalized** (mid / top / cheapest) | You want the pairing portable across any cellar. |
+| [`sommelier-pairing-tiers`](./skills/sommelier-pairing-tiers/SKILL.md) | **pinned** (Sonnet pours / Opus tastes / Haiku serves bread) | You run a fleet on concrete Claude tiers. |
 
 Both dispatch by tier **alias** (`'sonnet'` / `'opus'` / `'haiku'`), so the pour always resolves to
 the latest bottle in that tier — no chasing version bumps.
@@ -116,10 +116,21 @@ in one context, or where a report's numbers decide the plan and could be wrong.
 
 ## Install
 
+**As a Claude Code plugin (recommended).** This repo is both a plugin and a marketplace:
+
+```
+/plugin marketplace add AppSoApp/sommelier
+/plugin install sommelier@appsoapp
+```
+
+Both skills (`sommelier-pairing`, `sommelier-pairing-tiers`) come bundled and are
+auto-discovered — namespaced as `sommelier:sommelier-pairing`.
+
+**Or drop the skills in manually:**
+
 ```bash
-# Claude Code (personal skills)
 git clone https://github.com/AppSoApp/sommelier.git
-cp -r sommelier/sommelier-pairing ~/.claude/skills/
+cp -r sommelier/skills/sommelier-pairing ~/.claude/skills/
 ```
 
 The agent loads a skill by its `description` when the task matches — see each `SKILL.md` for triggers.
