@@ -4,10 +4,14 @@
 
 # 🍷 sommelier
 
-**She cooks nothing. She composes the pairing, tastes every pour, and sends back what's corked.**
+**A sommelier tastes a hundred wines and pours only the ones that earn the glass.**
 
-*An orchestration skill for Claude that turns a vague "build / refactor / migrate X" into a PRD +
-file-scoped parallel tickets — and refuses to trust a number it hasn't re-measured itself.*
+*I built this plugin the same way. I sat with the engineering principles I trust most — Karpathy's
+minimalism, YAGNI, PRD-driven decomposition, adversarial verification, model-tier delegation —
+tasted each against real work, and kept only what held up. What's left is a house blend that
+orchestrates Claude to build big things: a vague "build / refactor / migrate X" becomes a PRD split
+into file-scoped parallel tickets, each paired to the cheapest model that passes, and nothing is
+merged until the numbers have been re-poured by hand.*
 
 [![license](https://img.shields.io/badge/license-MIT-black)](./LICENSE)
 [![skill](https://img.shields.io/badge/type-Agent%20Skill-7b1e3a)](./skills/sommelier-pairing/SKILL.md)
@@ -19,9 +23,10 @@ file-scoped parallel tickets — and refuses to trust a number it hasn't re-meas
 
 ---
 
-> **Honesty first.** This skill's second rule is *"never believe a report — re-measure it."*
-> So we held ourselves to it: every number below is measured, and the parts where the skill
-> **lost** are published too, in [`BENCHMARKS.md`](./BENCHMARKS.md). No inflated stats.
+> **Tasted, not assumed.** A good sommelier spits out the corked bottle no matter how fancy the
+> label — and I held this skill to the same bar. I poured it against a plain placebo four times and
+> published every glass I sent back, in [`BENCHMARKS.md`](./BENCHMARKS.md). What made it onto the
+> card is what earned its place. No inflated stats.
 
 ## What actually held up in testing
 
@@ -160,7 +165,9 @@ The agent loads a skill by its `description` when the task matches — see each 
 
 ## 🇰🇷 한국어 설명
 
-**sommelier**는 Claude용 오케스트레이션 스킬입니다. 소믈리에가 요리를 하지 않듯, **오케스트레이터는 코드를 직접 짜지 않습니다** — 큰 작업을 **PRD + 파일 단위 병렬 티켓**으로 쪼개고, 각 티켓을 **가장 싼 모델 티어**에 페어링하고, **재측정한 증거가 있을 때만** 머지합니다.
+소믈리에가 수백 종의 와인을 시음해 **잔에 오를 자격이 있는 것만** 따르듯, 저는 제가 가장 신뢰하는 엔지니어링 원칙들(**Karpathy 미니멀리즘 · YAGNI · PRD 분해 · 적대적 검증 · 모델 티어 위임**)을 하나하나 실제 작업에 시음해보고 **검증을 통과한 것만 블렌딩**해 이 플러그인을 만들었습니다.
+
+소믈리에가 요리를 하지 않듯, **오케스트레이터는 코드를 직접 짜지 않습니다** — 큰 작업을 **PRD + 파일 단위 병렬 티켓**으로 쪼개고, 각 티켓을 **가장 싼 모델 티어**에 페어링하고, **재측정한 증거가 있을 때만** 머지합니다. 그리고 코르크 난 와인은 라벨이 뭐라 하든 뱉습니다 — 그래서 이 스킬 자신도 4번 시음해 뱉은 잔까지 전부 공개했습니다.
 
 ### 세 가지 무브
 | 무브 | 코드네임 | 하는 일 |
