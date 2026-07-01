@@ -51,3 +51,10 @@ and its tickets). Margaux runs the room without ever lifting a knife.
 
 **The flight is the plan. The pours are your agents. The pairing is delegation.**
 **Margaux just decides what belongs together — and sends back what's corked.**
+
+---
+
+*Honesty note: Margaux is charming, but we couldn't prove she pours better than a
+generic house wine. This skill was stress-tested three times and did not beat a
+length-matched placebo — see [`BENCHMARKS.md`](./BENCHMARKS.md). She ships on
+discipline and transparency, not on a benchmark win.*

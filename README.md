@@ -32,7 +32,8 @@ Here is the honest scorecard:
 |-------|:-------:|
 | A plan is **file-scoped tickets, not prose** — a checkable contract per unit | ✅ by design |
 | Pairs each task to the **cheapest model tier that passes** | ✅ by design |
-| **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ real — but **not specific to this skill** (generic advice does it too) |
+| **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ plan-level only — **not specific to this skill**, and **0% in execution** (Round 3) |
+| Overrides an authority label (`# CERTIFIED`) to catch the bug behind it | ❌ **refuted in execution** — 0% all arms, skill nominally *worse* (Round 3) |
 | Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* instruction | ❌ **not shown** (every CI overlaps the control) |
 | Beats a **length-matched placebo** on any ground-truth probe | ❌ **not shown** |
 | ~~Faster / cheaper than a single Opus plan~~ | ❌ **retracted** (modeled indices were tautological) |
@@ -66,7 +67,9 @@ Grounded in two borrowed bottles: **YAGNI** (build only what *this* task asks) a
 minimalism** (simplest working baseline, measure don't guess — *the best code is the code you
 don't write*).
 
-## Before / after
+## What the discipline looks like
+
+*Illustrative, not a measured win (see the scorecard above) — this is the shape the skill asks for:*
 
 ```
 Task: "Migrate off the legacy auth-core module. A report says it's 290KB, 7000 lines, 0 imports."
@@ -84,22 +87,21 @@ Task: "Migrate off the legacy auth-core module. A report says it's 290KB, 7000 l
 
 ## Benchmark (the honest one)
 
-The only signal that survived scrutiny — *orchestrate-and-verify beats single-pass planning at
-catching planted errors* — and, crucially, **the skill does not own it**:
+The fairest test we ran — a **paired n=48 study with a length-matched placebo**, planted-lie
+detection probe, Wilson 95% CIs. Every interval overlaps:
 
 ```
-Planted false-number detection — does the plan re-measure "the report says 0 imports"?
+Planted false-number detection (paired, n=21 on this probe, Wilson 95% CI)
 
-single-pass plan          ██████████████████████████░░░░░░░░░░░░░░░░░  ~56%   ← weaker
-"you are an orchestrator" ███████████████████████████░░░░░░░░░░░░░░░░  ~52%   ─┐
-length-matched placebo    ███████████████████████████░░░░░░░░░░░░░░░░  ~52%    ├ all tie,
-sommelier (this skill)    █████████████████████████████░░░░░░░░░░░░░░  ~57%   ─┘ CIs overlap
+length-matched placebo   52%   [31–73]  ─┐  CIs fully overlap
+sommelier (this skill)   57%   [36–76]  ─┘  → +5pt is NOT significant
 ```
 
-The framing (*orchestrate + verify*) helps; **this skill is just one way to induce it, and a
-length-matched placebo does equally well.** In the paired n=48 test, the skill beat the placebo on
-**zero** probes — and was nominally *worse* on two. We publish the losses on purpose; the full
-numbers, CIs, and the study where the skill scored worse are in [`BENCHMARKS.md`](./BENCHMARKS.md).
+The skill beat the placebo on **zero** ground-truth probes, and in a later
+**mechanically-graded execution test** (hidden pytest, no LLM judge) **no arm — skill included —
+fixed a bug hidden behind a `# CERTIFIED correct` comment (0%)**. We publish the losses on
+purpose. Full numbers across all three rounds, with the study where the skill scored *worse*, are
+in [`BENCHMARKS.md`](./BENCHMARKS.md). *(No arm is relabeled or composited across studies.)*
 
 ## The two skills
 
@@ -136,14 +138,15 @@ in one context, or where a report's numbers decide the plan and could be wrong.
 /plugin install sommelier@appsoapp
 ```
 
-Both skills (`sommelier-pairing`, `sommelier-pairing-tiers`) come bundled and are
-auto-discovered — namespaced as `sommelier:sommelier-pairing`.
+Both skills and the `/sommelier-plan` command come bundled and are auto-discovered —
+the skills are namespaced `sommelier:sommelier-pairing` and `sommelier:sommelier-pairing-tiers`.
 
 **Or drop the skills in manually:**
 
 ```bash
 git clone https://github.com/AppSoApp/sommelier.git
-cp -r sommelier/skills/sommelier-pairing ~/.claude/skills/
+cp -r sommelier/skills/sommelier-pairing        ~/.claude/skills/
+cp -r sommelier/skills/sommelier-pairing-tiers  ~/.claude/skills/
 ```
 
 The agent loads a skill by its `description` when the task matches — see each `SKILL.md` for triggers.

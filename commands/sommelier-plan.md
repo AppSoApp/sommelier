@@ -11,7 +11,7 @@ Output, in this order:
 
 1. **PRD (frozen)** — one paragraph: the single contract this work delivers, and what is explicitly out of scope (YAGNI — nothing the task didn't ask for).
 
-2. **Verification tickets first** — if the task rests on any reported number ("0 imports", "1,240 tests", "100% covered"), the FIRST ticket re-measures it. A reported number is a hypothesis, not a fact.
+2. **Verification tickets first** — if the task rests on any claim that code already works (a reported number like "0 imports"/"1,240 tests", OR a "certified"/"tested"/"reviewed" label), the FIRST ticket re-runs the check on boundary inputs. A label is a claim, not evidence; on REFUTED the ticket fixes the code in the same change. No later ticket may depend on a module still marked unverified.
 
 3. **Tickets** — a table where every ticket has all four fields and NO code:
    | # | Files owned (exact) | Single contract | Success metric (re-measured at gate) | Tier |

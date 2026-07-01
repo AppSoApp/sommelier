@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json-schemastore.org/claude-code-plugin-manifest.json",
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "sommelier",
   "displayName": "Sommelier",
   "version": "1.0.0",
@@ -13,5 +13,6 @@
   "repository": "https://github.com/AppSoApp/sommelier",
   "license": "MIT",
   "keywords": ["orchestration", "skills", "verification", "yagni", "parallel", "workflow", "planning"],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "commands": "./commands/"
 }
