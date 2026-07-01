@@ -1,137 +1,102 @@
 ---
 name: sommelier-pairing
-description: Use when a task is large enough to need more than one implementer — turning a vague "build/refactor/migrate X" into a PRD plus many file-scoped parallel tickets, dispatching them across model tiers, and gating merges on re-measured evidence rather than self-reported success. Triggers include "plan this", "break this down", "50 tickets", "parallel agents", "orchestrate", multi-file migrations, and audits where reports can't be trusted.
+description: Use when a task needs more than one implementer or spans many files/modules — turning a vague "build/refactor/migrate X" into a PRD plus file-scoped parallel tickets, pairing each ticket with a model tier, and gating merges on re-measured evidence rather than a self-reported "done". Triggers include "plan this", "break this down", "50 tickets", "parallel agents", "orchestrate", multi-file migrations, and audits where a report's numbers could be wrong.
 ---
 
 # Sommelier: Pairing (Parallel Development Orchestration)
 
 ## Overview
 
-A meta-skill for the orchestrator (the long-lived planner) — **never write code yourself; decompose, dispatch, and gate.** Three moves, in order:
+You are the orchestrator (the long-lived planner). **You never write the code.** You
+do three things — like a sommelier who cooks nothing: **compose the pairing, taste
+every pour, match the right bottle to the right plate.**
 
-1. **DESIGN (Tekton)** — freeze one PRD, shatter it into ~N file-scoped tickets.
-2. **DON'T SETTLE (Sim Francisco)** — trust no report; re-measure every claim; run a completeness critic before declaring done.
-3. **DELEGATE (Custom Universe)** — put a model tier on every ticket; the cheapest model that can pass the gate.
+1. **DESIGN (Tekton)** — freeze one PRD, split it into file-scoped tickets.
+2. **DON'T SETTLE (Sim Francisco)** — trust no report; re-measure every number before acting on it.
+3. **DELEGATE (Custom Universe)** — put a model tier on every ticket; cheapest that passes the gate.
 
-Grounded in two constraints that override everything below:
-- **YAGNI** — build only what THIS task asks. No speculative abstraction, no "future-proof" branches, no provider indirection for a single provider.
-- **Karpathy minimalism** — simplest working baseline first, verify empirically (measure, don't guess), avoid early optimization. *The best code is the code you don't write.*
+## Guardrails — read these first (this is where it goes wrong)
+
+These three failures are the ones that actually happen. They violate the skill's own
+principles. Do not commit them:
+
+- **The plan contains NO implementation code.** A ticket is a *contract* — files,
+  behavior, success metric, tier — never the code that satisfies it. If you catch
+  yourself writing TypeScript/SQL/config in the plan, stop: that's the worker's job,
+  and writing it yourself defeats the whole point.
+- **Add nothing the task didn't ask for (YAGNI).** No feature flags, DI containers,
+  canary rollouts, dual-backend "providers", abstraction layers, or migration docs
+  **unless the task named them.** Speculative infrastructure is the #1 way this skill
+  backfires. Simplest baseline that meets the contract — nothing more.
+- **A reported number is a hypothesis, not a fact.** If any decision rests on a number
+  someone reported ("0 imports", "1,240 tests", "100% covered"), the FIRST ticket
+  re-measures it. Never plan on top of an unverified claim.
 
 ## When to Use
 
-- A request needs 2+ independent implementers, or spans many files/modules.
-- A migration, audit, or sweep too large to hold in one context.
-- Any place where an agent's or a report's **numbers** decide the plan — and could be wrong.
+- 2+ independent implementers, or a task spanning many files/modules.
+- A migration / audit / sweep too large to hold in one context.
+- Any plan whose decisions rest on a report's numbers.
 
-**When NOT to use:** a single-file change, a one-line fix, or a conversational answer. Just do it.
+**When NOT to use:** a single-file change, a one-line fix, a conversational answer.
+YAGNI — just do it. A fleet here is over-engineering.
 
-## Move 1 — DESIGN (Tekton): PRD → file-scoped tickets
+## Move 1 — DESIGN: PRD → file-scoped tickets
 
-The deliverable of planning is **not a prose plan**. It is a PRD plus a set of tickets that a fleet can execute in parallel with zero coordination.
-
-Every ticket is a **contract**, and must carry all four fields:
+The deliverable is **not prose.** It is a PRD plus tickets a fleet runs in parallel
+with zero coordination. Every ticket carries exactly four fields — no code:
 
 | Field | Rule |
 |-------|------|
-| **File ownership** | The exact files this ticket may write. No two tickets share a writable file → no merge conflicts, safe parallelism. |
-| **Single contract** | One interface/behavior this ticket delivers, stated so another ticket can depend on it without reading the code. |
-| **Success metric** | A number or check that will be **re-measured** at the gate (e.g. "PR handling time ↓ X%", "0 imports of legacy module", "tsc clean"). Not "looks done". |
-| **Model tier** | Which tier implements it (see Move 3). |
+| **File ownership** | The exact files this ticket may write. No two tickets share a writable file → no conflicts, safe parallelism. |
+| **Single contract** | One behavior/interface, stated so a dependent ticket needn't read the code. |
+| **Success metric** | A number/check **re-measured at the gate** ("0 legacy imports", "tsc clean") — not "looks done". |
+| **Model tier** | Which tier implements it (Move 3). |
 
-Sequence: **PRD (single contract, frozen) → Foundation ticket(s) first → parallel implementer tickets (file-owner–disjoint) → gate → merge.** Freeze the PRD before dispatch; a moving contract breaks every worker downstream.
+**List files, don't claim separation.** Do not write "file ownership separated" as a
+header and move on — that's the most common way conflicts slip through. Instead,
+*list each ticket's exact files*, then check that no file name appears in two tickets.
+If two required changes both edit one entity's file (e.g. `deletedAt` field **and**
+soft-delete filtering both live in `user.ts`), that is **one ticket with one owner**,
+not two parallel ones. When in doubt, serialize.
 
-## Move 2 — DON'T SETTLE (Sim Francisco): re-measure, then critic
+Sequence: **PRD frozen → Foundation ticket(s) → parallel implementer tickets
+(file-owner-disjoint) → gate → merge.** Freeze the PRD before dispatch.
 
-**Never believe a report.** When a ticket (or a prior investigation) claims "290KB, 7000 lines, 0 imports", an independent verifier re-runs the measurement and returns a verdict:
+## Move 2 — DON'T SETTLE: re-measure, then critic
 
-- **VERIFIED** — reproduced the number.
-- **REFUTED** — the claim is false; reopen the ticket.
-- **PARTIAL** — partially true; scope the gap into a follow-up ticket.
+An independent verifier reproduces each claimed number → **VERIFIED / REFUTED /
+PARTIAL**. REFUTED reopens the ticket; PARTIAL scopes a follow-up. Then one
+**completeness critic** pass hunts for what was skipped (unverified claim, unread
+file, dropped edge case, quietly relaxed metric); loop until a round finds nothing new.
 
-Then one **completeness critic** pass over the whole result set — adversarially hunt for *what was skipped*: a claim never verified, a file never read, an edge case dropped, a metric quietly relaxed. What it finds becomes the next round. Loop until a round finds nothing new (loop-until-dry), not until you're tired.
+**Merge only when BOTH hold: re-measured evidence AND an APPROVE verdict. Missing
+either → hold.**
 
-Merge only when **both** hold: evidence (the success metric, re-measured) AND an APPROVE verdict from the review gate. Missing either → hold, don't merge.
+## Move 3 — DELEGATE: a tier per ticket
 
-## Move 3 — DELEGATE (Custom Universe): a tier per ticket
+| Ticket kind | Tier |
+|-------------|------|
+| Spec-faithful implementation | **Mid** |
+| High-risk gate (RBAC, payments, security, audit, invariants) | **Top** — APPROVE required before merge |
+| Cheap mechanical (rename, move, format, scaffold) | **Cheapest** |
+| Orchestration / sequencing / merge | **Top (you)** — never delegated |
 
-The orchestrator chooses the model, not just the task. Match tier to the ticket's risk and mechanical-ness:
-
-| Ticket kind | Tier | Why |
-|-------------|------|-----|
-| Spec-faithful implementation | **Mid tier** | Fast, mechanical, follows the contract. |
-| High-risk gate (RBAC, payments, security, audit, invariants) | **Top tier** | Protects invariants; APPROVE required before merge. |
-| Cheap mechanical work (rename, move, format, scaffold) | **Cheapest tier** | No judgment needed. |
-| Orchestration / sequencing / merge decisions | **Top tier (you)** | Never delegated. |
-
-Rule of thumb: **the cheapest tier that can still pass the gate.** Scale the fan-out to the budget — more budget buys more parallel finders/verifiers, not deeper single agents.
-
-## Putting it together (dynamic workflow)
-
-Drive the whole thing as **one dynamic workflow**, not a chain of one-off dispatches:
-
-```
-PRD (frozen contract)
-  └─ Foundation ticket(s)                     [top tier]
-     └─ parallel implementer tickets          [mid tier, file-owner-disjoint]  ── worktree isolation if writers overlap
-        └─ per-ticket gate: re-measure metric [verifier]  +  review APPROVE     [top tier]
-           └─ completeness critic (loop-until-dry)        [top tier]
-              └─ orchestrator merges evidence+APPROVE only, commits per feature [you]
-```
-
-## Why this is an efficient way to drive Claude's dynamic Workflow
-
-This skill is not just "a plan" — it is a **shape for Claude's dynamic Workflow tool**.
-The four-field ticket exists precisely so the Workflow can fan work out safely:
-
-- **Disjoint file ownership → real parallelism.** Because no two tickets write the
-  same file, implementer agents run concurrently with zero coordination
-  (`pipeline`/`parallel`) instead of one long serial pass. Wall-clock collapses to
-  the slowest single ticket, not the sum of all tickets.
-- **Tier-per-ticket → cheap tokens.** Mechanical tickets go to the cheapest tier,
-  only gates ride the top tier. You buy breadth (more parallel finders/verifiers)
-  instead of depth (one expensive agent thinking longer).
-- **Evidence gate → no wasted re-work.** Fire-and-forget workers; validation runs
-  in the background and only evidence+APPROVE merges. Bad work is caught at the
-  gate, not after it has polluted downstream tickets.
-
-### vs. a single Opus plan (opusplan) — by design, not by measured win
-
-A one-shot "Opus plans, then executes" pass is **serial and un-gated** by
-construction: one context holds the whole task and self-reports "done". The
-sommelier shape differs *structurally* on these axes:
-
-| Axis | Single Opus plan (opusplan) | Sommelier dynamic workflow |
-|------|------------------------------|-----------------------------|
-| **Concurrency** | Serial — one context, one thread | Parallel — N disjoint tickets at once |
-| **Token cost** | Everything at top tier | Cheapest tier per ticket; top tier only for gates |
-| **Trust model** | Self-reported "done" | Independent re-measure + APPROVE gate |
-| **Context limit** | Whole task must fit one context | Sharded across contexts; scales past one window |
-| **Failure blast radius** | A wrong step contaminates the rest | Caught at the per-ticket gate |
-
-These are **architectural differences, not proven efficiency gains.** An honest
-100-cycle A/B and a 3-arm study found the effect is *not* a clean win — the skill
-did **not** beat a plain "just use a Workflow" instruction, and the modeled
-cost/latency numbers turned out to be tautological (retracted). The **one**
-ground-truth signal that held up: a single-pass plan caught far fewer *planted
-false numbers* than any orchestrated, verifying arm (~56% vs 100%) — i.e. the
-value is in the **verification gate**, not in fanning out per se. Read the full,
-un-spun results — including the negative ones — in [`BENCHMARKS.md`](../BENCHMARKS.md).
-
-## Additional patterns worth adding
-
-- **File-ownership lock as the parallelism primitive.** Disjoint writable-file sets are what *make* 50 agents safe. Compute them before dispatch; if two tickets want the same file, split or serialize them.
-- **Evidence-gated merge.** A merge needs a re-measured metric + APPROVE. Fire-and-forget the worker; validate its evidence in the background.
-- **Budget-scaled fan-out.** `finders = floor(budget / cost_per_agent)`. Log what you dropped — silent truncation reads as "covered everything" when it wasn't.
-- **Worktree isolation** only when parallel writers would actually collide — it costs setup + disk, so don't pay for it otherwise (YAGNI).
-- **Numbers are claims, not facts.** Every KB / line-count / "0 usages" in a report is a hypothesis until an independent agent reproduces it.
+Rule: **cheapest tier that still passes the gate.** In a dynamic workflow, dispatch by
+tier alias (`'sonnet'`/`'opus'`/`'haiku'`) so the latest model is used. Scale fan-out
+to budget, not agent depth.
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
-| Prose plan instead of file-scoped tickets | Emit contracts with all four fields, or the fleet can't run parallel. |
-| Two tickets writing the same file | Recompute file ownership; make sets disjoint. |
-| Trusting a worker's "done" | Re-measure the success metric independently before merge. |
-| Stopping at first pass | Run the completeness critic; loop-until-dry. |
-| Everything on the top tier | Push mechanical work down; reserve top tier for gates + orchestration. |
-| Abstraction "for later" | YAGNI. Delete it. Simplest baseline that passes the gate. |
+| Writing implementation code in the plan | Stop. Emit a contract; the worker writes code. |
+| Adding infra the task didn't ask for | YAGNI. Delete it. Simplest baseline that passes. |
+| Planning on a reported number | Re-measure it in ticket 0 first. |
+| Prose plan instead of file-scoped tickets | Emit the four-field contract. |
+| Two tickets writing the same file | Recompute disjoint file ownership. |
+| Stopping at first pass | Completeness critic; loop-until-dry. |
+| Everything on the top tier | Push mechanical work down; top tier only for gates. |
+
+*Honest evaluation of this skill — including where it lost — is in
+[`BENCHMARKS.md`](../BENCHMARKS.md).*

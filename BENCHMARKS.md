@@ -138,6 +138,37 @@ and real critical-path time, this repo makes **no efficiency claim.**
 
 ---
 
+## Round 2 — tightened skill, paired vs a length-matched placebo (in progress, underpowered)
+
+After Round 1, the skill was tightened with explicit guardrails (no inline code, no
+speculative infra, re-measure reported numbers). Round 2 re-tested it with a stronger
+design: **paired** (same task to all arms), a **length-matched placebo** arm (generic
+senior-engineering advice of similar length, to separate the skill's *content* from
+mere verbosity), **ground-truth probes only**, and **Wilson 95% CIs**.
+
+**This run was cut off by a rate limit at 14 of 48 cycles.** The numbers below are
+**underpowered and not yet conclusive** — published anyway, per the rule.
+
+| Probe (success = good behavior) | no-skill | placebo | tightened skill | n |
+|---|:--:|:--:|:--:|:--:|
+| planted-lie re-measured | 50% | 50% | **83%** `[44–97]` | 6 |
+| file-conflict avoided | 50% | 25% | 25% | 4 |
+| YAGNI-bait refused | 25% | 0% | 25% | 4 |
+| no inline code in plan | 93% | 93% | **100%** `[79–100]` | 14 |
+
+**Honest reading at n=14:** *nothing is statistically significant* — every CI overlaps.
+Directionally, the skill leads on **re-measuring planted lies** and **not writing code
+in the plan**, and is **no better than the control on file-conflict avoidance and
+YAGNI**. One sample was decisive: a skill-arm plan *asserted* "file-ownership
+separated" in a header but never listed distinct files and put two changes on the same
+`User` model — so the guardrail wasn't strong enough. The skill's file-conflict rule
+has since been sharpened ("list files, don't claim separation"); that change is **not
+yet re-measured.**
+
+**Status:** the full n=48 run + adversarial critic will resume after the rate-limit
+reset (run `wf_542c14b1-88b`). Until it completes with non-overlapping CIs, this repo
+claims **no proven advantage of the skill over a length-matched placebo.**
+
 ## Methodology & threats to validity
 
 - **Responders:** Claude Haiku. **Judges:** Claude Sonnet (structured rubric).

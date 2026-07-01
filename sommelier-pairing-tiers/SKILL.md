@@ -11,6 +11,17 @@ The tier-pinned sibling of `sommelier-pairing`. Same three moves — **DESIGN (T
 
 The orchestrator is **Opus, long-lived. It never writes code.** It decomposes, dispatches Sonnet implementers inside a dynamic workflow, and gates merges. Bound by **YAGNI** (build only what's asked) and **Karpathy minimalism** (simplest working baseline, measure don't guess — *the best code is the code you don't write*).
 
+## Guardrails — read these first (this is where it goes wrong)
+
+- **The plan contains NO implementation code.** A ticket is a contract (files +
+  behavior + metric + tier), never the code that satisfies it. Writing it yourself
+  defeats the point — that's the Sonnet worker's job.
+- **Add nothing the task didn't ask for (YAGNI).** No feature flags, DI containers,
+  canary rollouts, dual-backend providers, or migration docs unless the task named
+  them. Speculative infrastructure is the #1 way this backfires.
+- **A reported number is a hypothesis, not a fact.** If a decision rests on a reported
+  number, the FIRST ticket re-measures it before anyone plans on top of it.
+
 ## When to Use
 
 - A request needs a fleet of implementers or spans many files/modules.
@@ -29,6 +40,8 @@ Planning outputs a **PRD + tickets**, not prose. Each ticket is a contract with 
 | **Single contract** | One behavior/interface, stated so dependents needn't read the code. |
 | **Success metric** | A number/check re-measured at the gate (e.g. "PR handling time ↓ X%", "0 legacy imports", "tsc/test clean"). |
 | **Model tier** | Concrete tier below. |
+
+**List each ticket's exact files and check no file appears twice — do not just claim "ownership separated" in a header** (that is how conflicts slip through). Two changes that both live in `user.ts` = one ticket, not two parallel ones.
 
 Sequence: **PRD frozen → Foundation (Opus-designed) → parallel Sonnet implementers (file-owner-disjoint) → Opus+reviewer gate → Opus merge + tsc/test + per-feature commit.**
 
