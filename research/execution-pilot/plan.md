@@ -1,6 +1,6 @@
-# Pre-registered evaluation plan — sommelier v1.1
+# Pre-registered evaluation plan — sommelier (Round 4)
 
-**Status:** frozen before the v1.1 run. Purpose: give the improved skill a fair,
+**Status:** frozen before the Round 4 run. Purpose: give the improved skill a fair,
 mechanically-graded chance to show **one real, attributable win**, and to falsify it
 cleanly if it doesn't. Written after three prior null rounds (see `../../BENCHMARKS.md`).
 

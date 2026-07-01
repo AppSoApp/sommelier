@@ -236,7 +236,7 @@ execution pilot): **no study shows the skill helping; the one with the strongest
 validity shows it not helping and trending worse.** The repo's no-efficacy-claim stance
 is, if anything, generous.
 
-## Round 4 — v1.1, the first win (pre-registered, mechanically graded)
+## Round 4 — the first win (pre-registered, mechanically graded)
 
 After Round 3, Move 2 was rewritten from a *belief* ("a claim is a hypothesis") into a
 **TRIGGER → ACTION**: a `# CERTIFIED correct` / "tested" / "reviewed" label is a claim;
@@ -277,7 +277,7 @@ hidden edge test.
 **Caveats:** one producing run (deterministic grading, unreplicated sample); `rule` ran
 ~18% longer than `placebo` (over the ±10% target — but the effect size makes length an
 implausible driver); small pure-function tasks. Harness + data frozen under
-[`research/execution-pilot/v1.1/`](./research/execution-pilot/v1.1/).
+[`research/execution-pilot/round4/`](./research/execution-pilot/round4/).
 
 ## Methodology & threats to validity
 

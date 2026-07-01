@@ -1,6 +1,6 @@
 export const meta = {
   name: 'sommelier-producer-v11',
-  description: 'v1.1 pre-registered producer run: 4 arms (noskill/placebo/rule/skill) x 2 tiers (haiku/sonnet) produce real Python for headroom-bug tasks. Graded mechanically downstream.',
+  description: 'Round 4 pre-registered producer run: 4 arms (noskill/placebo/rule/skill) x 2 tiers (haiku/sonnet) produce real Python for headroom-bug tasks. Graded mechanically downstream.',
   phases: [{ title: 'Produce', detail: 'each task x tier -> 4 arms produce full module' }],
 }
 

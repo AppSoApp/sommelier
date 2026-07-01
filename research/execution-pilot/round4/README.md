@@ -1,4 +1,4 @@
-# Round 4 — v1.1 pre-registered execution eval (the first win)
+# Round 4 — pre-registered execution eval (the first win)
 
 The confirmatory run for [`../plan.md`](../plan.md). Mechanically graded (hidden pytest,
 **no LLM judge**). This is the round where the improved skill finally beats its controls.

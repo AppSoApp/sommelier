@@ -27,6 +27,6 @@ Published Round 3 result: bug-fix **0%** for all three arms (skill included);
 feature-correctness 72% / 72% / 44% (no-skill / placebo / skill). See BENCHMARKS.md
 for the full reading and caveats.
 
-> Note: this harness is superseded by the pre-registered v1.1 plan in
+> Note: this harness is superseded by the pre-registered Round 4 plan in
 > [`plan.md`](./plan.md), which fixes the confounds an audit found in this pilot
 > (a self-failing planted bug, unpaired CIs, single-agent category mismatch).

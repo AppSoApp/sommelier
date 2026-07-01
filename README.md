@@ -43,7 +43,7 @@ Here is the honest scorecard:
 | A plan is **file-scoped tickets, not prose** — a checkable contract per unit | ✅ by design |
 | Pairs each task to the **cheapest model tier that passes** | ✅ by design |
 | **Orchestrate-and-verify catches planted errors a single-pass plan misses** | ✅ plan-level only — **not specific to this skill**, and **0% in execution** (Round 3) |
-| Catches a bug hidden behind an authority label (`# CERTIFIED`) | ✅ **v1.1 win** — the rewritten verify rule lifts bug-fix 0%→**29%** (haiku)/**44%** (sonnet) vs a length-matched placebo, McNemar **p ≤ 10⁻⁴**, pre-registered, hidden-pytest (Round 4) |
+| Catches a bug hidden behind an authority label (`# CERTIFIED`) | ✅ **Round 4 win** — the rewritten verify rule lifts bug-fix 0%→**29%** (haiku)/**44%** (sonnet) vs a length-matched placebo, McNemar **p ≤ 10⁻⁴**, pre-registered, hidden-pytest (Round 4) |
 | Beats a plain *"just use a Workflow"* / *"you are an orchestrator"* on *planning* | ❌ **not shown** (every CI overlaps the control) |
 | Beats a **length-matched placebo** on *plan-text* probes | ❌ **not shown** (the win above is on executed code, not plan text) |
 | ~~Faster / cheaper than a single Opus plan~~ | ❌ **retracted** (modeled indices were tautological) |

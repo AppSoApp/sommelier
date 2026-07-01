@@ -73,6 +73,10 @@ Sequence: **PRD frozen → Foundation ticket(s) → parallel implementer tickets
 
 ## Move 2 — DON'T SETTLE: falsify the claim, then critic
 
+> **The one-line version (say this to a mechanical / low-tier worker):**
+> *STOP. Before you trust or reuse a "certified" function, run it on `0`, `1`, empty, and a
+> negative. If any is wrong, rewrite it now — and leave the `assert` that proves it.*
+
 A **claim** is anything asserting code already works: a reported number, or a status
 label in the code or comments (`# CERTIFIED correct`, `# fully tested`, "reviewed",
 "frozen — do not modify"). **Treat them all identically — as an unproven hypothesis.**
@@ -85,6 +89,11 @@ recursive base case). Return **VERIFIED / REFUTED / PARTIAL**.
 Naming the bug is not resolving it. "It was certified" is not a reason to leave a
 failing check failing — the certification is exactly what you just refuted. A
 **REFUTED-but-unfixed claim is the failure mode this move exists to stop.**
+
+**Ship the fix with its evidence.** When you fix a REFUTED claim, leave the boundary
+check that caught it as an **executable assertion that now passes** (e.g. `assert
+factorial(0) == 1`). A fix without a passing check is just another unverified claim —
+the assert is the proof the certification lacked.
 
 Then one **completeness critic** pass hunts for what was skipped (an unverified claim,
 an unread file, a dropped edge case, a quietly relaxed metric); loop until a round

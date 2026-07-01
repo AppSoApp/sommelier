@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""v1.1 grader v4 — robust prose-stripping extractor (behavioral fix rate).
+"""Round 4 grader v4 — robust prose-stripping extractor (behavioral fix rate).
 Extracts code even when the agent wraps it in prose (REFUTED/VERIFIED narration),
 so we measure bug-FIXING behavior, not output formatting. Unparseable rate kept as
 a secondary usability finding. Primary: paired McNemar (1-sided) rule vs placebo on FIX."""
