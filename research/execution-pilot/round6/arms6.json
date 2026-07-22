@@ -1,0 +1,21 @@
+{
+  "arms": {
+    "noskill": null,
+    "placebo-long": {
+      "path": "arms/placebo-long.txt",
+      "sha256": "fc6fdba9aa85767f19b7c698b71fa0157f757a971a745850069d4bdfefe1a388"
+    },
+    "skill-full": {
+      "path": "arms/skill-full.txt",
+      "sha256": "e6a2f1ae38113b3dd21a818ba656aeb77c06115f928f820b649826b76d332001"
+    },
+    "rule-only": {
+      "path": "arms/rule-only.txt",
+      "sha256": "f1715ee0e7e701b488e0a6a287db91af6c57db1a8c9fbcc8ee653fd988db060e"
+    },
+    "skill-no-imperative": {
+      "path": "arms/skill-no-imperative.txt",
+      "sha256": "96e20e70e1807dcdc7feb1122d03895d8c44d9fa7dd5d91d7d6d02bbb09a1ec4"
+    }
+  }
+}

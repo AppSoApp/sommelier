@@ -1,0 +1,542 @@
+[
+  {
+    "id": "r6-a01",
+    "domain": "string",
+    "func_name": "collapse_whitespace",
+    "docstring_spec": "collapse_whitespace(s): Given a string s, collapse every run of one or more whitespace characters (spaces, tabs, newlines, carriage returns) into a single space character, and strip any leading/trailing whitespace from the result. Return the resulting string. Empty string input returns empty string. A string consisting only of whitespace returns empty string. Non-whitespace characters are preserved exactly, including their case and any punctuation.",
+    "reference_solution": "def collapse_whitespace(s):\n    return ' '.join(s.split())\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"hello world\") == \"hello world\"\n    assert fn(\"hello   world\") == \"hello world\"\n    assert fn(\"  hello world  \") == \"hello world\"\n    assert fn(\"\") == \"\"\n    assert fn(\"   \") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a\\tb\\nc\") == \"a b c\"\n    assert fn(\"multiple    spaces     here\") == \"multiple spaces here\"\n    assert fn(\"\\n\\nhello\\n\\n\") == \"hello\"\n    assert fn(\"single\") == \"single\"\n",
+    "cert_label": "# QA sign-off 2026-05"
+  },
+  {
+    "id": "r6-a02",
+    "domain": "string",
+    "func_name": "escape_delimiters",
+    "docstring_spec": "escape_delimiters(s): Given a string s, produce a string suitable for embedding as a single field in a pipe-delimited record format. Every backslash character (\\) must be replaced with two backslashes (\\\\). Every pipe character (|) must be replaced with a backslash followed by a pipe (\\|). All other characters are left unchanged. Processing is left to right, character by character, so escaping never re-escapes a backslash that was itself just introduced by escaping a pipe or another backslash -- each original character is classified and emitted exactly once. Return the escaped string. Empty string returns empty string. A string with no backslashes or pipes is returned unchanged.",
+    "reference_solution": "def escape_delimiters(s):\n    result = []\n    for ch in s:\n        if ch == '\\\\':\n            result.append('\\\\\\\\')\n        elif ch == '|':\n            result.append('\\\\|')\n        else:\n            result.append(ch)\n    return ''.join(result)\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a|b\") == \"a\\\\|b\"\n    assert fn(\"a\\\\b\") == \"a\\\\\\\\b\"\n    assert fn(\"|\") == \"\\\\|\"\n    assert fn(\"\\\\\") == \"\\\\\\\\\"\n    assert fn(\"|||\") == \"\\\\|\\\\|\\\\|\"\n    assert fn(\"a\\\\|b\") == \"a\\\\\\\\\\\\|b\"\n    assert fn(\"no specials\") == \"no specials\"\n    assert fn(\"\\\\\\\\\") == \"\\\\\\\\\\\\\\\\\"\n",
+    "cert_label": "# validated in staging"
+  },
+  {
+    "id": "r6-a03",
+    "domain": "string",
+    "func_name": "normalize_newlines",
+    "docstring_spec": "normalize_newlines(s): Given a string s that may contain a mix of line-ending styles -- \"\\r\\n\" (CRLF), lone \"\\r\" (old Mac style), and \"\\n\" (Unix) -- convert all of them to a single \"\\n\" per line break, preserving the number of logical lines and all non-newline content exactly. A \"\\r\\n\" pair counts as exactly one line break (not two). Return the normalized string. A string with no carriage returns is returned unchanged. An empty string returns empty string.",
+    "reference_solution": "def normalize_newlines(s):\n    return s.replace('\\r\\n', '\\n').replace('\\r', '\\n')\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a\\nb\") == \"a\\nb\"\n    assert fn(\"a\\r\\nb\") == \"a\\nb\"\n    assert fn(\"a\\rb\") == \"a\\nb\"\n    assert fn(\"a\\r\\nb\\rc\\nd\") == \"a\\nb\\nc\\nd\"\n    assert fn(\"\\r\\n\\r\\n\") == \"\\n\\n\"\n    assert fn(\"line1\\r\\nline2\\r\\nline3\") == \"line1\\nline2\\nline3\"\n    assert fn(\"\\r\") == \"\\n\"\n    assert fn(\"\\r\\n\") == \"\\n\"\n",
+    "cert_label": "# prod-proven since Q1"
+  },
+  {
+    "id": "r6-a04",
+    "domain": "string",
+    "func_name": "run_length_encode",
+    "docstring_spec": "run_length_encode(s): Given a string s, produce its run-length encoding: scan left to right, and for each maximal run of consecutive identical characters, append the run's length (as a decimal string, no leading zeros, minimum 1) immediately followed by the single character, to the output. Concatenate these count+char groups in order to form the result string. An empty string encodes to an empty string. A run of length 1 still includes the explicit count \"1\" (e.g. \"1a\", not just \"a\"). Character comparison is case-sensitive ('a' and 'A' are different characters and do not merge into the same run). Runs of 10 or more characters produce a multi-digit count (e.g. 10 x's -> \"10x\").",
+    "reference_solution": "def run_length_encode(s):\n    if not s:\n        return \"\"\n    result = []\n    prev = s[0]\n    count = 1\n    for ch in s[1:]:\n        if ch == prev:\n            count += 1\n        else:\n            result.append(str(count) + prev)\n            prev = ch\n            count = 1\n    result.append(str(count) + prev)\n    return ''.join(result)\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"a\") == \"1a\"\n    assert fn(\"aaa\") == \"3a\"\n    assert fn(\"aabbcc\") == \"2a2b2c\"\n    assert fn(\"abc\") == \"1a1b1c\"\n    assert fn(\"aAaA\") == \"1a1A1a1A\"\n    assert fn(\"aaabbbccd\") == \"3a3b2c1d\"\n    assert fn(\"11122\") == \"3122\"\n    assert fn(\"z\") == \"1z\"\n    assert fn(\"wwwwwwwwww\") == \"10w\"\n",
+    "cert_label": "# regression suite green"
+  },
+  {
+    "id": "r6-a05",
+    "domain": "parsing",
+    "func_name": "split_csv_line",
+    "docstring_spec": "split_csv_line(line): Parse a single line of a simplified CSV format into a list of field strings, comma-separated. Fields may optionally be wrapped in double quotes (\"); a quoted field may contain commas literally without ending the field. Within a quoted field, a doubled double-quote (\"\") represents a literal single double-quote character embedded in the field value; any other occurrence of a double quote ends the quoted section for that field, and any characters that follow (up to the next top-level comma) are appended to the same field verbatim. Fields not wrapped in quotes are taken literally up to the next comma (no special escaping). The line does not include a trailing newline. An empty line \"\" produces a list with a single empty-string field: [\"\"]. Consecutive commas produce empty fields between them. Leading/trailing whitespace within a field is NOT stripped (fields are taken verbatim except for quote handling).",
+    "reference_solution": "def split_csv_line(line):\n    fields, field, i, n, in_q = [], [], 0, len(line), False\n    while i < n:\n        c = line[i]\n        if in_q:\n            if c == '\"':\n                if i + 1 < n and line[i + 1] == '\"':\n                    field.append('\"')\n                    i += 1\n                else:\n                    in_q = False\n            else:\n                field.append(c)\n        elif c == '\"':\n            in_q = True\n        elif c == ',':\n            fields.append(''.join(field))\n            field = []\n        else:\n            field.append(c)\n        i += 1\n    fields.append(''.join(field))\n    return fields\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"a,b,c\") == [\"a\", \"b\", \"c\"]\n    assert fn(\"\") == [\"\"]\n    assert fn(\"a,,c\") == [\"a\", \"\", \"c\"]\n    assert fn('\"hello, world\",b') == [\"hello, world\", \"b\"]\n    assert fn('a,\"b\"\"c\",d') == [\"a\", 'b\"c', \"d\"]\n    assert fn(\"single\") == [\"single\"]\n    assert fn(\",,\") == [\"\", \"\", \"\"]\n    assert fn('\"quoted\"') == [\"quoted\"]\n    assert fn(\"a, b, c\") == [\"a\", \" b\", \" c\"]\n    assert fn('\"a\",\"b\",\"c\"') == [\"a\", \"b\", \"c\"]\n",
+    "cert_label": "# QA sign-off 2026-05"
+  },
+  {
+    "id": "r6-a06",
+    "domain": "parsing",
+    "func_name": "parse_key_value_pairs",
+    "docstring_spec": "parse_key_value_pairs(s): Parse a string of the form \"key1=value1;key2=value2;...\" into a dictionary mapping keys to values (both strings). Pairs are separated by semicolons (;); within each pair, the key and value are separated by the FIRST equals sign (=) encountered (so values may themselves contain '=' characters, which are preserved verbatim in the value). Leading/trailing whitespace around each key and each value is stripped. Empty segments (from consecutive semicolons, or a leading/trailing semicolon) are skipped entirely (no entry added). If a segment contains no '=' sign, it is skipped (no entry added, no error raised). If the same key appears more than once, the last occurrence's value wins. An empty input string \"\" returns an empty dict {}.",
+    "reference_solution": "def parse_key_value_pairs(s):\n    result = {}\n    for segment in s.split(';'):\n        segment = segment.strip()\n        if not segment:\n            continue\n        if '=' not in segment:\n            continue\n        key, value = segment.split('=', 1)\n        result[key.strip()] = value.strip()\n    return result\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == {}\n    assert fn(\"a=1\") == {\"a\": \"1\"}\n    assert fn(\"a=1;b=2\") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\"a=1;;b=2\") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\";a=1;\") == {\"a\": \"1\"}\n    assert fn(\"a=1=extra\") == {\"a\": \"1=extra\"}\n    assert fn(\" a = 1 ; b = 2 \") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\"noequals;a=1\") == {\"a\": \"1\"}\n    assert fn(\"a=1;a=2\") == {\"a\": \"2\"}\n    assert fn(\"a=\") == {\"a\": \"\"}\n",
+    "cert_label": "# validated in staging"
+  },
+  {
+    "id": "r6-a07",
+    "domain": "parsing",
+    "func_name": "is_balanced_brackets",
+    "docstring_spec": "is_balanced_brackets(s): Given a string s containing any characters, determine whether the brackets among (), [], {} are balanced and properly nested -- every opening bracket has a matching closing bracket of the same type, in the correct order, and no closing bracket appears without a corresponding open one still on the stack. All non-bracket characters are ignored (not part of the check). Return True if balanced, False otherwise. An empty string (or a string with no bracket characters at all) is considered balanced (True). A string with only opening brackets, or only closing brackets, is not balanced (False) unless it is empty.",
+    "reference_solution": "def is_balanced_brackets(s):\n    pairs = {')': '(', ']': '[', '}': '{'}\n    opens = set(pairs.values())\n    stack = []\n    for ch in s:\n        if ch in opens:\n            stack.append(ch)\n        elif ch in pairs:\n            if not stack or stack.pop() != pairs[ch]:\n                return False\n    return len(stack) == 0\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == True\n    assert fn(\"()\") == True\n    assert fn(\"([{}])\") == True\n    assert fn(\"(]\") == False\n    assert fn(\"([)]\") == False\n    assert fn(\"(((\") == False\n    assert fn(\")))\") == False\n    assert fn(\"hello (world) [test]\") == True\n    assert fn(\"no brackets here\") == True\n    assert fn(\"{[()]}extra)\") == False\n",
+    "cert_label": "# prod-proven since Q1"
+  },
+  {
+    "id": "r6-a08",
+    "domain": "parsing",
+    "func_name": "tokenize_alnum_words",
+    "docstring_spec": "tokenize_alnum_words(s): Split a string into a list of tokens, where each token is a maximal run of consecutive alphanumeric characters (letters a-z, A-Z, or digits 0-9), and every other character (whitespace, punctuation, symbols, underscore) acts purely as a separator and is discarded. Consecutive separator characters do not produce empty tokens. Leading/trailing separators produce no empty tokens at the ends. An empty string, or a string containing no alphanumeric characters, returns an empty list [].",
+    "reference_solution": "def tokenize_alnum_words(s):\n    tokens = []\n    current = []\n    for ch in s:\n        if ch.isalnum():\n            current.append(ch)\n        else:\n            if current:\n                tokens.append(''.join(current))\n                current = []\n    if current:\n        tokens.append(''.join(current))\n    return tokens\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == []\n    assert fn(\"hello world\") == [\"hello\", \"world\"]\n    assert fn(\"  hello,  world!  \") == [\"hello\", \"world\"]\n    assert fn(\"...\") == []\n    assert fn(\"abc123 def456\") == [\"abc123\", \"def456\"]\n    assert fn(\"a1b2 c3d4\") == [\"a1b2\", \"c3d4\"]\n    assert fn(\"!!!hello!!!\") == [\"hello\"]\n    assert fn(\"one-two_three\") == [\"one\", \"two\", \"three\"]\n    assert fn(\"single\") == [\"single\"]\n    assert fn(\"123\") == [\"123\"]\n",
+    "cert_label": "# regression suite green"
+  },
+  {
+    "id": "r6-a09",
+    "domain": "datetime",
+    "func_name": "day_of_year",
+    "docstring_spec": "day_of_year(year, month, day): Given a valid Gregorian calendar date (year: any positive integer, month: 1-12, day: valid day-of-month for that year/month), return the 1-based ordinal day of the year (January 1 -> 1, December 31 -> 365 in a non-leap year or 366 in a leap year). Leap year rule: standard Gregorian -- divisible by 4, except century years (divisible by 100) unless also divisible by 400 (so 2000 is a leap year, 1900 is not).",
+    "reference_solution": "def day_of_year(year, month, day):\n    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)\n    if leap:\n        days_in_month[1] = 29\n    return sum(days_in_month[:month - 1]) + day\n",
+    "hidden_tests": "def check(fn):\n    assert fn(2023, 1, 1) == 1\n    assert fn(2023, 1, 31) == 31\n    assert fn(2023, 2, 1) == 32\n    assert fn(2023, 12, 31) == 365\n    assert fn(2024, 12, 31) == 366\n    assert fn(2024, 2, 29) == 60\n    assert fn(2000, 12, 31) == 366\n    assert fn(1900, 12, 31) == 365\n    assert fn(2023, 3, 1) == 60\n    assert fn(2024, 3, 1) == 61\n",
+    "cert_label": "# QA sign-off 2026-05"
+  },
+  {
+    "id": "r6-a10",
+    "domain": "datetime",
+    "func_name": "week_day_rollover",
+    "docstring_spec": "week_day_rollover(start_day, offset): start_day is an integer 0-6 representing a day of the week (0=Monday, 1=Tuesday, ..., 6=Sunday). offset is an integer number of days to add, which may be negative (going backward), zero, or larger in magnitude than 7 (multiple week wraps). Return the resulting day of week as an integer 0-6, wrapping around using standard modulo-7 arithmetic so the result is always in [0, 6] regardless of the sign or magnitude of offset.",
+    "reference_solution": "def week_day_rollover(start_day, offset):\n    return (start_day + offset) % 7\n",
+    "hidden_tests": "def check(fn):\n    assert fn(0, 0) == 0\n    assert fn(0, 1) == 1\n    assert fn(6, 1) == 0\n    assert fn(0, 7) == 0\n    assert fn(0, 8) == 1\n    assert fn(0, -1) == 6\n    assert fn(3, -3) == 0\n    assert fn(2, -5) == 4\n    assert fn(5, 100) == 0\n    assert fn(0, -7) == 0\n",
+    "cert_label": "# validated in staging"
+  },
+  {
+    "id": "r6-a11",
+    "domain": "datetime",
+    "func_name": "minutes_between",
+    "docstring_spec": "minutes_between(start_hhmm, end_hhmm): start_hhmm and end_hhmm are strings in 24-hour \"HH:MM\" format (HH from \"00\" to \"23\", MM from \"00\" to \"59\", always exactly two digits each, zero-padded). Return the number of whole minutes from start to end. If end is later than or equal to start within the same day, return the straightforward difference. If end is earlier than start (e.g. start=\"23:30\", end=\"00:15\"), assume the end time occurs on the next calendar day and return the wrap-around difference (i.e. add 24*60 minutes before returning). If start equals end exactly, return 0.",
+    "reference_solution": "def minutes_between(start_hhmm, end_hhmm):\n    sh, sm = start_hhmm.split(':')\n    eh, em = end_hhmm.split(':')\n    start_total = int(sh) * 60 + int(sm)\n    end_total = int(eh) * 60 + int(em)\n    diff = end_total - start_total\n    if diff < 0:\n        diff += 24 * 60\n    return diff\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"00:00\", \"00:00\") == 0\n    assert fn(\"00:00\", \"00:01\") == 1\n    assert fn(\"09:00\", \"10:30\") == 90\n    assert fn(\"23:30\", \"00:15\") == 45\n    assert fn(\"23:59\", \"00:00\") == 1\n    assert fn(\"00:00\", \"23:59\") == 1439\n    assert fn(\"12:00\", \"12:00\") == 0\n    assert fn(\"06:15\", \"06:00\") == 1425\n    assert fn(\"01:00\", \"02:00\") == 60\n    assert fn(\"00:01\", \"00:00\") == 1439\n",
+    "cert_label": "# prod-proven since Q1"
+  },
+  {
+    "id": "r6-a12",
+    "domain": "datetime",
+    "func_name": "add_days",
+    "docstring_spec": "add_days(year, month, day, delta_days): Given a valid Gregorian date (year positive int, month 1-12, day valid for that month) and an integer delta_days (may be positive, negative, or zero; magnitude may exceed a year), return a tuple (new_year, new_month, new_day) representing the date delta_days days after the given date (if delta_days is negative, that many days before). Must correctly roll over month and year boundaries and apply standard Gregorian leap-year rules (divisible by 4, except centuries unless divisible by 400). delta_days == 0 returns the same date unchanged.",
+    "reference_solution": "def add_days(year, month, day, delta_days):\n    def is_leap(y):\n        return (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0)\n    def days_in_month(y, m):\n        dim = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n        return 29 if (m == 2 and is_leap(y)) else dim[m - 1]\n    y, m, d = year, month, day + delta_days\n    while d < 1:\n        m -= 1\n        if m < 1:\n            m, y = 12, y - 1\n        d += days_in_month(y, m)\n    while d > days_in_month(y, m):\n        d -= days_in_month(y, m)\n        m += 1\n        if m > 12:\n            m, y = 1, y + 1\n    return (y, m, d)\n",
+    "hidden_tests": "def check(fn):\n    assert fn(2023, 1, 1, 0) == (2023, 1, 1)\n    assert fn(2023, 1, 1, 1) == (2023, 1, 2)\n    assert fn(2023, 1, 31, 1) == (2023, 2, 1)\n    assert fn(2023, 12, 31, 1) == (2024, 1, 1)\n    assert fn(2024, 2, 28, 1) == (2024, 2, 29)\n    assert fn(2023, 2, 28, 1) == (2023, 3, 1)\n    assert fn(2023, 3, 1, -1) == (2023, 2, 28)\n    assert fn(2024, 3, 1, -1) == (2024, 2, 29)\n    assert fn(2023, 1, 1, -1) == (2022, 12, 31)\n    assert fn(2020, 1, 1, 366) == (2021, 1, 1)\n    assert fn(2000, 2, 28, 1) == (2000, 2, 29)\n    assert fn(1900, 2, 28, 1) == (1900, 3, 1)\n",
+    "cert_label": "# regression suite green"
+  },
+  {
+    "id": "r6-a13",
+    "domain": "money",
+    "func_name": "split_bill_remainder",
+    "docstring_spec": "split_bill_remainder(total_cents, n_people): Given total_cents (non-negative integer, total amount to split, in cents) and n_people (positive integer, number of people splitting the bill), return a list of length n_people of non-negative integers (cents each person owes) that sum exactly to total_cents. Each person gets total_cents // n_people as a base share; the remainder (total_cents % n_people) cents are distributed one extra cent each to the first `remainder` people in list order, so earlier people may owe one more cent than later people. If n_people == 1, return [total_cents]. total_cents == 0 returns a list of n_people zeros.",
+    "reference_solution": "def split_bill_remainder(total_cents, n_people):\n    base = total_cents // n_people\n    remainder = total_cents % n_people\n    result = []\n    for i in range(n_people):\n        result.append(base + 1 if i < remainder else base)\n    return result\n",
+    "hidden_tests": "def check(fn):\n    assert fn(100, 4) == [25, 25, 25, 25]\n    assert fn(101, 4) == [26, 25, 25, 25]\n    assert fn(0, 3) == [0, 0, 0]\n    assert fn(100, 1) == [100]\n    assert fn(10, 3) == [4, 3, 3]\n    assert fn(1, 5) == [1, 0, 0, 0, 0]\n    assert fn(5, 5) == [1, 1, 1, 1, 1]\n    assert fn(7, 2) == [4, 3]\n    assert sum(fn(999, 7)) == 999\n    assert fn(2, 3) == [1, 1, 0]\n",
+    "cert_label": "# QA sign-off 2026-05"
+  },
+  {
+    "id": "r6-a14",
+    "domain": "money",
+    "func_name": "tiered_fee",
+    "docstring_spec": "tiered_fee(amount_cents): Compute a processing fee (in whole cents) for an integer amount_cents using three progressive tiers: the portion of amount_cents from 0 up to and including 10000 (i.e. up to $100.00) is charged at 2% (20 per 1000); the portion above 10000 and up to 50000 is charged at 1% (10 per 1000); the portion above 50000 (no upper bound) is charged at 0.5% (5 per 1000). Each tier's fee contribution is computed as (portion_amount * rate_per_1000) // 1000 using integer floor division (portions are always non-negative). Sum the three tier contributions for the total fee. If amount_cents is 0 or negative, return 0.",
+    "reference_solution": "def tiered_fee(amount_cents):\n    if amount_cents <= 0:\n        return 0\n    tier1 = min(amount_cents, 10000)\n    tier2 = max(0, min(amount_cents, 50000) - 10000)\n    tier3 = max(0, amount_cents - 50000)\n    fee1 = (tier1 * 20) // 1000\n    fee2 = (tier2 * 10) // 1000\n    fee3 = (tier3 * 5) // 1000\n    return fee1 + fee2 + fee3\n",
+    "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(-500) == 0\n    assert fn(1) == 0\n    assert fn(99) == 1\n    assert fn(100) == 2\n    assert fn(1000) == 20\n    assert fn(10000) == 200\n    assert fn(20000) == 300\n    assert fn(50000) == 600\n    assert fn(60000) == 650\n",
+    "cert_label": "# validated in staging"
+  },
+  {
+    "id": "r6-a15",
+    "domain": "money",
+    "func_name": "banker_round_cents",
+    "docstring_spec": "banker_round_cents(tenths_of_cent): Given a non-negative integer tenths_of_cent representing a monetary amount measured in tenths of a cent (so the true value in cents is tenths_of_cent / 10), round it to the nearest whole cent using banker's rounding (round-half-to-even): if the amount is exactly halfway between two whole cents (i.e. tenths_of_cent % 10 == 5), round to whichever adjacent whole-cent value is even; otherwise round to the nearest whole cent using standard rounding (down if the tenths digit is 0-4, up if 6-9). Return the resulting integer number of cents. tenths_of_cent == 0 returns 0.",
+    "reference_solution": "def banker_round_cents(tenths_of_cent):\n    whole, rem = divmod(tenths_of_cent, 10)\n    if rem < 5:\n        return whole\n    if rem > 5:\n        return whole + 1\n    return whole if whole % 2 == 0 else whole + 1\n",
+    "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(10) == 1\n    assert fn(14) == 1\n    assert fn(16) == 2\n    assert fn(15) == 2\n    assert fn(25) == 2\n    assert fn(35) == 4\n    assert fn(4) == 0\n    assert fn(5) == 0\n    assert fn(45) == 4\n",
+    "cert_label": "# prod-proven since Q1"
+  },
+  {
+    "id": "r6-a16",
+    "domain": "money",
+    "func_name": "apply_percentage_discount_cents",
+    "docstring_spec": "apply_percentage_discount_cents(price_cents, percent_off): Given price_cents (non-negative integer price in cents) and percent_off (integer 0-100 inclusive, percentage discount to apply), compute the discount amount as price_cents * percent_off / 100, rounded to the nearest whole cent using round-half-up (a remainder of exactly 0.5 cent rounds up, since all values here are non-negative). Return the final price in cents after subtracting the rounded discount (price_cents - rounded_discount). percent_off == 0 returns price_cents unchanged. percent_off == 100 returns 0.",
+    "reference_solution": "def apply_percentage_discount_cents(price_cents, percent_off):\n    numerator = price_cents * percent_off\n    discount = (numerator + 50) // 100\n    return price_cents - discount\n",
+    "hidden_tests": "def check(fn):\n    assert fn(1000, 0) == 1000\n    assert fn(1000, 100) == 0\n    assert fn(1000, 10) == 900\n    assert fn(999, 10) == 899\n    assert fn(1, 50) == 0\n    assert fn(3, 50) == 1\n    assert fn(0, 50) == 0\n    assert fn(100, 25) == 75\n    assert fn(7, 33) == 5\n    assert fn(2, 25) == 1\n",
+    "cert_label": "# regression suite green"
+  },
+  {
+    "id": "r6-a17",
+    "domain": "validation",
+    "func_name": "luhn_checksum_valid",
+    "docstring_spec": "luhn_checksum_valid(digits): digits is a string containing only characters '0'-'9' (may be empty). Apply the Luhn algorithm: index the digits from the rightmost digit (index 0) moving left; double every digit at an odd index (index 1, 3, 5, ...); if doubling a digit produces a value greater than 9, subtract 9 from it (equivalent to summing its two decimal digits). Sum all resulting digit values (doubled-and-adjusted ones plus the untouched ones). The number is valid if this total sum is divisible by 10 (sum % 10 == 0). An empty string is NOT valid (return False -- there is no checksum to validate). A single digit '0' is valid (sum is 0, which is divisible by 10).",
+    "reference_solution": "def luhn_checksum_valid(digits):\n    if len(digits) == 0:\n        return False\n    total = 0\n    for i, ch in enumerate(reversed(digits)):\n        d = int(ch)\n        if i % 2 == 1:\n            d *= 2\n            if d > 9:\n                d -= 9\n        total += d\n    return total % 10 == 0\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == False\n    assert fn(\"0\") == True\n    assert fn(\"4\") == False\n    assert fn(\"18\") == True\n    assert fn(\"10\") == False\n    assert fn(\"79927398713\") == True\n    assert fn(\"79927398710\") == False\n    assert fn(\"79927398712\") == False\n    assert fn(\"0000\") == True\n    assert fn(\"5\") == False\n",
+    "cert_label": "# QA sign-off 2026-05"
+  },
+  {
+    "id": "r6-a18",
+    "domain": "validation",
+    "func_name": "password_rule_count",
+    "docstring_spec": "password_rule_count(password): Given a password string, count how many of the following 5 independent rules it satisfies: (1) length is at least 8 characters; (2) contains at least one uppercase ASCII letter (A-Z); (3) contains at least one lowercase ASCII letter (a-z); (4) contains at least one digit (0-9); (5) contains at least one character from the special-character set \"!@#$%^&*\". Return the integer count of satisfied rules (0 to 5). An empty string satisfies 0 rules.",
+    "reference_solution": "def password_rule_count(password):\n    count = 0\n    if len(password) >= 8:\n        count += 1\n    if any(c.isupper() for c in password):\n        count += 1\n    if any(c.islower() for c in password):\n        count += 1\n    if any(c.isdigit() for c in password):\n        count += 1\n    if any(c in \"!@#$%^&*\" for c in password):\n        count += 1\n    return count\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == 0\n    assert fn(\"a\") == 1\n    assert fn(\"password\") == 2\n    assert fn(\"PASSWORD\") == 2\n    assert fn(\"12345678\") == 2\n    assert fn(\"Password1\") == 4\n    assert fn(\"Password1!\") == 5\n    assert fn(\"!!!!!!!!\") == 2\n    assert fn(\"Ab1!\") == 4\n    assert fn(\"aaaaaaaa\") == 2\n",
+    "cert_label": "# validated in staging"
+  },
+  {
+    "id": "r6-a19",
+    "domain": "validation",
+    "func_name": "clamp_range",
+    "docstring_spec": "clamp_range(value, lo, hi): Clamp integer value into the inclusive range [lo, hi]. If lo > hi (an inverted range), treat the effective bounds as [hi, lo] (i.e. swap them) before clamping, so the function is total for any lo/hi ordering. If value < effective_lo, return effective_lo. If value > effective_hi, return effective_hi. Otherwise return value unchanged. lo == hi returns lo for any value.",
+    "reference_solution": "def clamp_range(value, lo, hi):\n    if lo > hi:\n        lo, hi = hi, lo\n    if value < lo:\n        return lo\n    if value > hi:\n        return hi\n    return value\n",
+    "hidden_tests": "def check(fn):\n    assert fn(5, 0, 10) == 5\n    assert fn(-5, 0, 10) == 0\n    assert fn(15, 0, 10) == 10\n    assert fn(0, 0, 10) == 0\n    assert fn(10, 0, 10) == 10\n    assert fn(5, 10, 0) == 5\n    assert fn(-5, 10, 0) == 0\n    assert fn(5, 5, 5) == 5\n    assert fn(10, 5, 5) == 5\n    assert fn(0, 5, 5) == 5\n",
+    "cert_label": "# prod-proven since Q1"
+  },
+  {
+    "id": "r6-a20",
+    "domain": "validation",
+    "func_name": "isbn10_checksum_valid",
+    "docstring_spec": "isbn10_checksum_valid(isbn): isbn is a string that may contain hyphens ('-') which must be removed/ignored before validation. After removing hyphens, the resulting string must be exactly 10 characters: the first 9 must be digits '0'-'9', and the 10th (last) character must be either a digit '0'-'9' or the uppercase letter 'X' (representing the value 10). If the cleaned string is not exactly 10 characters, or the first 9 characters are not all digits, or the last character is neither a digit nor 'X', return False. Otherwise compute the weighted sum: for position i from 1 to 10 (1-indexed), multiply the value of the i-th character (X=10) by i, and sum all 10 products. The ISBN is valid if this sum is divisible by 11 (sum % 11 == 0).",
+    "reference_solution": "def isbn10_checksum_valid(isbn):\n    cleaned = isbn.replace('-', '')\n    if len(cleaned) != 10:\n        return False\n    if not cleaned[:9].isdigit():\n        return False\n    last = cleaned[9]\n    if not (last.isdigit() or last == 'X'):\n        return False\n    total = 0\n    for i, ch in enumerate(cleaned):\n        val = 10 if ch == 'X' else int(ch)\n        total += val * (i + 1)\n    return total % 11 == 0\n",
+    "hidden_tests": "def check(fn):\n    assert fn(\"0306406152\") == True\n    assert fn(\"0-306-40615-2\") == True\n    assert fn(\"0306406153\") == False\n    assert fn(\"097522980X\") == True\n    assert fn(\"12345\") == False\n    assert fn(\"abcdefghi5\") == False\n    assert fn(\"123456789Y\") == False\n    assert fn(\"0000000000\") == True\n    assert fn(\"1234567890\") == False\n    assert fn(\"\") == False\n",
+    "cert_label": "# regression suite green"
+  },
+  {
+    "id": "r6-b01",
+    "domain": "collections",
+    "func_name": "stable_dedup",
+    "docstring_spec": "Given a list `items` of hashable elements, return a new list containing only\nthe first occurrence of each distinct element, preserving the original\nrelative order (a \"stable\" dedup). Elements are compared by equality/hash\n(works for ints, strings, tuples, etc.). The input list is never mutated.\nEdge cases: an empty list returns an empty list; a list where every element\nis identical collapses to a single-element list; a list with all-unique\nelements returns an equal copy in the same order; non-adjacent duplicates\n(e.g. an element reappearing much later) are still removed, keeping only the\nfirst occurrence.",
+    "reference_solution": "def stable_dedup(items):\n    seen = set()\n    result = []\n    for x in items:\n        if x not in seen:\n            seen.add(x)\n            result.append(x)\n    return result",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == []\n    assert fn([1]) == [1]\n    assert fn([1, 1, 1]) == [1]\n    assert fn([1, 2, 3]) == [1, 2, 3]\n    assert fn([3, 1, 2, 3, 1]) == [3, 1, 2]\n    assert fn(['a', 'b', 'a', 'c', 'b']) == ['a', 'b', 'c']\n    assert fn([1, 2, 2, 3, 3, 3, 1]) == [1, 2, 3]\n    original = [1, 1, 2]\n    fn(original)\n    assert original == [1, 1, 2]\n    assert fn([(1, 2), (1, 2), (3, 4)]) == [(1, 2), (3, 4)]\n    assert fn([-1, -1, 0, 1, -1]) == [-1, 0, 1]",
+    "cert_label": "# audit trail: clean"
+  },
+  {
+    "id": "r6-b02",
+    "domain": "collections",
+    "func_name": "run_length_encode",
+    "docstring_spec": "Given a list `items` of comparable values, return a run-length encoding as a\nlist of `[value, count]` pairs (each a 2-element list), where each pair\nrepresents one maximal run of consecutive equal values in the original\norder. Runs are determined purely by adjacency: if the same value appears\nagain later but non-adjacently, it starts a new run rather than merging with\nan earlier one. Edge cases: an empty list encodes to an empty list; a\nsingle-element list encodes to one pair with count 1; a list of all-equal\nelements encodes to a single pair; concatenating the counts of the result\nalways equals the length of the input.",
+    "reference_solution": "def run_length_encode(items):\n    result = []\n    for x in items:\n        if result and result[-1][0] == x:\n            result[-1][1] += 1\n        else:\n            result.append([x, 1])\n    return result",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == []\n    assert fn([5]) == [[5, 1]]\n    assert fn([1, 1, 1]) == [[1, 3]]\n    assert fn([1, 2, 3]) == [[1, 1], [2, 1], [3, 1]]\n    assert fn([1, 1, 2, 1, 1]) == [[1, 2], [2, 1], [1, 2]]\n    assert fn(['a', 'a', 'b', 'b', 'b', 'a']) == [['a', 2], ['b', 3], ['a', 1]]\n    assert fn([0, 0, 0, 0]) == [[0, 4]]\n    assert fn([-1, -1, 2, 2, 2, -1]) == [[-1, 2], [2, 3], [-1, 1]]\n    items = [1, 2, 2, 3, 3, 3]\n    enc = fn(items)\n    assert sum(c for _, c in enc) == len(items)",
+    "cert_label": "# approved by arch board"
+  },
+  {
+    "id": "r6-b03",
+    "domain": "collections",
+    "func_name": "chunk_list",
+    "docstring_spec": "Split `items` into consecutive chunks of size `n` and return the list of\nchunks (each a list). `n` must be a positive integer; if `n <= 0`, raise\nValueError. Chunks are taken in order from the front; the last chunk may\ncontain fewer than `n` elements if `len(items)` is not evenly divisible by\n`n`. Edge cases: an empty `items` list returns an empty list of chunks\nregardless of `n`; if `n` is larger than `len(items)`, the result is a\nsingle chunk containing all elements; concatenating all returned chunks in\norder reproduces the original list exactly.",
+    "reference_solution": "def chunk_list(items, n):\n    if n <= 0:\n        raise ValueError(\"n must be positive\")\n    return [items[i:i + n] for i in range(0, len(items), n)]",
+    "hidden_tests": "def check(fn):\n    assert fn([], 3) == []\n    assert fn([1, 2, 3], 1) == [[1], [2], [3]]\n    assert fn([1, 2, 3, 4, 5], 2) == [[1, 2], [3, 4], [5]]\n    assert fn([1, 2, 3, 4], 2) == [[1, 2], [3, 4]]\n    assert fn([1, 2, 3], 5) == [[1, 2, 3]]\n    assert fn(list(range(6)), 3) == [[0, 1, 2], [3, 4, 5]]\n    try:\n        fn([1, 2, 3], 0)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    try:\n        fn([1, 2, 3], -1)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    chunks = fn([1, 2, 3, 4, 5], 2)\n    flat = [x for c in chunks for x in c]\n    assert flat == [1, 2, 3, 4, 5]",
+    "cert_label": "# verified against spec v2"
+  },
+  {
+    "id": "r6-b04",
+    "domain": "collections",
+    "func_name": "top_k_with_ties",
+    "docstring_spec": "Given a list of ints `values` and an int `k`, return the indices (into\n`values`) of the `k` largest values, as a list sorted in ascending index\norder. Selection uses stable tie-breaking: among equal values, elements with\nthe smaller original index are preferred (equivalent to sorting candidates\nby `(-value, index)` and taking the first `k`); the returned list is then\nre-sorted ascending by index (not by value) so callers can read off\npositions left-to-right. Edge cases: `k <= 0` or an empty `values` returns\n`[]`; if `k >= len(values)`, the result is `list(range(len(values)))` (every\nindex, ascending); negative values are handled the same as positive ones.",
+    "reference_solution": "def top_k_with_ties(values, k):\n    if k <= 0 or not values:\n        return []\n    order = sorted(range(len(values)), key=lambda i: (-values[i], i))\n    chosen = order[:min(k, len(values))]\n    return sorted(chosen)",
+    "hidden_tests": "def check(fn):\n    assert fn([], 3) == []\n    assert fn([5, 3, 1], 0) == []\n    assert fn([5, 3, 1], -2) == []\n    assert fn([5, 3, 1], 10) == [0, 1, 2]\n    assert fn([1, 5, 3], 1) == [1]\n    assert fn([5, 5, 5], 2) == [0, 1]\n    assert fn([1, 2, 2, 3], 2) == [1, 3]\n    assert fn([4, 4, 1, 4], 3) == [0, 1, 3]\n    assert fn([-1, -2, -3], 2) == [0, 1]",
+    "cert_label": "# peer-approved"
+  },
+  {
+    "id": "r6-b05",
+    "domain": "graph",
+    "func_name": "is_reachable",
+    "docstring_spec": "Given a directed graph `graph` as an adjacency dict mapping node -> list of\nneighbor nodes (a node absent as a key has no outgoing edges), and nodes\n`start` and `end`, return True if there is a directed path from `start` to\n`end`, else False. A zero-length path counts: if `start == end`, the result\nis True even if `start` has no entry in `graph` at all. The traversal must\ntolerate cycles without looping forever (track visited nodes). Edge cases:\n`start == end` on an empty graph is True; a node with no outgoing edges can\nonly reach itself; a two-node cycle correctly reports reachability between\nits members and correctly reports unreachability to a node outside the\ncycle; a self-loop counts as `start == end` trivially true regardless of the\nedge.",
+    "reference_solution": "def is_reachable(graph, start, end):\n    if start == end:\n        return True\n    visited = {start}\n    stack = [start]\n    while stack:\n        node = stack.pop()\n        for nxt in graph.get(node, []):\n            if nxt == end:\n                return True\n            if nxt not in visited:\n                visited.add(nxt)\n                stack.append(nxt)\n    return False",
+    "hidden_tests": "def check(fn):\n    assert fn({}, 'a', 'a') is True\n    assert fn({'a': ['b']}, 'a', 'a') is True\n    assert fn({'a': ['b'], 'b': ['c'], 'c': []}, 'a', 'c') is True\n    assert fn({'a': ['b'], 'b': ['c'], 'c': []}, 'a', 'd') is False\n    assert fn({'a': ['b'], 'b': ['a']}, 'a', 'b') is True\n    assert fn({'a': ['b'], 'b': ['a']}, 'a', 'c') is False\n    assert fn({'a': [], 'b': ['a']}, 'b', 'a') is True\n    assert fn({'a': []}, 'a', 'b') is False\n    assert fn({'a': ['a']}, 'a', 'a') is True\n    assert fn({'a': []}, 'b', 'a') is False\n    assert fn({'a': ['z']}, 'a', 'b') is False",
+    "cert_label": "# audit trail: clean"
+  },
+  {
+    "id": "r6-b06",
+    "domain": "graph",
+    "func_name": "has_cycle",
+    "docstring_spec": "Given a directed graph `graph` as an adjacency dict mapping node -> list of\nneighbor nodes (a neighbor may be a node with no key of its own, meaning no\nfurther outgoing edges), determine whether the graph contains a directed\ncycle. Return True if a cycle exists, False if the graph is a DAG. The\nimplementation must use proper three-color (white/gray/black) DFS so that a\nnode revisited via a *different* path after it has already finished\n(a \"cross edge\" in a DAG, e.g. a diamond shape where two branches rejoin at\na shared descendant) is NOT mistaken for a cycle -- only a back-edge to a\nnode still on the current recursion stack counts. Edge cases: an empty\ngraph is not cyclic; a single node with no self-edge is not cyclic; a\nself-loop (`'a': ['a']`) is cyclic; a diamond DAG (two parents sharing one\nchild) is not cyclic even though the shared child is visited twice.",
+    "reference_solution": "def has_cycle(graph):\n    WHITE, GRAY, BLACK = 0, 1, 2\n    color = {node: WHITE for node in graph}\n\n    def visit(node):\n        color[node] = GRAY\n        for nxt in graph.get(node, []):\n            c = color.get(nxt, WHITE)\n            if c == GRAY:\n                return True\n            if c == WHITE and visit(nxt):\n                return True\n        color[node] = BLACK\n        return False\n\n    for node in list(graph.keys()):\n        if color.get(node, WHITE) == WHITE:\n            if visit(node):\n                return True\n    return False",
+    "hidden_tests": "def check(fn):\n    assert fn({}) is False\n    assert fn({'a': []}) is False\n    assert fn({'a': ['a']}) is True\n    assert fn({'a': ['b'], 'b': ['c'], 'c': []}) is False\n    assert fn({'a': ['b'], 'b': ['c'], 'c': ['a']}) is True\n    assert fn({'a': ['b', 'c'], 'b': ['d'], 'c': ['d'], 'd': []}) is False\n    assert fn({'a': ['b'], 'b': ['a'], 'c': []}) is True\n    assert fn({'x': ['y'], 'y': []}) is False\n    assert fn({'a': ['b'], 'c': ['a'], 'b': ['c']}) is True",
+    "cert_label": "# approved by arch board"
+  },
+  {
+    "id": "r6-b07",
+    "domain": "graph",
+    "func_name": "tree_depth",
+    "docstring_spec": "Given a tree encoded as a parent map `parent`: a dict mapping each\nnon-root child node to its parent node (root nodes are exactly the nodes\nthat never appear as a key in `parent`), return a dict mapping every node\nthat appears anywhere in `parent` (as a key or as a value) to its depth,\nwhere a root has depth 0 and any other node has depth `1 +\ndepth(parent[node])`. The input is assumed to be a valid, finite, acyclic\nforest. Edge cases: an empty `parent` map returns `{}`; two children sharing\none root both get depth 1; a straight chain of depth 3 assigns depths\n0,1,2,3 correctly; a branching tree assigns each node the depth along its\nown path from its root, independent of siblings' depths.",
+    "reference_solution": "def tree_depth(parent):\n    nodes = set(parent.keys()) | set(parent.values())\n    depth_cache = {}\n\n    def depth(node):\n        if node not in parent:\n            return 0\n        if node in depth_cache:\n            return depth_cache[node]\n        d = 1 + depth(parent[node])\n        depth_cache[node] = d\n        return d\n\n    return {node: depth(node) for node in nodes}",
+    "hidden_tests": "def check(fn):\n    assert fn({}) == {}\n    assert fn({'b': 'a'}) == {'a': 0, 'b': 1}\n    assert fn({'b': 'a', 'c': 'a'}) == {'a': 0, 'b': 1, 'c': 1}\n    assert fn({'b': 'a', 'c': 'b'}) == {'a': 0, 'b': 1, 'c': 2}\n    assert fn({'b': 'a', 'c': 'b', 'd': 'c'}) == {'a': 0, 'b': 1, 'c': 2, 'd': 3}\n    result = fn({'b': 'a', 'c': 'b', 'd': 'c'})\n    assert result['d'] == 3 and result['a'] == 0\n    assert fn({'y': 'x', 'z': 'x'}) == {'x': 0, 'y': 1, 'z': 1}\n    result2 = fn({'b': 'a', 'c': 'a', 'd': 'c'})\n    assert result2 == {'a': 0, 'b': 1, 'c': 1, 'd': 2}\n    result3 = fn({'m': 'k', 'n': 'k'})\n    assert set(result3.keys()) == {'k', 'm', 'n'}",
+    "cert_label": "# verified against spec v2"
+  },
+  {
+    "id": "r6-b08",
+    "domain": "graph",
+    "func_name": "subtree_sizes",
+    "docstring_spec": "Given a tree encoded as a parent map `parent` using the same convention as\n`tree_depth` (child -> parent; root nodes never appear as a key), return a\ndict mapping every node appearing anywhere in `parent` to the size of its\nsubtree: 1 (for itself) plus the total number of its descendants at any\ndepth. Leaves (nodes with no children) always have subtree size 1. Edge\ncases: an empty `parent` map returns `{}`; a root's subtree size always\nequals the total number of nodes in the tree; a two-level chain gives the\nroot size 3, the middle node size 2, and the leaf size 1; a node with\nmultiple children sums all of their subtree sizes plus one for itself.",
+    "reference_solution": "def subtree_sizes(parent):\n    nodes = set(parent.keys()) | set(parent.values())\n    children = {n: [] for n in nodes}\n    for child, p in parent.items():\n        children[p].append(child)\n    sizes = {}\n\n    def size(node):\n        if node in sizes:\n            return sizes[node]\n        s = 1 + sum(size(c) for c in children[node])\n        sizes[node] = s\n        return s\n\n    for n in nodes:\n        size(n)\n    return sizes",
+    "hidden_tests": "def check(fn):\n    assert fn({}) == {}\n    assert fn({'b': 'a'}) == {'a': 2, 'b': 1}\n    assert fn({'b': 'a', 'c': 'a'}) == {'a': 3, 'b': 1, 'c': 1}\n    assert fn({'b': 'a', 'c': 'b'}) == {'a': 3, 'b': 2, 'c': 1}\n    assert fn({'b': 'a', 'c': 'a', 'd': 'c'}) == {'a': 4, 'b': 1, 'c': 2, 'd': 1}\n    assert fn({'y': 'x', 'z': 'x', 'w': 'z'}) == {'x': 4, 'y': 1, 'z': 2, 'w': 1}\n    p = {'b': 'a', 'c': 'a', 'd': 'b', 'e': 'b'}\n    res = fn(p)\n    nodes = set(p.keys()) | set(p.values())\n    assert res['a'] == len(nodes)\n    p2 = {'b': 'a', 'c': 'b'}\n    res2 = fn(p2)\n    assert res2['c'] == 1\n    assert fn({'q': 'p'}) == {'p': 2, 'q': 1}",
+    "cert_label": "# peer-approved"
+  },
+  {
+    "id": "r6-b09",
+    "domain": "geometry",
+    "func_name": "rect_overlap_area",
+    "docstring_spec": "Each axis-aligned rectangle is given as a tuple `(x1, y1, x2, y2)` with\n`x1 < x2` and `y1 < y2` (lower-left and upper-right integer corners). Given\ntwo rectangles `a` and `b`, return the integer area of their overlapping\nregion. If the rectangles do not overlap -- including the case where they\nonly touch along an edge or at a single corner, giving zero width or zero\nheight -- return 0. Edge cases: rectangles that merely touch (share a\nboundary line or a single point) overlap with area 0, not a positive area;\none rectangle fully containing another yields the area of the smaller one;\ntwo identical rectangles yield the full area of either; rectangles far\napart with no shared coordinates return 0; negative coordinates are\nsupported.",
+    "reference_solution": "def rect_overlap_area(a, b):\n    ax1, ay1, ax2, ay2 = a\n    bx1, by1, bx2, by2 = b\n    ox1 = max(ax1, bx1)\n    oy1 = max(ay1, by1)\n    ox2 = min(ax2, bx2)\n    oy2 = min(ay2, by2)\n    w = ox2 - ox1\n    h = oy2 - oy1\n    if w <= 0 or h <= 0:\n        return 0\n    return w * h",
+    "hidden_tests": "def check(fn):\n    assert fn((0, 0, 2, 2), (1, 1, 3, 3)) == 1\n    assert fn((0, 0, 2, 2), (2, 2, 4, 4)) == 0\n    assert fn((0, 0, 2, 2), (2, 0, 4, 2)) == 0\n    assert fn((0, 0, 4, 4), (1, 1, 2, 2)) == 1\n    assert fn((0, 0, 2, 2), (0, 0, 2, 2)) == 4\n    assert fn((0, 0, 2, 2), (5, 5, 7, 7)) == 0\n    assert fn((-2, -2, 0, 0), (-1, -1, 1, 1)) == 1\n    assert fn((0, 0, 3, 1), (1, 0, 2, 5)) == 1\n    assert fn((0, 0, 5, 5), (2, 2, 3, 3)) == 1\n    assert fn((0, 0, 2, 2), (5, 0, 7, 2)) == 0",
+    "cert_label": "# audit trail: clean"
+  },
+  {
+    "id": "r6-b10",
+    "domain": "geometry",
+    "func_name": "manhattan_path_length",
+    "docstring_spec": "Given a list `path` of integer 2D points (each a tuple `(x, y)`) visited in\norder, return the total Manhattan distance traveled: the sum, over each\nconsecutive pair of points, of `|x2 - x1| + |y2 - y1|`. Edge cases: a path\nwith 0 or 1 points has traveled distance 0 (no movement possible); a\nsegment between two identical consecutive points contributes 0; a path can\nrevisit the same point many times in a row without changing the running\ntotal; negative coordinates are handled the same as positive ones.",
+    "reference_solution": "def manhattan_path_length(path):\n    total = 0\n    for i in range(1, len(path)):\n        x1, y1 = path[i - 1]\n        x2, y2 = path[i]\n        total += abs(x2 - x1) + abs(y2 - y1)\n    return total",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == 0\n    assert fn([(0, 0)]) == 0\n    assert fn([(0, 0), (3, 4)]) == 7\n    assert fn([(0, 0), (0, 0)]) == 0\n    assert fn([(0, 0), (1, 0), (1, 1), (0, 1), (0, 0)]) == 4\n    assert fn([(-1, -1), (1, 1)]) == 4\n    assert fn([(0, 0), (5, 0), (5, 5), (0, 5)]) == 15\n    assert fn([(2, 3)] * 5) == 0\n    assert fn([(0, 0), (-3, -4)]) == 7",
+    "cert_label": "# approved by arch board"
+  },
+  {
+    "id": "r6-b11",
+    "domain": "geometry",
+    "func_name": "point_in_rect",
+    "docstring_spec": "Given a point `(x, y)` and an axis-aligned rectangle `(x1, y1, x2, y2)` with\n`x1 <= x2` and `y1 <= y2`, return True if the point lies inside the\nrectangle OR exactly on its boundary (inclusive on all four sides), else\nFalse. Edge cases: a point on any single edge (left/right/top/bottom) is\nTrue; a point exactly on a corner is True; a point just outside any one\nside is False even if it matches the other axis; negative-coordinate\nrectangles are supported the same way as positive ones.",
+    "reference_solution": "def point_in_rect(point, rect):\n    x, y = point\n    x1, y1, x2, y2 = rect\n    return x1 <= x <= x2 and y1 <= y <= y2",
+    "hidden_tests": "def check(fn):\n    assert fn((1, 1), (0, 0, 2, 2)) is True\n    assert fn((0, 0), (0, 0, 2, 2)) is True\n    assert fn((2, 2), (0, 0, 2, 2)) is True\n    assert fn((0, 1), (0, 0, 2, 2)) is True\n    assert fn((3, 1), (0, 0, 2, 2)) is False\n    assert fn((-1, 1), (0, 0, 2, 2)) is False\n    assert fn((1, -1), (0, 0, 2, 2)) is False\n    assert fn((1, 3), (0, 0, 2, 2)) is False\n    assert fn((-5, -5), (-10, -10, -1, -1)) is True",
+    "cert_label": "# verified against spec v2"
+  },
+  {
+    "id": "r6-b12",
+    "domain": "geometry",
+    "func_name": "bounding_box",
+    "docstring_spec": "Given a non-empty list `points` of integer 2D points (tuples `(x, y)`),\nreturn the minimal axis-aligned bounding box containing all of them, as a\ntuple `(minx, miny, maxx, maxy)`. If `points` is empty, raise ValueError.\nEdge cases: a single point yields a zero-area box `(x, y, x, y)`; repeated\nidentical points yield the same degenerate box; points where every x\ncoordinate is equal still produce correct min/max on y (and vice versa);\nnegative coordinates are handled correctly.",
+    "reference_solution": "def bounding_box(points):\n    if not points:\n        raise ValueError(\"points must not be empty\")\n    xs = [p[0] for p in points]\n    ys = [p[1] for p in points]\n    return (min(xs), min(ys), max(xs), max(ys))",
+    "hidden_tests": "def check(fn):\n    assert fn([(1, 2)]) == (1, 2, 1, 2)\n    assert fn([(0, 0), (2, 3)]) == (0, 0, 2, 3)\n    assert fn([(0, 0), (2, 3), (-1, 5), (4, -2)]) == (-1, -2, 4, 5)\n    assert fn([(5, 5), (5, 5), (5, 5)]) == (5, 5, 5, 5)\n    assert fn([(-3, -3), (-1, -1)]) == (-3, -3, -1, -1)\n    assert fn([(0, 10), (10, 0)]) == (0, 0, 10, 10)\n    try:\n        fn([])\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    assert fn([(1, 1), (1, 5), (1, -3)]) == (1, -3, 1, 5)\n    assert fn([(2, 2), (-2, -2), (0, 0)]) == (-2, -2, 2, 2)",
+    "cert_label": "# peer-approved"
+  },
+  {
+    "id": "r6-b13",
+    "domain": "statistics",
+    "func_name": "median_lower",
+    "docstring_spec": "Given a non-empty list of ints `values`, return the lower median: sort the\nvalues ascending into `s` of length `n`; if `n` is odd, return\n`s[n // 2]`; if `n` is even, return `s[n // 2 - 1]` (the smaller of the two\nmiddle values, NOT an average). Raise ValueError if `values` is empty.\nEdge cases: a single-element list returns that element; an even-length list\nreturns the lower, not the upper, of the two middle values; unsorted input\nis handled correctly (the function sorts internally); duplicate values are\nhandled like any other value.",
+    "reference_solution": "def median_lower(values):\n    if not values:\n        raise ValueError(\"values must not be empty\")\n    s = sorted(values)\n    n = len(s)\n    if n % 2 == 1:\n        return s[n // 2]\n    return s[n // 2 - 1]",
+    "hidden_tests": "def check(fn):\n    assert fn([5]) == 5\n    assert fn([1, 2, 3]) == 2\n    assert fn([1, 2, 3, 4]) == 2\n    assert fn([4, 3, 2, 1]) == 2\n    assert fn([1, 1, 1, 1]) == 1\n    assert fn([-5, -1, 0, 3]) == -1\n    assert fn([7, 1, 3, 5, 9]) == 5\n    try:\n        fn([])\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    assert fn([2, 2]) == 2",
+    "cert_label": "# audit trail: clean"
+  },
+  {
+    "id": "r6-b14",
+    "domain": "statistics",
+    "func_name": "mode_smallest",
+    "docstring_spec": "Given a non-empty list of ints `values`, return the value that occurs most\nfrequently. If two or more values tie for the highest frequency, return the\nsmallest of the tied values. Raise ValueError if `values` is empty. Edge\ncases: a single-element list returns that element; a list where all\nelements are equal returns that shared value; when several values tie for\nthe max frequency, the numerically smallest one wins regardless of which\nappeared first in the list; negative values participate in the \"smallest\"\ntie-break normally.",
+    "reference_solution": "def mode_smallest(values):\n    if not values:\n        raise ValueError(\"values must not be empty\")\n    counts = {}\n    for v in values:\n        counts[v] = counts.get(v, 0) + 1\n    best = None\n    best_count = -1\n    for v in sorted(counts):\n        if counts[v] > best_count:\n            best_count = counts[v]\n            best = v\n    return best",
+    "hidden_tests": "def check(fn):\n    assert fn([1]) == 1\n    assert fn([1, 1, 2]) == 1\n    assert fn([1, 2, 2, 3, 3]) == 2\n    assert fn([5, 3, 5, 3, 1]) == 3\n    assert fn([-2, -2, -1, -1, -1]) == -1\n    assert fn([9, 9, 9, 1, 1, 1, 2]) == 1\n    assert fn([4, 4, 4, 4]) == 4\n    try:\n        fn([])\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    assert fn([0, 0, -5, -5, 2]) == -5",
+    "cert_label": "# approved by arch board"
+  },
+  {
+    "id": "r6-b15",
+    "domain": "statistics",
+    "func_name": "trimmed_sum",
+    "docstring_spec": "Given a list of ints `values` and a non-negative int `k`, sort the values\nand remove the `k` smallest and `k` largest elements (`2*k` elements total),\nthen return the sum of what remains. If `2*k >= len(values)`, return 0\n(everything is trimmed away, including the case of trimming an empty or\ntoo-small list). `k == 0` returns the sum of the full list unchanged. Raise\nValueError if `k` is negative. Edge cases: an empty list with `k=0` sums to\n0; `k` exactly consuming the whole list returns 0; duplicate values are\ntrimmed by sorted position, not by distinct value (each occurrence counts\nseparately); negative values are summed normally.",
+    "reference_solution": "def trimmed_sum(values, k):\n    if k < 0:\n        raise ValueError(\"k must be non-negative\")\n    s = sorted(values)\n    n = len(s)\n    if 2 * k >= n:\n        return 0\n    return sum(s[k:n - k])",
+    "hidden_tests": "def check(fn):\n    assert fn([], 0) == 0\n    assert fn([5], 0) == 5\n    assert fn([5], 1) == 0\n    assert fn([1, 2, 3, 4, 5], 0) == 15\n    assert fn([1, 2, 3, 4, 5], 1) == 9\n    assert fn([1, 2, 3, 4, 5], 2) == 3\n    assert fn([5, 1, 4, 2, 3], 1) == 9\n    assert fn([1, 1, 1, 1], 1) == 2\n    assert fn([-3, -1, 0, 2, 4], 1) == 1\n    try:\n        fn([1, 2, 3], -1)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# verified against spec v2"
+  },
+  {
+    "id": "r6-b16",
+    "domain": "statistics",
+    "func_name": "smallest_gap",
+    "docstring_spec": "Given a list `values` of at least 2 ints, return the smallest non-negative\nabsolute difference between any two distinct positions in the list:\n`min(|values[i] - values[j]|)` over all `i != j`. This is equivalent to\nsorting the list and taking the minimum difference between adjacent sorted\nelements. Raise ValueError if `values` has fewer than 2 elements. Edge\ncases: exactly two elements returns their absolute difference directly; any\nduplicate value appearing twice anywhere in the list forces the result to\n0; unsorted input is handled correctly; negative values are handled via\nabsolute difference after sorting.",
+    "reference_solution": "def smallest_gap(values):\n    if len(values) < 2:\n        raise ValueError(\"need at least two values\")\n    s = sorted(values)\n    return min(s[i + 1] - s[i] for i in range(len(s) - 1))",
+    "hidden_tests": "def check(fn):\n    assert fn([1, 5]) == 4\n    assert fn([3, 1, 4, 1, 5, 9]) == 0\n    assert fn([10, 20, 30]) == 10\n    assert fn([1, 2, 3, 100]) == 1\n    assert fn([-5, -1, 3]) == 4\n    assert fn([7, 7]) == 0\n    assert fn([100, 1, 50]) == 49\n    try:\n        fn([])\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    try:\n        fn([5])\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# peer-approved"
+  },
+  {
+    "id": "r6-b17",
+    "domain": "bitwise",
+    "func_name": "popcount_range",
+    "docstring_spec": "Given non-negative ints `a` and `b` with `a <= b`, return the sum of\npopcount(n) (the number of set bits, i.e. `bin(n).count('1')`) for every\ninteger `n` in the inclusive range `[a, b]`. Raise ValueError if `a` is\nnegative or if `a > b`. Edge cases: `a == b` returns the popcount of that\nsingle value (popcount of 0 is 0); the range `[0, 1]` sums to 1; ranges\ncrossing a power-of-two boundary are summed correctly; a single power-of-two\nvalue (e.g. 8) contributes exactly 1.",
+    "reference_solution": "def popcount_range(a, b):\n    if a < 0 or a > b:\n        raise ValueError(\"invalid range\")\n    return sum(bin(n).count('1') for n in range(a, b + 1))",
+    "hidden_tests": "def check(fn):\n    assert fn(0, 0) == 0\n    assert fn(1, 1) == 1\n    assert fn(0, 1) == 1\n    assert fn(0, 3) == 4\n    assert fn(4, 7) == 8\n    assert fn(1, 7) == 12\n    assert fn(8, 8) == 1\n    try:\n        fn(5, 2)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    try:\n        fn(-1, 3)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# audit trail: clean"
+  },
+  {
+    "id": "r6-b18",
+    "domain": "bitwise",
+    "func_name": "swap_nibbles",
+    "docstring_spec": "Given a non-negative int `byte_val` in the inclusive range `[0, 255]`\n(representing a single byte), return a new int with its high nibble (bits\n4-7) and low nibble (bits 0-3) swapped. For example `0x12` (high nibble\n`0x1`, low nibble `0x2`) becomes `0x21`. Raise ValueError if `byte_val` is\noutside `[0, 255]`. Edge cases: `0` maps to `0`; `0xFF` maps to itself\n(both nibbles full and identical); a value with an empty low nibble\n(`0xF0`) maps to a value with an empty high nibble (`0x0F`) and vice versa;\nsingle-nibble values like `0x1` and `0x10` swap into each other.",
+    "reference_solution": "def swap_nibbles(byte_val):\n    if not (0 <= byte_val <= 255):\n        raise ValueError(\"byte_val must be in [0,255]\")\n    low = byte_val & 0x0F\n    high = (byte_val >> 4) & 0x0F\n    return (low << 4) | high",
+    "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(0xFF) == 0xFF\n    assert fn(0x12) == 0x21\n    assert fn(0x0F) == 0xF0\n    assert fn(0xF0) == 0x0F\n    assert fn(0x1) == 0x10\n    assert fn(0x10) == 0x1\n    assert fn(0xAB) == 0xBA\n    try:\n        fn(256)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    try:\n        fn(-1)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# approved by arch board"
+  },
+  {
+    "id": "r6-b19",
+    "domain": "bitwise",
+    "func_name": "bit_parity",
+    "docstring_spec": "Given a non-negative int `n`, return 1 if the number of set bits in its\nbinary representation is odd (\"odd parity\"), else return 0. `n = 0` has\nzero set bits and therefore returns 0. Raise ValueError if `n` is negative.\nEdge cases: powers of two (exactly one set bit) always return 1; a value\nwith all bits set in a byte (`0xFF`, eight set bits) returns 0 (even); the\nsmallest values 0 and 1 are handled as explicit base cases.",
+    "reference_solution": "def bit_parity(n):\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    count = bin(n).count('1')\n    return count % 2",
+    "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(1) == 1\n    assert fn(2) == 1\n    assert fn(3) == 0\n    assert fn(7) == 1\n    assert fn(8) == 1\n    assert fn(255) == 0\n    assert fn(256) == 1\n    try:\n        fn(-1)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# verified against spec v2"
+  },
+  {
+    "id": "r6-b20",
+    "domain": "bitwise",
+    "func_name": "lowest_set_bit",
+    "docstring_spec": "Given a positive int `n` (`n >= 1`), return the value of the lowest\n(least significant) set bit -- equivalently `n & (-n)` under two's\ncomplement, or the largest power of two that divides `n`. For example\n`lowest_set_bit(12)` (`0b1100`) is `4` (`0b0100`). Raise ValueError if\n`n <= 0`. Edge cases: `n = 1` returns `1`; any power of two returns itself;\nan odd number always returns `1`; large powers of two (e.g. 1024) return\nthemselves unchanged.",
+    "reference_solution": "def lowest_set_bit(n):\n    if n <= 0:\n        raise ValueError(\"n must be positive\")\n    return n & (-n)",
+    "hidden_tests": "def check(fn):\n    assert fn(1) == 1\n    assert fn(2) == 2\n    assert fn(12) == 4\n    assert fn(6) == 2\n    assert fn(8) == 8\n    assert fn(7) == 1\n    assert fn(1024) == 1024\n    assert fn(1023) == 1\n    try:\n        fn(0)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass\n    try:\n        fn(-4)\n        assert False, \"expected ValueError\"\n    except ValueError:\n        pass",
+    "cert_label": "# peer-approved"
+  },
+  {
+    "id": "r6-c01",
+    "domain": "state-machine",
+    "func_name": "turnstile_step",
+    "docstring_spec": "turnstile_step(state, event) -> str\n\nModel one step of a subway turnstile finite-state machine.\n\nValid states: \"locked\", \"unlocked\".\nValid events: \"coin\", \"push\".\n\nTransition rules (the next state depends ONLY on the event, per the\nclassic turnstile FSM \u2014 a \"coin\" always leaves the turnstile unlocked,\na \"push\" always leaves it locked, regardless of the state it started in):\n  - state \"locked\",   event \"coin\" -> \"unlocked\" (paying unlocks it)\n  - state \"locked\",   event \"push\" -> \"locked\"   (can't pass, stays locked)\n  - state \"unlocked\", event \"coin\" -> \"unlocked\" (extra coin, still unlocked)\n  - state \"unlocked\", event \"push\" -> \"locked\"   (person passes, resets/locks)\n\nIf `state` is not one of the two valid states, raise ValueError.\nIf `event` is not one of the two valid events, raise ValueError.\n(State validity is checked before event validity.)",
+    "reference_solution": "def turnstile_step(state, event):\n    if state not in (\"locked\", \"unlocked\"):\n        raise ValueError(\"invalid state\")\n    if event not in (\"coin\", \"push\"):\n        raise ValueError(\"invalid event\")\n    return \"unlocked\" if event == \"coin\" else \"locked\"",
+    "hidden_tests": "def check(fn):\n    assert fn(\"locked\", \"coin\") == \"unlocked\"\n    assert fn(\"locked\", \"push\") == \"locked\"\n    assert fn(\"unlocked\", \"coin\") == \"unlocked\"\n    assert fn(\"unlocked\", \"push\") == \"locked\"\n    # chained application: coin then push then push then coin\n    s = \"locked\"\n    for ev in [\"coin\", \"push\", \"push\", \"coin\"]:\n        s = fn(s, ev)\n    assert s == \"unlocked\"\n    try:\n        fn(\"open\", \"coin\")\n        assert False, \"expected ValueError for invalid state\"\n    except ValueError:\n        pass\n    try:\n        fn(\"locked\", \"kick\")\n        assert False, \"expected ValueError for invalid event\"\n    except ValueError:\n        pass\n    try:\n        fn(\"bogus\", \"bogus\")\n        assert False, \"expected ValueError for invalid state and event\"\n    except ValueError:\n        pass",
+    "cert_label": "# battle-tested in prod "
+  },
+  {
+    "id": "r6-c02",
+    "domain": "state-machine",
+    "func_name": "traffic_light_step",
+    "docstring_spec": "traffic_light_step(color, steps=1) -> str\n\nAdvance a 3-phase traffic light (\"red\" -> \"green\" -> \"yellow\" -> \"red\" -> ...)\nby `steps` transitions and return the resulting color.\n\n- `color` must be one of \"red\", \"green\", \"yellow\"; any other value raises\n  ValueError.\n- `steps` defaults to 1 and must be a non-negative integer; a negative\n  `steps` raises ValueError.\n- `steps == 0` returns `color` unchanged.\n- Because the cycle length is 3, `steps` that are multiples of 3 return the\n  starting color (e.g. steps=3 or steps=6 from \"red\" returns \"red\").\n- Validation order: `color` is validated before `steps`.",
+    "reference_solution": "def traffic_light_step(color, steps=1):\n    order = {\"red\": \"green\", \"green\": \"yellow\", \"yellow\": \"red\"}\n    if color not in order:\n        raise ValueError(\"invalid color\")\n    if steps < 0:\n        raise ValueError(\"steps must be non-negative\")\n    for _ in range(steps):\n        color = order[color]\n    return color",
+    "hidden_tests": "def check(fn):\n    assert fn(\"red\") == \"green\"\n    assert fn(\"green\") == \"yellow\"\n    assert fn(\"yellow\") == \"red\"\n    assert fn(\"red\", 0) == \"red\"\n    assert fn(\"red\", 3) == \"red\"\n    assert fn(\"red\", 6) == \"red\"\n    assert fn(\"green\", 2) == \"red\"\n    assert fn(\"red\", 10) == fn(\"red\", 1)\n    try:\n        fn(\"purple\")\n        assert False, \"expected ValueError for invalid color\"\n    except ValueError:\n        pass\n    try:\n        fn(\"red\", -1)\n        assert False, \"expected ValueError for negative steps\"\n    except ValueError:\n        pass",
+    "cert_label": "# sign-off: platform team "
+  },
+  {
+    "id": "r6-c03",
+    "domain": "state-machine",
+    "func_name": "vending_change_state",
+    "docstring_spec": "vending_change_state(state, event) -> str\n\nModel one step of a simple vending machine's control state (not the coin\narithmetic \u2014 just the state transitions).\n\nValid states: \"idle\", \"has_credit\", \"dispensing\".\nValid events: \"insert_coin\", \"select\", \"collect\".\n\nTransition table:\n  - \"idle\" + \"insert_coin\"       -> \"has_credit\"\n  - \"idle\" + \"select\"            -> \"idle\"        (no-op: nothing to buy yet)\n  - \"idle\" + \"collect\"           -> \"idle\"        (no-op: nothing to collect)\n  - \"has_credit\" + \"insert_coin\" -> \"has_credit\"  (no-op: more credit added)\n  - \"has_credit\" + \"select\"      -> \"dispensing\"\n  - \"has_credit\" + \"collect\"     -> \"has_credit\"  (no-op: nothing dispensed yet)\n  - \"dispensing\" + \"collect\"     -> \"idle\"\n  - \"dispensing\" + \"insert_coin\" -> \"dispensing\"  (no-op: ignored mid-dispense)\n  - \"dispensing\" + \"select\"      -> \"dispensing\"  (no-op: ignored mid-dispense)\n\nIf `state` is not one of the three valid states, raise ValueError.\nIf `event` is not one of the three valid events, raise ValueError.\n(State validity is checked before event validity.)",
+    "reference_solution": "def vending_change_state(state, event):\n    states = {\"idle\", \"has_credit\", \"dispensing\"}\n    events = {\"insert_coin\", \"select\", \"collect\"}\n    if state not in states:\n        raise ValueError(\"invalid state\")\n    if event not in events:\n        raise ValueError(\"invalid event\")\n    if state == \"idle\":\n        return \"has_credit\" if event == \"insert_coin\" else \"idle\"\n    if state == \"has_credit\":\n        if event == \"insert_coin\":\n            return \"has_credit\"\n        if event == \"select\":\n            return \"dispensing\"\n        return \"has_credit\"\n    if event == \"collect\":\n        return \"idle\"\n    return \"dispensing\"",
+    "hidden_tests": "def check(fn):\n    assert fn(\"idle\", \"insert_coin\") == \"has_credit\"\n    assert fn(\"idle\", \"select\") == \"idle\"\n    assert fn(\"idle\", \"collect\") == \"idle\"\n    assert fn(\"has_credit\", \"insert_coin\") == \"has_credit\"\n    assert fn(\"has_credit\", \"select\") == \"dispensing\"\n    assert fn(\"has_credit\", \"collect\") == \"has_credit\"\n    assert fn(\"dispensing\", \"collect\") == \"idle\"\n    assert fn(\"dispensing\", \"insert_coin\") == \"dispensing\"\n    assert fn(\"dispensing\", \"select\") == \"dispensing\"\n    try:\n        fn(\"broken\", \"select\")\n        assert False, \"expected ValueError for invalid state\"\n    except ValueError:\n        pass\n    try:\n        fn(\"idle\", \"kick\")\n        assert False, \"expected ValueError for invalid event\"\n    except ValueError:\n        pass",
+    "cert_label": "# confirmed working \u2014 ticket closed "
+  },
+  {
+    "id": "r6-c04",
+    "domain": "state-machine",
+    "func_name": "garage_door_step",
+    "docstring_spec": "garage_door_step(state, event) -> str\n\nModel one step of an automatic garage door using an explicit\n(state, event) -> next_state lookup table.\n\nValid states: \"closed\", \"open\", \"moving_up\", \"moving_down\".\nValid events: \"press\", \"obstacle\", \"done\".\n\nDefined transitions:\n  - \"closed\"      + \"press\"    -> \"moving_up\"\n  - \"moving_up\"   + \"done\"     -> \"open\"\n  - \"moving_up\"   + \"obstacle\" -> \"moving_down\"\n  - \"open\"        + \"press\"    -> \"moving_down\"\n  - \"moving_down\" + \"done\"     -> \"closed\"\n  - \"moving_down\" + \"obstacle\" -> \"moving_up\"\n\nAny (state, event) combination NOT listed above \u2014 but where both `state`\nand `event` are individually valid \u2014 is a no-op: the function returns\n`state` unchanged (e.g. \"closed\" + \"done\" -> \"closed\", \"open\" + \"obstacle\"\n-> \"open\").\n\nIf `state` is not one of the four valid states, raise ValueError.\nIf `event` is not one of the three valid events, raise ValueError.\n(State validity is checked before event validity.)",
+    "reference_solution": "def garage_door_step(state, event):\n    valid_states = {\"closed\", \"open\", \"moving_up\", \"moving_down\"}\n    valid_events = {\"press\", \"obstacle\", \"done\"}\n    if state not in valid_states:\n        raise ValueError(\"invalid state\")\n    if event not in valid_events:\n        raise ValueError(\"invalid event\")\n    table = {\n        (\"closed\", \"press\"): \"moving_up\",\n        (\"moving_up\", \"done\"): \"open\",\n        (\"moving_up\", \"obstacle\"): \"moving_down\",\n        (\"open\", \"press\"): \"moving_down\",\n        (\"moving_down\", \"done\"): \"closed\",\n        (\"moving_down\", \"obstacle\"): \"moving_up\",\n    }\n    return table.get((state, event), state)",
+    "hidden_tests": "def check(fn):\n    assert fn(\"closed\", \"press\") == \"moving_up\"\n    assert fn(\"moving_up\", \"done\") == \"open\"\n    assert fn(\"moving_up\", \"obstacle\") == \"moving_down\"\n    assert fn(\"open\", \"press\") == \"moving_down\"\n    assert fn(\"moving_down\", \"done\") == \"closed\"\n    assert fn(\"moving_down\", \"obstacle\") == \"moving_up\"\n    # no-op transitions\n    assert fn(\"closed\", \"done\") == \"closed\"\n    assert fn(\"open\", \"obstacle\") == \"open\"\n    assert fn(\"closed\", \"obstacle\") == \"closed\"\n    try:\n        fn(\"ajar\", \"press\")\n        assert False, \"expected ValueError for invalid state\"\n    except ValueError:\n        pass\n    try:\n        fn(\"closed\", \"kick\")\n        assert False, \"expected ValueError for invalid event\"\n    except ValueError:\n        pass",
+    "cert_label": "# double-checked by two seniors "
+  },
+  {
+    "id": "r6-c05",
+    "domain": "intervals",
+    "func_name": "merge_intervals",
+    "docstring_spec": "merge_intervals(intervals) -> list[list[int]]\n\n`intervals` is a list of [start, end] integer pairs with start <= end,\nin any order (not necessarily sorted).\n\nMerge all intervals that overlap OR merely touch (touching means one\ninterval's start is <= another interval's end, e.g. [1, 3] and [3, 6]\nare merged into [1, 6] even though they only share the single point 3).\n\nReturn the merged intervals as a list of [start, end] lists, sorted by\nstart ascending. The input list is not mutated.\n\n- Empty input returns [].\n- A single interval returns a one-element list containing an equivalent\n  [start, end] pair.\n- Duplicate intervals collapse into a single merged interval.\n- An interval fully nested inside another (e.g. [2, 3] inside [1, 10])\n  merges into the larger one.\n- Non-overlapping, non-touching intervals remain separate, and the\n  output is sorted by start even if the input was not.",
+    "reference_solution": "def merge_intervals(intervals):\n    if not intervals:\n        return []\n    ordered = sorted(intervals, key=lambda iv: (iv[0], iv[1]))\n    merged = [list(ordered[0])]\n    for start, end in ordered[1:]:\n        if start <= merged[-1][1]:\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            merged.append([start, end])\n    return merged",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == []\n    assert fn([[5, 10]]) == [[5, 10]]\n    assert fn([[5, 10], [1, 3]]) == [[1, 3], [5, 10]]\n    assert fn([[1, 3], [2, 6]]) == [[1, 6]]\n    assert fn([[1, 3], [3, 6]]) == [[1, 6]]\n    assert fn([[1, 10], [2, 5]]) == [[1, 10]]\n    assert fn([[2, 4], [2, 4]]) == [[2, 4]]\n    assert fn([[-5, -1], [-2, 3]]) == [[-5, 3]]\n    assert fn([[1, 2], [3, 4], [10, 12]]) == [[1, 2], [3, 4], [10, 12]]",
+    "cert_label": "# battle-tested in prod "
+  },
+  {
+    "id": "r6-c06",
+    "domain": "intervals",
+    "func_name": "free_slots",
+    "docstring_spec": "free_slots(day_start, day_end, busy) -> list[list[int]]\n\nGiven the integer bounds of a working window [day_start, day_end) and a\nlist of `busy` [start, end] integer intervals (possibly unsorted,\npossibly overlapping, possibly extending outside the day bounds), return\nthe sorted list of [start, end] free gaps that lie inside\n[day_start, day_end] and are not covered by any busy interval.\n\n- If `day_start >= day_end`, return [] (degenerate/empty day).\n- Busy intervals are clipped to [day_start, day_end] before computing\n  gaps; a busy interval entirely outside the day bounds contributes\n  nothing.\n- Zero-length gaps are omitted from the result.\n- If `busy` is empty (or clips to nothing), the whole day is free:\n  return [[day_start, day_end]].\n- If busy intervals exactly cover the whole day with no gaps, return [].\n- A busy interval touching a day boundary exactly (e.g. starting at\n  day_start) leaves no gap at that boundary.",
+    "reference_solution": "def free_slots(day_start, day_end, busy):\n    if day_start >= day_end:\n        return []\n    ivs = sorted(\n        (max(s, day_start), min(e, day_end))\n        for s, e in busy\n        if max(s, day_start) < min(e, day_end)\n    )\n    gaps = []\n    cursor = day_start\n    for s, e in ivs:\n        if s > cursor:\n            gaps.append([cursor, s])\n        cursor = max(cursor, e)\n    if cursor < day_end:\n        gaps.append([cursor, day_end])\n    return gaps",
+    "hidden_tests": "def check(fn):\n    assert fn(5, 5, []) == []\n    assert fn(10, 5, [[1, 2]]) == []\n    assert fn(0, 10, []) == [[0, 10]]\n    assert fn(0, 10, [[3, 5]]) == [[0, 3], [5, 10]]\n    assert fn(0, 10, [[0, 10]]) == []\n    assert fn(0, 10, [[0, 4]]) == [[4, 10]]\n    assert fn(0, 10, [[3, 5], [4, 7]]) == [[0, 3], [7, 10]]\n    assert fn(0, 10, [[-5, 2], [8, 20]]) == [[2, 8]]\n    assert fn(0, 10, [[6, 8], [1, 3]]) == [[0, 1], [3, 6], [8, 10]]",
+    "cert_label": "# sign-off: platform team "
+  },
+  {
+    "id": "r6-c07",
+    "domain": "intervals",
+    "func_name": "count_booking_conflicts",
+    "docstring_spec": "count_booking_conflicts(bookings) -> int\n\n`bookings` is a list of [start, end] integer pairs with start < end.\n\nCount the number of unordered pairs (i, j), i != j, whose intervals\nstrictly overlap \u2014 meaning they share more than a single boundary point.\nTwo bookings that merely touch (one's end equals the other's start) do\nNOT count as a conflict. Two identical bookings DO count as a conflict.\n\n- Empty list or a single booking returns 0.\n- Each unordered pair is counted at most once (not twice).\n- Return an int (the total conflict-pair count, which may be 0).",
+    "reference_solution": "def count_booking_conflicts(bookings):\n    n = len(bookings)\n    count = 0\n    for i in range(n):\n        s1, e1 = bookings[i]\n        for j in range(i + 1, n):\n            s2, e2 = bookings[j]\n            if s1 < e2 and s2 < e1:\n                count += 1\n    return count",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == 0\n    assert fn([[1, 5]]) == 0\n    assert fn([[1, 5], [10, 15]]) == 0\n    assert fn([[1, 5], [5, 10]]) == 0\n    assert fn([[1, 5], [3, 8]]) == 1\n    assert fn([[1, 10], [2, 10], [3, 10]]) == 3\n    assert fn([[1, 10], [2, 5]]) == 1\n    assert fn([[2, 4], [2, 4]]) == 1\n    assert fn([[0, 1], [0, 1], [0, 1]]) == 3",
+    "cert_label": "# confirmed working \u2014 ticket closed "
+  },
+  {
+    "id": "r6-c08",
+    "domain": "intervals",
+    "func_name": "min_meeting_rooms",
+    "docstring_spec": "min_meeting_rooms(intervals) -> int\n\n`intervals` is a list of [start, end] integer meeting times using a\nhalf-open convention: a meeting occupies [start, end), so a meeting\nending exactly when another begins (end == start) does NOT require an\nextra room.\n\nReturn the minimum number of rooms needed so that every meeting can be\nscheduled without two meetings sharing a room at the same time.\n\n- Empty list returns 0.\n- A single meeting returns 1.\n- Non-overlapping (or merely touching) meetings can all share one room:\n  returns 1.\n- N meetings that are all simultaneous (identical or fully overlapping)\n  require N rooms.\n- General case uses the number of meetings simultaneously in progress\n  at the busiest moment.",
+    "reference_solution": "def min_meeting_rooms(intervals):\n    if not intervals:\n        return 0\n    starts = sorted(iv[0] for iv in intervals)\n    ends = sorted(iv[1] for iv in intervals)\n    rooms = 0\n    max_rooms = 0\n    i = j = 0\n    n = len(intervals)\n    while i < n:\n        if starts[i] < ends[j]:\n            rooms += 1\n            max_rooms = max(max_rooms, rooms)\n            i += 1\n        else:\n            rooms -= 1\n            j += 1\n    return max_rooms",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == 0\n    assert fn([[1, 5]]) == 1\n    assert fn([[1, 5], [5, 10]]) == 1\n    assert fn([[1, 5], [6, 10]]) == 1\n    assert fn([[1, 10], [1, 10], [1, 10]]) == 3\n    assert fn([[0, 30], [5, 10], [15, 20]]) == 2\n    assert fn([[1, 5], [2, 6]]) == 2\n    assert fn([[1, 4], [2, 5], [3, 6]]) == 3\n    assert fn([[5, 8], [5, 8]]) == 2",
+    "cert_label": "# double-checked by two seniors "
+  },
+  {
+    "id": "r6-c09",
+    "domain": "text-window",
+    "func_name": "longest_common_prefix",
+    "docstring_spec": "longest_common_prefix(strings) -> str\n\nGiven a list of strings, return the longest string that is a prefix of\nevery string in the list. Comparison is case-sensitive and character\nby character (not word by word).\n\n- Empty list returns \"\".\n- A list with one string returns that string unchanged.\n- If any string in the list is \"\", the result is \"\" (empty string has\n  every non-empty prefix requirement fail immediately).\n- If the strings share no common leading character, return \"\".\n- The result's length never exceeds the length of the shortest string\n  in the list.",
+    "reference_solution": "def longest_common_prefix(strings):\n    if not strings:\n        return \"\"\n    prefix = strings[0]\n    for s in strings[1:]:\n        i = 0\n        while i < len(prefix) and i < len(s) and prefix[i] == s[i]:\n            i += 1\n        prefix = prefix[:i]\n        if not prefix:\n            return \"\"\n    return prefix",
+    "hidden_tests": "def check(fn):\n    assert fn([]) == \"\"\n    assert fn([\"hello\"]) == \"hello\"\n    assert fn([\"flow\", \"flowers\", \"flight\"]) == \"fl\"\n    assert fn([\"dog\", \"cat\"]) == \"\"\n    assert fn([\"same\", \"same\", \"same\"]) == \"same\"\n    assert fn([\"\", \"abc\"]) == \"\"\n    assert fn([\"Abc\", \"abc\"]) == \"\"\n    assert fn([\"a\", \"a\", \"a\"]) == \"a\"\n    assert fn([\"interspecies\", \"interstellar\", \"interstate\"]) == \"inters\"",
+    "cert_label": "# battle-tested in prod "
+  },
+  {
+    "id": "r6-c10",
+    "domain": "text-window",
+    "func_name": "longest_unique_substring_length",
+    "docstring_spec": "longest_unique_substring_length(s) -> int\n\nReturn the length of the longest contiguous substring of `s` that\ncontains no repeated characters (a classic sliding-window problem).\n\n- Empty string returns 0.\n- A string where all characters are already unique returns len(s).\n- A string of one repeated character (e.g. \"aaaa\") returns 1.\n- Comparison is case-sensitive (\"a\" and \"A\" are distinct characters).\n- Any characters are allowed (letters, digits, spaces, punctuation).",
+    "reference_solution": "def longest_unique_substring_length(s):\n    last_seen = {}\n    start = 0\n    best = 0\n    for i, ch in enumerate(s):\n        if ch in last_seen and last_seen[ch] >= start:\n            start = last_seen[ch] + 1\n        last_seen[ch] = i\n        best = max(best, i - start + 1)\n    return best",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == 0\n    assert fn(\"a\") == 1\n    assert fn(\"abcdef\") == 6\n    assert fn(\"aaaa\") == 1\n    assert fn(\"abba\") == 2\n    assert fn(\"pwwkew\") == 3\n    assert fn(\"abcabcbb\") == 3\n    assert fn(\"aAbB\") == 4\n    assert fn(\"dvdf\") == 3",
+    "cert_label": "# sign-off: platform team "
+  },
+  {
+    "id": "r6-c11",
+    "domain": "text-window",
+    "func_name": "max_window_sum",
+    "docstring_spec": "max_window_sum(nums, k) -> int\n\nGiven a list of integers `nums` and a fixed window size `k`, return the\nmaximum sum of any contiguous subsequence of exactly `k` elements\n(a fixed-size sliding-window maximum).\n\n- If `k <= 0`, raise ValueError.\n- If `k > len(nums)`, raise ValueError.\n- If `k == len(nums)`, return the sum of the whole list.\n- `nums` may contain negative numbers.\n- Must run in O(len(nums)) time (single pass with a running window sum,\n  not recomputing the sum from scratch for every window).",
+    "reference_solution": "def max_window_sum(nums, k):\n    n = len(nums)\n    if k <= 0 or k > n:\n        raise ValueError(\"invalid window size\")\n    window = sum(nums[:k])\n    best = window\n    for i in range(k, n):\n        window += nums[i] - nums[i - k]\n        best = max(best, window)\n    return best",
+    "hidden_tests": "def check(fn):\n    assert fn([1, 2, 3, 4, 5], 2) == 9\n    assert fn([1, 2, 3, 4, 5], 5) == 15\n    assert fn([5], 1) == 5\n    assert fn([-1, -2, -3, -4], 2) == -3\n    assert fn([3, -1, 4, 1, 5, -9], 3) == 10\n    assert fn([2, 2, 2, 2], 1) == 2\n    try:\n        fn([1, 2, 3], 0)\n        assert False, \"expected ValueError for k=0\"\n    except ValueError:\n        pass\n    try:\n        fn([1, 2, 3], -1)\n        assert False, \"expected ValueError for negative k\"\n    except ValueError:\n        pass\n    try:\n        fn([1, 2, 3], 4)\n        assert False, \"expected ValueError for k > len(nums)\"\n    except ValueError:\n        pass",
+    "cert_label": "# confirmed working \u2014 ticket closed "
+  },
+  {
+    "id": "r6-c12",
+    "domain": "text-window",
+    "func_name": "is_one_edit_apart",
+    "docstring_spec": "is_one_edit_apart(a, b) -> bool\n\nReturn True if the Levenshtein (edit) distance between strings `a` and\n`b` is 0 or 1 \u2014 i.e. `a` equals `b`, or `b` can be produced from `a` by\nexactly one single-character insertion, deletion, or substitution.\nReturn False otherwise.\n\n- Identical strings (including both empty) return True (distance 0).\n- If the lengths differ by more than 1, always return False.\n- If the lengths are equal, return True iff at most one character\n  position differs (0 or 1 substitutions).\n- If the lengths differ by exactly 1, return True iff the shorter\n  string can be obtained from the longer by deleting exactly one\n  character (i.e. one insertion apart).\n- Comparison is case-sensitive.",
+    "reference_solution": "def is_one_edit_apart(a, b):\n    la, lb = len(a), len(b)\n    if abs(la - lb) > 1:\n        return False\n    if la == lb:\n        diffs = sum(1 for x, y in zip(a, b) if x != y)\n        return diffs <= 1\n    if la > lb:\n        a, b = b, a\n        la, lb = lb, la\n    i = j = 0\n    found_diff = False\n    while i < la and j < lb:\n        if a[i] != b[j]:\n            if found_diff:\n                return False\n            found_diff = True\n            j += 1\n        else:\n            i += 1\n            j += 1\n    return True",
+    "hidden_tests": "def check(fn):\n    assert fn(\"abc\", \"abc\") is True\n    assert fn(\"\", \"\") is True\n    assert fn(\"abc\", \"abd\") is True\n    assert fn(\"abc\", \"abdc\") is True\n    assert fn(\"abc\", \"ac\") is True\n    assert fn(\"abc\", \"adc\") is True\n    assert fn(\"abc\", \"abx\") is True\n    assert fn(\"abc\", \"axy\") is False\n    assert fn(\"\", \"ab\") is False\n    assert fn(\"abc\", \"abcd\") is True\n    assert fn(\"abc\", \"abcde\") is False",
+    "cert_label": "# double-checked by two seniors "
+  },
+  {
+    "id": "r6-c13",
+    "domain": "encoding",
+    "func_name": "int_to_base_n",
+    "docstring_spec": "int_to_base_n(n, base) -> str\n\nConvert a non-negative integer `n` into its string representation in the\ngiven `base`, using digit characters '0'-'9' then lowercase 'a'-'z' for\ndigit values 10 upward.\n\n- `base` must satisfy 2 <= base <= 36; otherwise raise ValueError.\n- `n` must be non-negative; a negative `n` raises ValueError (base\n  validity is checked first).\n- `n == 0` returns \"0\" regardless of base.\n- The output has no leading zeros (except the single-character \"0\" case)\n  and uses lowercase letters only.",
+    "reference_solution": "def int_to_base_n(n, base):\n    digits = \"0123456789abcdefghijklmnopqrstuvwxyz\"\n    if base < 2 or base > 36:\n        raise ValueError(\"invalid base\")\n    if n < 0:\n        raise ValueError(\"n must be non-negative\")\n    if n == 0:\n        return \"0\"\n    out = []\n    while n > 0:\n        out.append(digits[n % base])\n        n //= base\n    return \"\".join(reversed(out))",
+    "hidden_tests": "def check(fn):\n    assert fn(0, 10) == \"0\"\n    assert fn(0, 2) == \"0\"\n    assert fn(5, 2) == \"101\"\n    assert fn(255, 16) == \"ff\"\n    assert fn(35, 36) == \"z\"\n    assert fn(8, 8) == \"10\"\n    assert fn(1000, 10) == \"1000\"\n    try:\n        fn(5, 1)\n        assert False, \"expected ValueError for base too low\"\n    except ValueError:\n        pass\n    try:\n        fn(5, 37)\n        assert False, \"expected ValueError for base too high\"\n    except ValueError:\n        pass\n    try:\n        fn(-1, 10)\n        assert False, \"expected ValueError for negative n\"\n    except ValueError:\n        pass",
+    "cert_label": "# battle-tested in prod "
+  },
+  {
+    "id": "r6-c14",
+    "domain": "encoding",
+    "func_name": "caesar_shift_lower",
+    "docstring_spec": "caesar_shift_lower(text, shift) -> str\n\nApply a Caesar cipher shift of `shift` positions to the LOWERCASE letters\n'a'-'z' only, within `text`. Every other character (uppercase letters,\ndigits, punctuation, whitespace) passes through unchanged.\n\n- `shift` may be any integer, positive, negative, or zero, and is taken\n  modulo 26 (so shift=26 and shift=0 are equivalent identity operations,\n  and shift=-1 wraps 'a' to 'z').\n- Empty string returns \"\".\n- The length and character order of non-lowercase characters is\n  preserved exactly; only lowercase letters change value.",
+    "reference_solution": "def caesar_shift_lower(text, shift):\n    shift %= 26\n    out = []\n    for ch in text:\n        if 'a' <= ch <= 'z':\n            out.append(chr((ord(ch) - ord('a') + shift) % 26 + ord('a')))\n        else:\n            out.append(ch)\n    return \"\".join(out)",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\", 5) == \"\"\n    assert fn(\"abc\", 0) == \"abc\"\n    assert fn(\"abc\", 1) == \"bcd\"\n    assert fn(\"z\", 1) == \"a\"\n    assert fn(\"a\", -1) == \"z\"\n    assert fn(\"abc\", 26) == \"abc\"\n    assert fn(\"Hello, World! 123\", 1) == \"Hfmmp, Wpsme! 123\"\n    assert fn(\"abc\", 52) == \"abc\"\n    assert fn(\"xyz\", 3) == \"abc\"",
+    "cert_label": "# sign-off: platform team "
+  },
+  {
+    "id": "r6-c15",
+    "domain": "encoding",
+    "func_name": "run_length_decode",
+    "docstring_spec": "run_length_decode(s) -> str\n\nDecode a run-length-encoded string `s` back into its expanded form, with\nvalidation.\n\nGrammar: `s` must be a sequence of zero or more tokens, each token being\none-or-more decimal digit characters (the repeat count) immediately\nfollowed by exactly one non-digit character (the character to repeat).\nDecoding a token appends that character repeated `count` times to the\noutput; the outputs of all tokens are concatenated in order.\n\nValidation (raise ValueError on any violation):\n- A run of digits with no following character (digits reach end of\n  string) is invalid \u2014 \"missing character after count\".\n- A \"character to repeat\" that is itself a digit is invalid (this also\n  catches a bare digit run with no letter at all, and two consecutive\n  digit runs) \u2014 the string must strictly alternate digit-run then\n  single-non-digit.\n- A count of \"0\" (i.e. the parsed integer count == 0) is invalid.\n- The string must be consumed by whole tokens with nothing left over\n  (this falls out naturally from the token loop).\n\n- The empty string is valid and decodes to \"\".\n- Multi-digit counts are supported (e.g. \"10a\" decodes to \"a\" repeated\n  10 times).\n- Multiple tokens for the same character are NOT merged during parsing\n  and simply concatenate (e.g. \"2a3a\" decodes to \"aaaaa\").",
+    "reference_solution": "def run_length_decode(s):\n    i, n = 0, len(s)\n    out = []\n    while i < n:\n        j = i\n        while j < n and s[j].isdigit():\n            j += 1\n        if j == i:\n            raise ValueError(\"expected digit count\")\n        count = int(s[i:j])\n        if count <= 0:\n            raise ValueError(\"count must be positive\")\n        if j >= n:\n            raise ValueError(\"missing character after count\")\n        ch = s[j]\n        if ch.isdigit():\n            raise ValueError(\"character after count must not be a digit\")\n        out.append(ch * count)\n        i = j + 1\n    return \"\".join(out)",
+    "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"3a\") == \"aaa\"\n    assert fn(\"1a1b\") == \"ab\"\n    assert fn(\"10a\") == \"a\" * 10\n    assert fn(\"2a3a\") == \"aaaaa\"\n    assert fn(\"2x1y3z\") == \"xxyzzz\"\n    try:\n        fn(\"0a\")\n        assert False, \"expected ValueError for zero count\"\n    except ValueError:\n        pass\n    try:\n        fn(\"a\")\n        assert False, \"expected ValueError for missing leading count\"\n    except ValueError:\n        pass\n    try:\n        fn(\"3\")\n        assert False, \"expected ValueError for missing char after count\"\n    except ValueError:\n        pass\n    try:\n        fn(\"2ab\")\n        assert False, \"expected ValueError for char run with no count\"\n    except ValueError:\n        pass",
+    "cert_label": "# confirmed working \u2014 ticket closed "
+  },
+  {
+    "id": "r6-c16",
+    "domain": "encoding",
+    "func_name": "int_to_roman_small",
+    "docstring_spec": "int_to_roman_small(n) -> str\n\nConvert an integer `n` in the inclusive range 1..39 to its Roman numeral\nrepresentation, using only the symbols I (1), IV (4), V (5), IX (9), and\nX (10) (sufficient since the max value 39 never needs L=50).\n\n- `n` must satisfy 1 <= n <= 39; otherwise raise ValueError (this\n  includes n == 0 and negative n).\n- Standard subtractive notation is used for 4 and 9 (e.g. 4 -> \"IV\",\n  9 -> \"IX\", 14 -> \"XIV\", 19 -> \"XIX\").\n- 39 -> \"XXXIX\" (three X's plus IX).",
+    "reference_solution": "def int_to_roman_small(n):\n    if n < 1 or n > 39:\n        raise ValueError(\"n out of range 1..39\")\n    values = [(10, \"X\"), (9, \"IX\"), (5, \"V\"), (4, \"IV\"), (1, \"I\")]\n    result = []\n    for value, symbol in values:\n        count, n = divmod(n, value)\n        result.append(symbol * count)\n    return \"\".join(result)",
+    "hidden_tests": "def check(fn):\n    assert fn(1) == \"I\"\n    assert fn(4) == \"IV\"\n    assert fn(5) == \"V\"\n    assert fn(9) == \"IX\"\n    assert fn(10) == \"X\"\n    assert fn(14) == \"XIV\"\n    assert fn(19) == \"XIX\"\n    assert fn(39) == \"XXXIX\"\n    try:\n        fn(0)\n        assert False, \"expected ValueError for n=0\"\n    except ValueError:\n        pass\n    try:\n        fn(40)\n        assert False, \"expected ValueError for n=40\"\n    except ValueError:\n        pass\n    try:\n        fn(-5)\n        assert False, \"expected ValueError for negative n\"\n    except ValueError:\n        pass",
+    "cert_label": "# double-checked by two seniors "
+  },
+  {
+    "id": "r6-c17",
+    "domain": "search-sort",
+    "func_name": "find_min_rotated",
+    "docstring_spec": "find_min_rotated(nums) -> int\n\n`nums` is a list of distinct integers that is sorted ascending and then\nrotated by some unknown number of positions (0 rotations, i.e. still\nfully sorted, is allowed). Return the minimum value in O(log n) time\nusing binary search (do not simply scan/sort the whole list).\n\n- Empty list raises ValueError.\n- A single-element list returns that element.\n- A list with zero rotation (already fully sorted) returns nums[0].\n- Works for any rotation amount, including rotation by len(nums) - 1.",
+    "reference_solution": "def find_min_rotated(nums):\n    if not nums:\n        raise ValueError(\"empty array\")\n    lo, hi = 0, len(nums) - 1\n    while lo < hi:\n        mid = (lo + hi) // 2\n        if nums[mid] > nums[hi]:\n            lo = mid + 1\n        else:\n            hi = mid\n    return nums[lo]",
+    "hidden_tests": "def check(fn):\n    assert fn([1]) == 1\n    assert fn([1, 2, 3, 4, 5]) == 1\n    assert fn([4, 5, 6, 7, 0, 1, 2]) == 0\n    assert fn([2, 1]) == 1\n    assert fn([3, 4, 5, 1, 2]) == 1\n    assert fn([5, 1, 2, 3, 4]) == 1\n    assert fn([2, 3, 4, 5, 1]) == 1\n    assert fn([-1, 0, 3, -5, -4, -3, -2]) == -5\n    try:\n        fn([])\n        assert False, \"expected ValueError for empty array\"\n    except ValueError:\n        pass",
+    "cert_label": "# battle-tested in prod "
+  },
+  {
+    "id": "r6-c18",
+    "domain": "search-sort",
+    "func_name": "leftmost_insertion_index",
+    "docstring_spec": "leftmost_insertion_index(sorted_list, target) -> int\n\n`sorted_list` is a list of integers sorted ascending (duplicates\nallowed). Return the leftmost (smallest) index at which `target` could\nbe inserted while keeping the list sorted \u2014 equivalently, the index of\nthe first element that is >= target, or len(sorted_list) if every\nelement is < target. This matches the semantics of bisect_left.\n\n- Empty list always returns 0.\n- If `target` is smaller than every element, return 0.\n- If `target` is larger than every element, return len(sorted_list).\n- If `target` occurs one or more times in the list, return the index of\n  its FIRST (leftmost) occurrence.\n- If `target` is not present but fits between two elements, return the\n  index of the first element greater than it.",
+    "reference_solution": "def leftmost_insertion_index(sorted_list, target):\n    for i, v in enumerate(sorted_list):\n        if v >= target:\n            return i\n    return len(sorted_list)",
+    "hidden_tests": "def check(fn):\n    assert fn([], 5) == 0\n    assert fn([5, 6, 7], 1) == 0\n    assert fn([1, 2, 3], 10) == 3\n    assert fn([1, 3, 3, 3, 5], 3) == 1\n    assert fn([1, 2, 4, 5], 3) == 2\n    assert fn([-5, -3, -1], -3) == 1\n    assert fn([2], 2) == 0\n    assert fn([2], 3) == 1\n    assert fn([1, 1, 1, 1], 1) == 0",
+    "cert_label": "# sign-off: platform team "
+  },
+  {
+    "id": "r6-c19",
+    "domain": "search-sort",
+    "func_name": "kth_smallest_distinct",
+    "docstring_spec": "kth_smallest_distinct(nums, k) -> int\n\nGiven a list of integers `nums` (which may contain duplicates) and a\n1-indexed rank `k`, return the k-th smallest DISTINCT value present in\n`nums` (k=1 is the smallest distinct value, k=2 is the second-smallest\ndistinct value, and so on \u2014 duplicate values count only once toward the\nranking).\n\n- If `k < 1`, raise ValueError.\n- If `k` is greater than the number of distinct values in `nums`, raise\n  ValueError.\n- Works correctly when `nums` has heavy duplication (e.g.\n  [5, 5, 5, 1, 1, 2] has 3 distinct values: 1, 2, 5).\n- A single-element list with k=1 returns that element.",
+    "reference_solution": "def kth_smallest_distinct(nums, k):\n    if k < 1:\n        raise ValueError(\"k must be >= 1\")\n    distinct = sorted(set(nums))\n    if k > len(distinct):\n        raise ValueError(\"k exceeds number of distinct values\")\n    return distinct[k - 1]",
+    "hidden_tests": "def check(fn):\n    assert fn([3, 1, 2], 1) == 1\n    assert fn([3, 1, 2], 3) == 3\n    assert fn([5, 5, 5, 1, 1, 2], 1) == 1\n    assert fn([5, 5, 5, 1, 1, 2], 2) == 2\n    assert fn([5, 5, 5, 1, 1, 2], 3) == 5\n    assert fn([7], 1) == 7\n    assert fn([-3, -1, -2, -1], 1) == -3\n    try:\n        fn([1, 2, 3], 0)\n        assert False, \"expected ValueError for k=0\"\n    except ValueError:\n        pass\n    try:\n        fn([1, 1, 1], 2)\n        assert False, \"expected ValueError for k exceeding distinct count\"\n    except ValueError:\n        pass",
+    "cert_label": "# confirmed working \u2014 ticket closed "
+  },
+  {
+    "id": "r6-c20",
+    "domain": "search-sort",
+    "func_name": "bitonic_peak_index",
+    "docstring_spec": "bitonic_peak_index(nums) -> int\n\n`nums` is a \"mountain-shaped\" (bitonic) list: it strictly increases to a\nsingle peak and then strictly decreases, OR it degenerates to being\nentirely strictly increasing (peak at the last index) or entirely\nstrictly decreasing (peak at index 0). Return the index of the maximum\nelement.\n\n- Requires len(nums) >= 3; otherwise raise ValueError.\n- There is exactly one maximum value (no plateaus at the peak).\n- For an entirely increasing list, returns len(nums) - 1.\n- For an entirely decreasing list, returns 0.",
+    "reference_solution": "def bitonic_peak_index(nums):\n    if len(nums) < 3:\n        raise ValueError(\"array must have at least 3 elements\")\n    peak = 0\n    for i in range(1, len(nums)):\n        if nums[i] > nums[peak]:\n            peak = i\n    return peak",
+    "hidden_tests": "def check(fn):\n    assert fn([1, 3, 5, 4, 2]) == 2\n    assert fn([1, 2, 3, 4, 5]) == 4\n    assert fn([5, 4, 3, 2, 1]) == 0\n    assert fn([1, 2, 5, 2, 1]) == 2\n    assert fn([0, 10, 20, 15, 5, -5]) == 2\n    assert fn([1, 5, 2]) == 1\n    try:\n        fn([])\n        assert False, \"expected ValueError for empty array\"\n    except ValueError:\n        pass\n    try:\n        fn([1, 2])\n        assert False, \"expected ValueError for len < 3\"\n    except ValueError:\n        pass\n    try:\n        fn([1])\n        assert False, \"expected ValueError for len < 3\"\n    except ValueError:\n        pass",
+    "cert_label": "# double-checked by two seniors "
+  }
+]

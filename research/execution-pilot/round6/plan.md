@@ -1,9 +1,13 @@
-# Round 6 — Ship-What-You-Test (pre-registration DRAFT)
+# Round 6 — Ship-What-You-Test (pre-registration)
 
-> **STATUS: DRAFT — not frozen.** This plan freezes only when (a) the A-1 honesty patch
-> is merged, (b) the `sha256` fields below are filled with the pinned hashes of the
-> exact texts under test, and (c) this file is committed BEFORE any itembank item or
-> arm output is generated. Until then, nothing here is binding.
+> **STATUS: FROZEN.** A-1 merged at `cbc4670`; all arm hashes below are pinned; the
+> itembank (`itembank6.final.json`, sha256
+> `1aba57165dffa86e278872735680f39df44d3d91ee80077bb4bbbd26ca1fecc8`), mutation
+> engine, validator (report: PASS), and grader are committed together with this
+> FROZEN edit — all BEFORE any arm output is produced. The commit introducing this
+> paragraph is the freeze point; no arm text, item, hidden test, or analysis rule
+> may change after it. Deviations, if any become unavoidable, must be logged in
+> the results README as protocol deviations.
 
 ## Why this round exists
 
@@ -27,10 +31,10 @@ Paired, per tier (haiku, sonnet), same producer harness as Round 4. Arms:
 | Arm | Text prepended | sha256 (pin at freeze) |
 |-----|----------------|------------------------|
 | `noskill` | none | — |
-| `placebo-long` | length-matched neutral engineering prose (±10% of `skill-full` word count, zero verification content) | `TBD` |
+| `placebo-long` | length-matched neutral engineering prose (±10% of `skill-full` word count, zero verification content; actual: 1,372 words vs 1,378) | `fc6fdba9aa85767f19b7c698b71fa0157f757a971a745850069d4bdfefe1a388` |
 | `skill-full` | **the literal post-A-1 `skills/sommelier-pairing/SKILL.md`, verbatim, byte-for-byte** | `e6a2f1ae38113b3dd21a818ba656aeb77c06115f928f820b649826b76d332001` |
-| `rule-only` | the Move 2 one-liner exactly as it appears in the shipped skill (anchor arm — bridges to Round 4) | `TBD` |
-| `skill-no-imperative` | `skill-full` with only the imperative enforcement sentences removed ("you MUST edit the code… now", "REWRITE it", "in the same change") | `TBD` |
+| `rule-only` | the Move 2 one-liner exactly as it appears in the shipped skill (anchor arm — bridges to Round 4; verified exact substring of `skill-full`) | `f1715ee0e7e701b488e0a6a287db91af6c57db1a8c9fbcc8ee653fd988db060e` |
+| `skill-no-imperative` | `skill-full` with only the imperative enforcement sentences removed (every removal documented in `arms/no-imperative-removals.md`) | `96e20e70e1807dcdc7feb1122d03895d8c44d9fa7dd5d91d7d6d02bbb09a1ec4` |
 
 `skill-no-imperative` tests the causal hypothesis the audit surfaced: Round 3's arm
 already contained the boundary taxonomy and "certified" vocabulary and scored 0%;
@@ -84,11 +88,12 @@ rate, vs a paired no-plugin control. Smaller n (cost): 20 items × 2 arms, sonne
 
 ## Freeze checklist (all must be true before the first arm token is produced)
 
-- [ ] A-1 merged; `skills/sommelier-pairing/SKILL.md` stable at the commit under test
-- [ ] sha256 of all five arm texts recorded above and arm files committed
-- [ ] itembank v2 committed (60 items + hidden tests + validator report)
-- [ ] token-overlap check between arm texts and itembank passes, output committed
-- [ ] grader committed; this plan.md committed with `STATUS: FROZEN`
+- [x] A-1 merged (`cbc4670`); `skills/sommelier-pairing/SKILL.md` stable at the commit under test
+- [x] sha256 of all four non-null arm texts recorded above and arm files committed
+- [x] itembank v2 committed (60 items + hidden tests + validator report; mutation
+      assignment verified deterministic by double-run hash compare)
+- [x] token-overlap check between arm texts and itembank passes (`validation-report.json` committed)
+- [x] grader committed; this plan.md committed with `STATUS: FROZEN`
 
 ## Disclosure
 

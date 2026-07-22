@@ -1,0 +1,130 @@
+# Notes on Everyday Software Craft
+
+## Overview
+
+Most of the day-to-day feel of working in a codebase comes not from any single
+clever design decision but from a thousand small, consistent choices: what a
+variable is called, how a folder is organized, how a comment explains itself, how a
+pull request describes what it changes. None of these choices is dramatic on its
+own. Together they decide whether a new teammate can find their way around in an
+afternoon or a week, and whether a change six months from now is a small, calm edit
+or an archaeological dig. This note collects a few habits worth keeping in mind:
+naming, organization, comments and documentation, and the everyday etiquette of
+reading one another's changes.
+
+## Naming
+
+A name is the cheapest form of documentation there is, and also the one everybody
+reads whether they mean to or not. A few habits go a long way. Prefer a name that
+says what a thing is for over one that says how it happens to be implemented right
+now — `retryDelayMs` ages better than `sleepFor250`. Keep units in the name when a
+bare number could be misread: milliseconds, bytes, degrees. Boolean names read best
+as a question with an obvious yes/no shape — `isEnabled`, `hasPermission`,
+`shouldRetry` — rather than a bare adjective that leaves the polarity to guesswork.
+Collections read more naturally in the plural, and a single item pulled from one
+reads more naturally in the singular, so a loop over `orders` naming its variable
+`order` tends to read better than a loop that keeps calling everything `orders` or
+`item`.
+
+Abbreviations are a tax on everyone who joins later. `usr`, `cfg`, and `tmp` save a
+few keystrokes for the person typing them and cost a small guessing exercise for
+every future reader; spelling the word out is almost always worth the extra
+characters, with a short allow-list of abbreviations so universal they're not
+really abbreviations anymore (`id`, `url`, `html`). Two names that differ only in a
+suffix like `Manager` versus `Handler` versus `Service` should mean something
+different, or one of them should go — a project with three near-synonymous suffixes
+sprinkled at random makes every new name a small research question instead of an
+obvious choice. When a concept already has a name elsewhere in the codebase, reuse
+it; a second name for the same idea is a standing invitation for the two to drift
+apart in a reader's head even when the code underneath stays the same.
+
+## Organizing files and modules
+
+A module earns its name when everything inside it is there for one reason. A file
+that grows because it's convenient — "there's already an import for this" — rather
+than because it's cohesive tends to become the file nobody wants to touch, because
+touching it means understanding everything else that ended up there along the way.
+Splitting by responsibility rather than by type (all the "utils" in one place, all
+the "helpers" in another) usually keeps things easier to find later, because the
+question a reader is asking is almost always "where does the code that does X
+live," not "where do we keep small functions."
+
+Import ordering, folder depth, and where configuration lives are all matters of
+convention rather than any deeper design principle, which is exactly why it's worth
+settling on one convention and sticking to it — the value isn't in any one choice being better than
+another, it's in not having to relearn the layout for every new corner of the
+project. A short `CONTRIBUTING` note describing the layout, updated when the layout
+changes, saves the conversation from repeating in every review.
+
+## Comments and documentation
+
+The best comment explains a decision a reader couldn't get just by reading the
+code: why this approach and not the obvious alternative, what constraint forced an
+otherwise odd-looking shape, what would need to change if an assumption stopped
+holding. A comment that just restates the line below it in English adds reading
+time without adding information, and it rots the moment the code changes and the
+comment doesn't. A docstring earns its keep by describing what a function is for
+and what its caller can rely on — its inputs, its output, and its side effects, if
+any — in language a caller can use without opening the function body.
+
+Documentation ages fastest at the seams: the README's "getting started" section,
+the comment that used to describe a parameter that has since been renamed, the
+architecture diagram drawn before the last redesign. Treating documentation updates
+as part of the same change that makes them necessary, rather than a follow-up for
+later, is the single habit that keeps docs from drifting away from the code they
+describe. A short changelog, grouped by kind of change (added, changed, removed)
+and written in plain language for the person consuming the software rather than the
+person who wrote the diff, is worth more to most readers than a wall of commit
+subjects.
+
+## Commit messages
+
+A commit message is a note to whoever reads the history later, including the
+person who wrote it, a few months on. A subject line in the imperative mood —
+"add," "rename," "extract" rather than "added," "adds," or "adding" — reads
+naturally next to the generated ones ("merge," "revert") a version control system
+writes for itself. The subject says what changed; the body, when there's more to
+say, is the place for why — what motivated the change, what alternative was
+considered and set aside, what a future reader should know before touching the
+same area again. Squashing a exploratory sequence of small commits into one
+coherent change before it lands keeps the shared history readable, while keeping
+the exploratory history around locally (or in the pull request's own commit list)
+preserves the working notes for as long as they're useful.
+
+## Etiquette when reading one another's changes
+
+A comment on someone else's change lands very differently depending on how it's
+phrased. "This could be a constant" reads as a suggestion; "why isn't this a
+constant" reads as a challenge, even when both are asking for the same thing. Small
+prefixes carry a lot of tone — marking an optional stylistic preference as a
+"nit" so the author knows it's not blocking, distinguishing "I'd do this
+differently" from "this won't do what you want," and saying plainly when a comment
+is a question rather than a request. Praising a piece of code that reads well is as
+useful a signal as pointing out one that doesn't; it tells the author what to keep
+doing, not only what to change.
+
+Keeping a change small enough that a reader can hold the whole thing in their head
+at once does more for the quality of the conversation than almost any review
+technique — a five-line change gets a thoughtful read in a few minutes, while a
+two-thousand-line change gets skimmed, rubber-stamped, or ignored until the reviewer
+finds a free afternoon. When a change genuinely can't be small — a rename that
+touches every file, a dependency upgrade with a wide surface — splitting the
+mechanical part from the meaningful part into separate changes lets a reader spend
+their attention where it's actually needed instead of scrolling past hundreds of
+identical lines to find the handful that matter.
+
+Scope matters as much as size. A change proposing one thing invites a focused
+conversation about that one thing; a change that quietly reorganizes a neighboring
+file "while I was in there" invites a conversation about two things at once, and
+usually gets neither the attention it deserves. Opening a separate, small change
+for the incidental cleanup keeps both conversations legible, and lets each one
+land, or not, on its own.
+
+## Closing thought
+
+None of this is about any single change being dramatically better because of it.
+It's about the cumulative effect of a hundred small, considered choices making a
+codebase feel like a place someone can move around in comfortably, rather than a
+maze that only the person who built it can navigate. Consistency, more than
+cleverness, is usually what makes that difference — and it's built one ordinary
+name, one ordinary comment, one ordinary small change at a time.

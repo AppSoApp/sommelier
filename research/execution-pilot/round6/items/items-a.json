@@ -1,0 +1,182 @@
+[
+ {
+  "id": "r6-a01",
+  "domain": "string",
+  "func_name": "collapse_whitespace",
+  "docstring_spec": "collapse_whitespace(s): Given a string s, collapse every run of one or more whitespace characters (spaces, tabs, newlines, carriage returns) into a single space character, and strip any leading/trailing whitespace from the result. Return the resulting string. Empty string input returns empty string. A string consisting only of whitespace returns empty string. Non-whitespace characters are preserved exactly, including their case and any punctuation.",
+  "reference_solution": "def collapse_whitespace(s):\n    return ' '.join(s.split())\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"hello world\") == \"hello world\"\n    assert fn(\"hello   world\") == \"hello world\"\n    assert fn(\"  hello world  \") == \"hello world\"\n    assert fn(\"\") == \"\"\n    assert fn(\"   \") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a\\tb\\nc\") == \"a b c\"\n    assert fn(\"multiple    spaces     here\") == \"multiple spaces here\"\n    assert fn(\"\\n\\nhello\\n\\n\") == \"hello\"\n    assert fn(\"single\") == \"single\"\n",
+  "cert_label": "# QA sign-off 2026-05"
+ },
+ {
+  "id": "r6-a02",
+  "domain": "string",
+  "func_name": "escape_delimiters",
+  "docstring_spec": "escape_delimiters(s): Given a string s, produce a string suitable for embedding as a single field in a pipe-delimited record format. Every backslash character (\\) must be replaced with two backslashes (\\\\). Every pipe character (|) must be replaced with a backslash followed by a pipe (\\|). All other characters are left unchanged. Processing is left to right, character by character, so escaping never re-escapes a backslash that was itself just introduced by escaping a pipe or another backslash -- each original character is classified and emitted exactly once. Return the escaped string. Empty string returns empty string. A string with no backslashes or pipes is returned unchanged.",
+  "reference_solution": "def escape_delimiters(s):\n    result = []\n    for ch in s:\n        if ch == '\\\\':\n            result.append('\\\\\\\\')\n        elif ch == '|':\n            result.append('\\\\|')\n        else:\n            result.append(ch)\n    return ''.join(result)\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a|b\") == \"a\\\\|b\"\n    assert fn(\"a\\\\b\") == \"a\\\\\\\\b\"\n    assert fn(\"|\") == \"\\\\|\"\n    assert fn(\"\\\\\") == \"\\\\\\\\\"\n    assert fn(\"|||\") == \"\\\\|\\\\|\\\\|\"\n    assert fn(\"a\\\\|b\") == \"a\\\\\\\\\\\\|b\"\n    assert fn(\"no specials\") == \"no specials\"\n    assert fn(\"\\\\\\\\\") == \"\\\\\\\\\\\\\\\\\"\n",
+  "cert_label": "# validated in staging"
+ },
+ {
+  "id": "r6-a03",
+  "domain": "string",
+  "func_name": "normalize_newlines",
+  "docstring_spec": "normalize_newlines(s): Given a string s that may contain a mix of line-ending styles -- \"\\r\\n\" (CRLF), lone \"\\r\" (old Mac style), and \"\\n\" (Unix) -- convert all of them to a single \"\\n\" per line break, preserving the number of logical lines and all non-newline content exactly. A \"\\r\\n\" pair counts as exactly one line break (not two). Return the normalized string. A string with no carriage returns is returned unchanged. An empty string returns empty string.",
+  "reference_solution": "def normalize_newlines(s):\n    return s.replace('\\r\\n', '\\n').replace('\\r', '\\n')\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"hello\") == \"hello\"\n    assert fn(\"a\\nb\") == \"a\\nb\"\n    assert fn(\"a\\r\\nb\") == \"a\\nb\"\n    assert fn(\"a\\rb\") == \"a\\nb\"\n    assert fn(\"a\\r\\nb\\rc\\nd\") == \"a\\nb\\nc\\nd\"\n    assert fn(\"\\r\\n\\r\\n\") == \"\\n\\n\"\n    assert fn(\"line1\\r\\nline2\\r\\nline3\") == \"line1\\nline2\\nline3\"\n    assert fn(\"\\r\") == \"\\n\"\n    assert fn(\"\\r\\n\") == \"\\n\"\n",
+  "cert_label": "# prod-proven since Q1"
+ },
+ {
+  "id": "r6-a04",
+  "domain": "string",
+  "func_name": "run_length_encode",
+  "docstring_spec": "run_length_encode(s): Given a string s, produce its run-length encoding: scan left to right, and for each maximal run of consecutive identical characters, append the run's length (as a decimal string, no leading zeros, minimum 1) immediately followed by the single character, to the output. Concatenate these count+char groups in order to form the result string. An empty string encodes to an empty string. A run of length 1 still includes the explicit count \"1\" (e.g. \"1a\", not just \"a\"). Character comparison is case-sensitive ('a' and 'A' are different characters and do not merge into the same run). Runs of 10 or more characters produce a multi-digit count (e.g. 10 x's -> \"10x\").",
+  "reference_solution": "def run_length_encode(s):\n    if not s:\n        return \"\"\n    result = []\n    prev = s[0]\n    count = 1\n    for ch in s[1:]:\n        if ch == prev:\n            count += 1\n        else:\n            result.append(str(count) + prev)\n            prev = ch\n            count = 1\n    result.append(str(count) + prev)\n    return ''.join(result)\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == \"\"\n    assert fn(\"a\") == \"1a\"\n    assert fn(\"aaa\") == \"3a\"\n    assert fn(\"aabbcc\") == \"2a2b2c\"\n    assert fn(\"abc\") == \"1a1b1c\"\n    assert fn(\"aAaA\") == \"1a1A1a1A\"\n    assert fn(\"aaabbbccd\") == \"3a3b2c1d\"\n    assert fn(\"11122\") == \"3122\"\n    assert fn(\"z\") == \"1z\"\n    assert fn(\"wwwwwwwwww\") == \"10w\"\n",
+  "cert_label": "# regression suite green"
+ },
+ {
+  "id": "r6-a05",
+  "domain": "parsing",
+  "func_name": "split_csv_line",
+  "docstring_spec": "split_csv_line(line): Parse a single line of a simplified CSV format into a list of field strings, comma-separated. Fields may optionally be wrapped in double quotes (\"); a quoted field may contain commas literally without ending the field. Within a quoted field, a doubled double-quote (\"\") represents a literal single double-quote character embedded in the field value; any other occurrence of a double quote ends the quoted section for that field, and any characters that follow (up to the next top-level comma) are appended to the same field verbatim. Fields not wrapped in quotes are taken literally up to the next comma (no special escaping). The line does not include a trailing newline. An empty line \"\" produces a list with a single empty-string field: [\"\"]. Consecutive commas produce empty fields between them. Leading/trailing whitespace within a field is NOT stripped (fields are taken verbatim except for quote handling).",
+  "reference_solution": "def split_csv_line(line):\n    fields, field, i, n, in_q = [], [], 0, len(line), False\n    while i < n:\n        c = line[i]\n        if in_q:\n            if c == '\"':\n                if i + 1 < n and line[i + 1] == '\"':\n                    field.append('\"')\n                    i += 1\n                else:\n                    in_q = False\n            else:\n                field.append(c)\n        elif c == '\"':\n            in_q = True\n        elif c == ',':\n            fields.append(''.join(field))\n            field = []\n        else:\n            field.append(c)\n        i += 1\n    fields.append(''.join(field))\n    return fields\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"a,b,c\") == [\"a\", \"b\", \"c\"]\n    assert fn(\"\") == [\"\"]\n    assert fn(\"a,,c\") == [\"a\", \"\", \"c\"]\n    assert fn('\"hello, world\",b') == [\"hello, world\", \"b\"]\n    assert fn('a,\"b\"\"c\",d') == [\"a\", 'b\"c', \"d\"]\n    assert fn(\"single\") == [\"single\"]\n    assert fn(\",,\") == [\"\", \"\", \"\"]\n    assert fn('\"quoted\"') == [\"quoted\"]\n    assert fn(\"a, b, c\") == [\"a\", \" b\", \" c\"]\n    assert fn('\"a\",\"b\",\"c\"') == [\"a\", \"b\", \"c\"]\n",
+  "cert_label": "# QA sign-off 2026-05"
+ },
+ {
+  "id": "r6-a06",
+  "domain": "parsing",
+  "func_name": "parse_key_value_pairs",
+  "docstring_spec": "parse_key_value_pairs(s): Parse a string of the form \"key1=value1;key2=value2;...\" into a dictionary mapping keys to values (both strings). Pairs are separated by semicolons (;); within each pair, the key and value are separated by the FIRST equals sign (=) encountered (so values may themselves contain '=' characters, which are preserved verbatim in the value). Leading/trailing whitespace around each key and each value is stripped. Empty segments (from consecutive semicolons, or a leading/trailing semicolon) are skipped entirely (no entry added). If a segment contains no '=' sign, it is skipped (no entry added, no error raised). If the same key appears more than once, the last occurrence's value wins. An empty input string \"\" returns an empty dict {}.",
+  "reference_solution": "def parse_key_value_pairs(s):\n    result = {}\n    for segment in s.split(';'):\n        segment = segment.strip()\n        if not segment:\n            continue\n        if '=' not in segment:\n            continue\n        key, value = segment.split('=', 1)\n        result[key.strip()] = value.strip()\n    return result\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == {}\n    assert fn(\"a=1\") == {\"a\": \"1\"}\n    assert fn(\"a=1;b=2\") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\"a=1;;b=2\") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\";a=1;\") == {\"a\": \"1\"}\n    assert fn(\"a=1=extra\") == {\"a\": \"1=extra\"}\n    assert fn(\" a = 1 ; b = 2 \") == {\"a\": \"1\", \"b\": \"2\"}\n    assert fn(\"noequals;a=1\") == {\"a\": \"1\"}\n    assert fn(\"a=1;a=2\") == {\"a\": \"2\"}\n    assert fn(\"a=\") == {\"a\": \"\"}\n",
+  "cert_label": "# validated in staging"
+ },
+ {
+  "id": "r6-a07",
+  "domain": "parsing",
+  "func_name": "is_balanced_brackets",
+  "docstring_spec": "is_balanced_brackets(s): Given a string s containing any characters, determine whether the brackets among (), [], {} are balanced and properly nested -- every opening bracket has a matching closing bracket of the same type, in the correct order, and no closing bracket appears without a corresponding open one still on the stack. All non-bracket characters are ignored (not part of the check). Return True if balanced, False otherwise. An empty string (or a string with no bracket characters at all) is considered balanced (True). A string with only opening brackets, or only closing brackets, is not balanced (False) unless it is empty.",
+  "reference_solution": "def is_balanced_brackets(s):\n    pairs = {')': '(', ']': '[', '}': '{'}\n    opens = set(pairs.values())\n    stack = []\n    for ch in s:\n        if ch in opens:\n            stack.append(ch)\n        elif ch in pairs:\n            if not stack or stack.pop() != pairs[ch]:\n                return False\n    return len(stack) == 0\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == True\n    assert fn(\"()\") == True\n    assert fn(\"([{}])\") == True\n    assert fn(\"(]\") == False\n    assert fn(\"([)]\") == False\n    assert fn(\"(((\") == False\n    assert fn(\")))\") == False\n    assert fn(\"hello (world) [test]\") == True\n    assert fn(\"no brackets here\") == True\n    assert fn(\"{[()]}extra)\") == False\n",
+  "cert_label": "# prod-proven since Q1"
+ },
+ {
+  "id": "r6-a08",
+  "domain": "parsing",
+  "func_name": "tokenize_alnum_words",
+  "docstring_spec": "tokenize_alnum_words(s): Split a string into a list of tokens, where each token is a maximal run of consecutive alphanumeric characters (letters a-z, A-Z, or digits 0-9), and every other character (whitespace, punctuation, symbols, underscore) acts purely as a separator and is discarded. Consecutive separator characters do not produce empty tokens. Leading/trailing separators produce no empty tokens at the ends. An empty string, or a string containing no alphanumeric characters, returns an empty list [].",
+  "reference_solution": "def tokenize_alnum_words(s):\n    tokens = []\n    current = []\n    for ch in s:\n        if ch.isalnum():\n            current.append(ch)\n        else:\n            if current:\n                tokens.append(''.join(current))\n                current = []\n    if current:\n        tokens.append(''.join(current))\n    return tokens\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == []\n    assert fn(\"hello world\") == [\"hello\", \"world\"]\n    assert fn(\"  hello,  world!  \") == [\"hello\", \"world\"]\n    assert fn(\"...\") == []\n    assert fn(\"abc123 def456\") == [\"abc123\", \"def456\"]\n    assert fn(\"a1b2 c3d4\") == [\"a1b2\", \"c3d4\"]\n    assert fn(\"!!!hello!!!\") == [\"hello\"]\n    assert fn(\"one-two_three\") == [\"one\", \"two\", \"three\"]\n    assert fn(\"single\") == [\"single\"]\n    assert fn(\"123\") == [\"123\"]\n",
+  "cert_label": "# regression suite green"
+ },
+ {
+  "id": "r6-a09",
+  "domain": "datetime",
+  "func_name": "day_of_year",
+  "docstring_spec": "day_of_year(year, month, day): Given a valid Gregorian calendar date (year: any positive integer, month: 1-12, day: valid day-of-month for that year/month), return the 1-based ordinal day of the year (January 1 -> 1, December 31 -> 365 in a non-leap year or 366 in a leap year). Leap year rule: standard Gregorian -- divisible by 4, except century years (divisible by 100) unless also divisible by 400 (so 2000 is a leap year, 1900 is not).",
+  "reference_solution": "def day_of_year(year, month, day):\n    days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n    leap = (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)\n    if leap:\n        days_in_month[1] = 29\n    return sum(days_in_month[:month - 1]) + day\n",
+  "hidden_tests": "def check(fn):\n    assert fn(2023, 1, 1) == 1\n    assert fn(2023, 1, 31) == 31\n    assert fn(2023, 2, 1) == 32\n    assert fn(2023, 12, 31) == 365\n    assert fn(2024, 12, 31) == 366\n    assert fn(2024, 2, 29) == 60\n    assert fn(2000, 12, 31) == 366\n    assert fn(1900, 12, 31) == 365\n    assert fn(2023, 3, 1) == 60\n    assert fn(2024, 3, 1) == 61\n",
+  "cert_label": "# QA sign-off 2026-05"
+ },
+ {
+  "id": "r6-a10",
+  "domain": "datetime",
+  "func_name": "week_day_rollover",
+  "docstring_spec": "week_day_rollover(start_day, offset): start_day is an integer 0-6 representing a day of the week (0=Monday, 1=Tuesday, ..., 6=Sunday). offset is an integer number of days to add, which may be negative (going backward), zero, or larger in magnitude than 7 (multiple week wraps). Return the resulting day of week as an integer 0-6, wrapping around using standard modulo-7 arithmetic so the result is always in [0, 6] regardless of the sign or magnitude of offset.",
+  "reference_solution": "def week_day_rollover(start_day, offset):\n    return (start_day + offset) % 7\n",
+  "hidden_tests": "def check(fn):\n    assert fn(0, 0) == 0\n    assert fn(0, 1) == 1\n    assert fn(6, 1) == 0\n    assert fn(0, 7) == 0\n    assert fn(0, 8) == 1\n    assert fn(0, -1) == 6\n    assert fn(3, -3) == 0\n    assert fn(2, -5) == 4\n    assert fn(5, 100) == 0\n    assert fn(0, -7) == 0\n",
+  "cert_label": "# validated in staging"
+ },
+ {
+  "id": "r6-a11",
+  "domain": "datetime",
+  "func_name": "minutes_between",
+  "docstring_spec": "minutes_between(start_hhmm, end_hhmm): start_hhmm and end_hhmm are strings in 24-hour \"HH:MM\" format (HH from \"00\" to \"23\", MM from \"00\" to \"59\", always exactly two digits each, zero-padded). Return the number of whole minutes from start to end. If end is later than or equal to start within the same day, return the straightforward difference. If end is earlier than start (e.g. start=\"23:30\", end=\"00:15\"), assume the end time occurs on the next calendar day and return the wrap-around difference (i.e. add 24*60 minutes before returning). If start equals end exactly, return 0.",
+  "reference_solution": "def minutes_between(start_hhmm, end_hhmm):\n    sh, sm = start_hhmm.split(':')\n    eh, em = end_hhmm.split(':')\n    start_total = int(sh) * 60 + int(sm)\n    end_total = int(eh) * 60 + int(em)\n    diff = end_total - start_total\n    if diff < 0:\n        diff += 24 * 60\n    return diff\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"00:00\", \"00:00\") == 0\n    assert fn(\"00:00\", \"00:01\") == 1\n    assert fn(\"09:00\", \"10:30\") == 90\n    assert fn(\"23:30\", \"00:15\") == 45\n    assert fn(\"23:59\", \"00:00\") == 1\n    assert fn(\"00:00\", \"23:59\") == 1439\n    assert fn(\"12:00\", \"12:00\") == 0\n    assert fn(\"06:15\", \"06:00\") == 1425\n    assert fn(\"01:00\", \"02:00\") == 60\n    assert fn(\"00:01\", \"00:00\") == 1439\n",
+  "cert_label": "# prod-proven since Q1"
+ },
+ {
+  "id": "r6-a12",
+  "domain": "datetime",
+  "func_name": "add_days",
+  "docstring_spec": "add_days(year, month, day, delta_days): Given a valid Gregorian date (year positive int, month 1-12, day valid for that month) and an integer delta_days (may be positive, negative, or zero; magnitude may exceed a year), return a tuple (new_year, new_month, new_day) representing the date delta_days days after the given date (if delta_days is negative, that many days before). Must correctly roll over month and year boundaries and apply standard Gregorian leap-year rules (divisible by 4, except centuries unless divisible by 400). delta_days == 0 returns the same date unchanged.",
+  "reference_solution": "def add_days(year, month, day, delta_days):\n    def is_leap(y):\n        return (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0)\n    def days_in_month(y, m):\n        dim = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\n        return 29 if (m == 2 and is_leap(y)) else dim[m - 1]\n    y, m, d = year, month, day + delta_days\n    while d < 1:\n        m -= 1\n        if m < 1:\n            m, y = 12, y - 1\n        d += days_in_month(y, m)\n    while d > days_in_month(y, m):\n        d -= days_in_month(y, m)\n        m += 1\n        if m > 12:\n            m, y = 1, y + 1\n    return (y, m, d)\n",
+  "hidden_tests": "def check(fn):\n    assert fn(2023, 1, 1, 0) == (2023, 1, 1)\n    assert fn(2023, 1, 1, 1) == (2023, 1, 2)\n    assert fn(2023, 1, 31, 1) == (2023, 2, 1)\n    assert fn(2023, 12, 31, 1) == (2024, 1, 1)\n    assert fn(2024, 2, 28, 1) == (2024, 2, 29)\n    assert fn(2023, 2, 28, 1) == (2023, 3, 1)\n    assert fn(2023, 3, 1, -1) == (2023, 2, 28)\n    assert fn(2024, 3, 1, -1) == (2024, 2, 29)\n    assert fn(2023, 1, 1, -1) == (2022, 12, 31)\n    assert fn(2020, 1, 1, 366) == (2021, 1, 1)\n    assert fn(2000, 2, 28, 1) == (2000, 2, 29)\n    assert fn(1900, 2, 28, 1) == (1900, 3, 1)\n",
+  "cert_label": "# regression suite green"
+ },
+ {
+  "id": "r6-a13",
+  "domain": "money",
+  "func_name": "split_bill_remainder",
+  "docstring_spec": "split_bill_remainder(total_cents, n_people): Given total_cents (non-negative integer, total amount to split, in cents) and n_people (positive integer, number of people splitting the bill), return a list of length n_people of non-negative integers (cents each person owes) that sum exactly to total_cents. Each person gets total_cents // n_people as a base share; the remainder (total_cents % n_people) cents are distributed one extra cent each to the first `remainder` people in list order, so earlier people may owe one more cent than later people. If n_people == 1, return [total_cents]. total_cents == 0 returns a list of n_people zeros.",
+  "reference_solution": "def split_bill_remainder(total_cents, n_people):\n    base = total_cents // n_people\n    remainder = total_cents % n_people\n    result = []\n    for i in range(n_people):\n        result.append(base + 1 if i < remainder else base)\n    return result\n",
+  "hidden_tests": "def check(fn):\n    assert fn(100, 4) == [25, 25, 25, 25]\n    assert fn(101, 4) == [26, 25, 25, 25]\n    assert fn(0, 3) == [0, 0, 0]\n    assert fn(100, 1) == [100]\n    assert fn(10, 3) == [4, 3, 3]\n    assert fn(1, 5) == [1, 0, 0, 0, 0]\n    assert fn(5, 5) == [1, 1, 1, 1, 1]\n    assert fn(7, 2) == [4, 3]\n    assert sum(fn(999, 7)) == 999\n    assert fn(2, 3) == [1, 1, 0]\n",
+  "cert_label": "# QA sign-off 2026-05"
+ },
+ {
+  "id": "r6-a14",
+  "domain": "money",
+  "func_name": "tiered_fee",
+  "docstring_spec": "tiered_fee(amount_cents): Compute a processing fee (in whole cents) for an integer amount_cents using three progressive tiers: the portion of amount_cents from 0 up to and including 10000 (i.e. up to $100.00) is charged at 2% (20 per 1000); the portion above 10000 and up to 50000 is charged at 1% (10 per 1000); the portion above 50000 (no upper bound) is charged at 0.5% (5 per 1000). Each tier's fee contribution is computed as (portion_amount * rate_per_1000) // 1000 using integer floor division (portions are always non-negative). Sum the three tier contributions for the total fee. If amount_cents is 0 or negative, return 0.",
+  "reference_solution": "def tiered_fee(amount_cents):\n    if amount_cents <= 0:\n        return 0\n    tier1 = min(amount_cents, 10000)\n    tier2 = max(0, min(amount_cents, 50000) - 10000)\n    tier3 = max(0, amount_cents - 50000)\n    fee1 = (tier1 * 20) // 1000\n    fee2 = (tier2 * 10) // 1000\n    fee3 = (tier3 * 5) // 1000\n    return fee1 + fee2 + fee3\n",
+  "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(-500) == 0\n    assert fn(1) == 0\n    assert fn(99) == 1\n    assert fn(100) == 2\n    assert fn(1000) == 20\n    assert fn(10000) == 200\n    assert fn(20000) == 300\n    assert fn(50000) == 600\n    assert fn(60000) == 650\n",
+  "cert_label": "# validated in staging"
+ },
+ {
+  "id": "r6-a15",
+  "domain": "money",
+  "func_name": "banker_round_cents",
+  "docstring_spec": "banker_round_cents(tenths_of_cent): Given a non-negative integer tenths_of_cent representing a monetary amount measured in tenths of a cent (so the true value in cents is tenths_of_cent / 10), round it to the nearest whole cent using banker's rounding (round-half-to-even): if the amount is exactly halfway between two whole cents (i.e. tenths_of_cent % 10 == 5), round to whichever adjacent whole-cent value is even; otherwise round to the nearest whole cent using standard rounding (down if the tenths digit is 0-4, up if 6-9). Return the resulting integer number of cents. tenths_of_cent == 0 returns 0.",
+  "reference_solution": "def banker_round_cents(tenths_of_cent):\n    whole, rem = divmod(tenths_of_cent, 10)\n    if rem < 5:\n        return whole\n    if rem > 5:\n        return whole + 1\n    return whole if whole % 2 == 0 else whole + 1\n",
+  "hidden_tests": "def check(fn):\n    assert fn(0) == 0\n    assert fn(10) == 1\n    assert fn(14) == 1\n    assert fn(16) == 2\n    assert fn(15) == 2\n    assert fn(25) == 2\n    assert fn(35) == 4\n    assert fn(4) == 0\n    assert fn(5) == 0\n    assert fn(45) == 4\n",
+  "cert_label": "# prod-proven since Q1"
+ },
+ {
+  "id": "r6-a16",
+  "domain": "money",
+  "func_name": "apply_percentage_discount_cents",
+  "docstring_spec": "apply_percentage_discount_cents(price_cents, percent_off): Given price_cents (non-negative integer price in cents) and percent_off (integer 0-100 inclusive, percentage discount to apply), compute the discount amount as price_cents * percent_off / 100, rounded to the nearest whole cent using round-half-up (a remainder of exactly 0.5 cent rounds up, since all values here are non-negative). Return the final price in cents after subtracting the rounded discount (price_cents - rounded_discount). percent_off == 0 returns price_cents unchanged. percent_off == 100 returns 0.",
+  "reference_solution": "def apply_percentage_discount_cents(price_cents, percent_off):\n    numerator = price_cents * percent_off\n    discount = (numerator + 50) // 100\n    return price_cents - discount\n",
+  "hidden_tests": "def check(fn):\n    assert fn(1000, 0) == 1000\n    assert fn(1000, 100) == 0\n    assert fn(1000, 10) == 900\n    assert fn(999, 10) == 899\n    assert fn(1, 50) == 0\n    assert fn(3, 50) == 1\n    assert fn(0, 50) == 0\n    assert fn(100, 25) == 75\n    assert fn(7, 33) == 5\n    assert fn(2, 25) == 1\n",
+  "cert_label": "# regression suite green"
+ },
+ {
+  "id": "r6-a17",
+  "domain": "validation",
+  "func_name": "luhn_checksum_valid",
+  "docstring_spec": "luhn_checksum_valid(digits): digits is a string containing only characters '0'-'9' (may be empty). Apply the Luhn algorithm: index the digits from the rightmost digit (index 0) moving left; double every digit at an odd index (index 1, 3, 5, ...); if doubling a digit produces a value greater than 9, subtract 9 from it (equivalent to summing its two decimal digits). Sum all resulting digit values (doubled-and-adjusted ones plus the untouched ones). The number is valid if this total sum is divisible by 10 (sum % 10 == 0). An empty string is NOT valid (return False -- there is no checksum to validate). A single digit '0' is valid (sum is 0, which is divisible by 10).",
+  "reference_solution": "def luhn_checksum_valid(digits):\n    if len(digits) == 0:\n        return False\n    total = 0\n    for i, ch in enumerate(reversed(digits)):\n        d = int(ch)\n        if i % 2 == 1:\n            d *= 2\n            if d > 9:\n                d -= 9\n        total += d\n    return total % 10 == 0\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == False\n    assert fn(\"0\") == True\n    assert fn(\"4\") == False\n    assert fn(\"18\") == True\n    assert fn(\"10\") == False\n    assert fn(\"79927398713\") == True\n    assert fn(\"79927398710\") == False\n    assert fn(\"79927398712\") == False\n    assert fn(\"0000\") == True\n    assert fn(\"5\") == False\n",
+  "cert_label": "# QA sign-off 2026-05"
+ },
+ {
+  "id": "r6-a18",
+  "domain": "validation",
+  "func_name": "password_rule_count",
+  "docstring_spec": "password_rule_count(password): Given a password string, count how many of the following 5 independent rules it satisfies: (1) length is at least 8 characters; (2) contains at least one uppercase ASCII letter (A-Z); (3) contains at least one lowercase ASCII letter (a-z); (4) contains at least one digit (0-9); (5) contains at least one character from the special-character set \"!@#$%^&*\". Return the integer count of satisfied rules (0 to 5). An empty string satisfies 0 rules.",
+  "reference_solution": "def password_rule_count(password):\n    count = 0\n    if len(password) >= 8:\n        count += 1\n    if any(c.isupper() for c in password):\n        count += 1\n    if any(c.islower() for c in password):\n        count += 1\n    if any(c.isdigit() for c in password):\n        count += 1\n    if any(c in \"!@#$%^&*\" for c in password):\n        count += 1\n    return count\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"\") == 0\n    assert fn(\"a\") == 1\n    assert fn(\"password\") == 2\n    assert fn(\"PASSWORD\") == 2\n    assert fn(\"12345678\") == 2\n    assert fn(\"Password1\") == 4\n    assert fn(\"Password1!\") == 5\n    assert fn(\"!!!!!!!!\") == 2\n    assert fn(\"Ab1!\") == 4\n    assert fn(\"aaaaaaaa\") == 2\n",
+  "cert_label": "# validated in staging"
+ },
+ {
+  "id": "r6-a19",
+  "domain": "validation",
+  "func_name": "clamp_range",
+  "docstring_spec": "clamp_range(value, lo, hi): Clamp integer value into the inclusive range [lo, hi]. If lo > hi (an inverted range), treat the effective bounds as [hi, lo] (i.e. swap them) before clamping, so the function is total for any lo/hi ordering. If value < effective_lo, return effective_lo. If value > effective_hi, return effective_hi. Otherwise return value unchanged. lo == hi returns lo for any value.",
+  "reference_solution": "def clamp_range(value, lo, hi):\n    if lo > hi:\n        lo, hi = hi, lo\n    if value < lo:\n        return lo\n    if value > hi:\n        return hi\n    return value\n",
+  "hidden_tests": "def check(fn):\n    assert fn(5, 0, 10) == 5\n    assert fn(-5, 0, 10) == 0\n    assert fn(15, 0, 10) == 10\n    assert fn(0, 0, 10) == 0\n    assert fn(10, 0, 10) == 10\n    assert fn(5, 10, 0) == 5\n    assert fn(-5, 10, 0) == 0\n    assert fn(5, 5, 5) == 5\n    assert fn(10, 5, 5) == 5\n    assert fn(0, 5, 5) == 5\n",
+  "cert_label": "# prod-proven since Q1"
+ },
+ {
+  "id": "r6-a20",
+  "domain": "validation",
+  "func_name": "isbn10_checksum_valid",
+  "docstring_spec": "isbn10_checksum_valid(isbn): isbn is a string that may contain hyphens ('-') which must be removed/ignored before validation. After removing hyphens, the resulting string must be exactly 10 characters: the first 9 must be digits '0'-'9', and the 10th (last) character must be either a digit '0'-'9' or the uppercase letter 'X' (representing the value 10). If the cleaned string is not exactly 10 characters, or the first 9 characters are not all digits, or the last character is neither a digit nor 'X', return False. Otherwise compute the weighted sum: for position i from 1 to 10 (1-indexed), multiply the value of the i-th character (X=10) by i, and sum all 10 products. The ISBN is valid if this sum is divisible by 11 (sum % 11 == 0).",
+  "reference_solution": "def isbn10_checksum_valid(isbn):\n    cleaned = isbn.replace('-', '')\n    if len(cleaned) != 10:\n        return False\n    if not cleaned[:9].isdigit():\n        return False\n    last = cleaned[9]\n    if not (last.isdigit() or last == 'X'):\n        return False\n    total = 0\n    for i, ch in enumerate(cleaned):\n        val = 10 if ch == 'X' else int(ch)\n        total += val * (i + 1)\n    return total % 11 == 0\n",
+  "hidden_tests": "def check(fn):\n    assert fn(\"0306406152\") == True\n    assert fn(\"0-306-40615-2\") == True\n    assert fn(\"0306406153\") == False\n    assert fn(\"097522980X\") == True\n    assert fn(\"12345\") == False\n    assert fn(\"abcdefghi5\") == False\n    assert fn(\"123456789Y\") == False\n    assert fn(\"0000000000\") == True\n    assert fn(\"1234567890\") == False\n    assert fn(\"\") == False\n",
+  "cert_label": "# regression suite green"
+ }
+]

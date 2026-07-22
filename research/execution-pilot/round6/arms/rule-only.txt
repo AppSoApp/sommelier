@@ -1,0 +1,5 @@
+> **The one-line version (say this to a mechanical / low-tier worker, scope: callable
+> functions):**
+> *STOP. Before you trust or reuse a "certified" callable function, run it on `0`, `1`,
+> empty, and a negative. If any is wrong, rewrite it now — and leave the `assert` that
+> proves it.*

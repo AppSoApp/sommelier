@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "n_items": 60,
+  "n_buggy": 40,
+  "n_correct": 20,
+  "checks": {
+    "reference_and_presented": {
+      "pass": true,
+      "defects": []
+    },
+    "cert_labels": {
+      "pass": true,
+      "distinct_count": 12,
+      "min_required": 8,
+      "defects": []
+    },
+    "near_duplicates": {
+      "pass": true,
+      "threshold": 0.85,
+      "pairs_over_threshold": [],
+      "defects": []
+    },
+    "arm_overlap": {
+      "pass": true,
+      "note": "checked 5 arm file(s) under /Users/ohyeon/Desktop/work/src/somelier/research/execution-pilot/round6/arms",
+      "defects": []
+    }
+  },
+  "defects": []
+}
