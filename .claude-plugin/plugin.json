@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "sommelier",
   "displayName": "Sommelier",
-  "version": "1.0.9",
-  "description": "Verification-gated orchestration skills — turn a big task into a PRD + file-scoped parallel tickets, pair each with the cheapest model tier that passes, and gate merges on re-measured evidence. Self-tested across five rounds, every round published: the verification rule beats a placebo at catching certified bugs (0%->44% (sonnet) / 29% (haiku), hidden-tests, sonnet p~6e-8), tier-routing runs ~19% cheaper than an all-Opus workflow, and parallel fan-out is ~1.75x slower (single run) on small tasks (bring it only at scale).",
+  "version": "1.0.10",
+  "description": "Verification-gated orchestration skills — turn a big task into a PRD + file-scoped parallel tickets, pair each with the cheapest model tier that passes, and gate merges on re-measured evidence. Self-tested across six rounds, every round published: the verification rule (digest) beats a placebo at catching certified bugs (0%->44% (sonnet) / 29% (haiku), hidden-tests, sonnet p~6e-8), tier-routing runs ~19% cheaper than an all-Opus workflow, parallel fan-out is ~1.75x slower (single run) on small tasks, and Round 6's shipped-text probe nulled at the ceiling (published; 0/200 negative controls broken).",
   "author": {
     "name": "AppSoApp",
     "email": "appsoapplication@gmail.com",
