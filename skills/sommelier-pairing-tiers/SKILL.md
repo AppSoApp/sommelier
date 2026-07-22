@@ -18,12 +18,16 @@ latest model of that tier, so you never chase version bumps.
 | Ticket kind | Alias | Why |
 |-------------|-------|-----|
 | Spec-faithful implementation | `'sonnet'` | Mechanical, contract-faithful, fast. |
-| High-risk gate — RBAC, payments, security, audit, invariants | `'opus'` + `superpowers:code-reviewer` | Protects invariants; APPROVE required pre-merge. |
+| High-risk gate — RBAC, payments, security, audit, invariants | `'opus'` + `sommelier:code-reviewer` (bundled) | Protects invariants; APPROVE required pre-merge. |
 | Cheap mechanical — rename, move, format, scaffold | `'haiku'` | No judgment needed. |
 | Orchestration, sequencing, merge | `'opus'` (Manager) | Never delegated. |
 
 In a workflow: `agent({model:'sonnet'})` / `{model:'opus'}` / `{model:'haiku'}`.
-Cheapest tier that still passes the gate. Scale fan-out to budget, not agent depth.
+For the high-risk gate, dispatch the plugin's own reviewer:
+`agent(gatePrompt, {agentType: 'sommelier:code-reviewer'})` — it re-measures every
+claim and returns APPROVE/REJECT (see `agents/code-reviewer.md`; no external plugin
+needed). Cheapest tier that still passes the gate. Scale fan-out to budget, not
+agent depth.
 
 ## Dynamic workflow shape
 

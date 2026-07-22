@@ -45,9 +45,12 @@ principles. Do not commit them:
 - 2+ independent implementers, or a task spanning many files/modules.
 - A migration / audit / sweep too large to hold in one context.
 - Any plan whose decisions rest on a report's numbers.
+- Code carrying a certification label you're about to trust or build on — even a
+  single file (Move 2 alone, no fleet).
 
-**When NOT to use:** a single-file change, a one-line fix, a conversational answer.
-YAGNI — just do it. A fleet here is over-engineering.
+**When NOT to use:** single-file / one-line changes need no fleet — skip Moves 1 and
+3 — but Move 2 (verify-then-fix any "certified"/"tested"/"reviewed" claim) applies
+at ANY size, including one file. YAGNI — just do it. A fleet here is over-engineering.
 
 ## Move 1 — DESIGN: PRD → file-scoped tickets
 
@@ -73,17 +76,24 @@ Sequence: **PRD frozen → Foundation ticket(s) → parallel implementer tickets
 
 ## Move 2 — DON'T SETTLE: falsify the claim, then critic
 
-> **The one-line version (say this to a mechanical / low-tier worker):**
-> *STOP. Before you trust or reuse a "certified" function, run it on `0`, `1`, empty, and a
-> negative. If any is wrong, rewrite it now — and leave the `assert` that proves it.*
+> **The one-line version (say this to a mechanical / low-tier worker, scope: callable
+> functions):**
+> *STOP. Before you trust or reuse a "certified" callable function, run it on `0`, `1`,
+> empty, and a negative. If any is wrong, rewrite it now — and leave the `assert` that
+> proves it.*
 
 A **claim** is anything asserting code already works: a reported number, or a status
 label in the code or comments (`# CERTIFIED correct`, `# fully tested`, "reviewed",
 "frozen — do not modify"). **Treat them all identically — as an unproven hypothesis.**
 
-**TRIGGER → ACTION.** For each claim, don't "re-measure" abstractly — try to **BREAK
-it**: run it on the boundary inputs it would fail on (`0`, `1`, empty, negative, the
-recursive base case). Return **VERIFIED / REFUTED / PARTIAL**.
+**TRIGGER → ACTION, split by claim type.** Don't "re-measure" abstractly — try to
+**BREAK it**: a reported **NUMBER** ("0 imports", "1,240 tests") → re-run the exact
+measurement command and compare; a status **LABEL** on code → run the code on its
+domain's boundary inputs (defaults: `0`, `1`, empty, negative, the recursive base
+case). Return **VERIFIED / REFUTED / PARTIAL**. PARTIAL = the claim held on the
+inputs you could run, but a stated portion was untestable. A PARTIAL is unresolved:
+narrow the claim to what was verified or open a follow-up verification ticket — it
+blocks merge exactly like an unfixed REFUTED.
 
 **On REFUTED you MUST edit the code to make the check pass — in the same change, now.**
 Naming the bug is not resolving it. "It was certified" is not a reason to leave a

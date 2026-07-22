@@ -6,19 +6,27 @@
     "email": "appsoapplication@gmail.com"
   },
   "description": "AppSoApp's Claude Code plugins.",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "plugins": [
     {
       "name": "sommelier",
       "displayName": "Sommelier",
       "source": "./",
-      "description": "Verification-gated orchestration skills (PRD + file-scoped parallel tickets, tier-paired, evidence-gated). Self-tested across five rounds, all published: verification rule beats placebo at catching certified bugs (0%->44-58%, hidden-pytest, p<=1e-4); tier-routing ~19% cheaper than all-Opus; parallel ~1.8x slower on small tasks.",
-      "version": "1.0.8",
-      "author": { "name": "AppSoApp" },
+      "description": "Verification-gated orchestration skills (PRD + file-scoped parallel tickets, tier-paired, evidence-gated). Self-tested across five rounds, all published: verification rule beats placebo at catching certified bugs (0%->44% (sonnet) / 29% (haiku), hidden-tests, sonnet p~6e-8); tier-routing ~19% cheaper than all-Opus; parallel ~1.75x slower (single run) on small tasks.",
+      "version": "1.0.9",
+      "author": {
+        "name": "AppSoApp"
+      },
       "homepage": "https://github.com/AppSoApp/sommelier",
       "repository": "https://github.com/AppSoApp/sommelier",
       "license": "MIT",
-      "keywords": ["orchestration", "skills", "verification", "yagni", "workflow"],
+      "keywords": [
+        "orchestration",
+        "skills",
+        "verification",
+        "yagni",
+        "workflow"
+      ],
       "category": "productivity"
     }
   ]

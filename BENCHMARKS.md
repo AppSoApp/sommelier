@@ -4,21 +4,28 @@
 > be hypocritical to ship inflated numbers. So here is everything we measured,
 > including the parts where the skill **lost** or the metric **didn't hold up**.
 >
-> **TL;DR (after three studies, including a paired n=48 test with a length-matched
-> placebo):** We **could not show** that the `sommelier` skill beats a length-matched
-> placebo — or even just telling Claude *"you are an orchestrator."* On the fairest
-> test, every probe's confidence interval overlaps the control; on two probes the skill
-> is nominally *worse*. The one finding that survives is **not skill-specific**:
-> framing work as *orchestrate-and-verify* (rather than single-pass plan-then-execute)
-> catches more planted false numbers — but plain generic advice reproduces it. A third
-> study graded **real produced code with a hidden test (no LLM judge)** and was the most
-> negative: **0% of agents — skill included — fixed a bug hidden behind a "CERTIFIED
-> correct" comment**, and the skill trended *worse* on feature correctness. **Then a
-> fourth, pre-registered round found the first real win — a narrow one:** the rewritten
-> "don't trust a `# CERTIFIED` label" rule raises bug-fix behind an authority label from
-> ~0% to **29–44%** vs a length-matched placebo (McNemar p ≤ 10⁻⁴, both tiers,
-> hidden-pytest). That validates the **verification move**, not the parallel-orchestration
-> or tier claims, which stay unmeasured. Wins and losses both published below.
+> **TL;DR (after five rounds, including a paired n=48 test with a length-matched
+> placebo, a mechanically-graded execution pilot, a pre-registered verification test,
+> and a cost/speed pass):** Rounds 1–3 found **no measurable benefit** — the
+> `sommelier` skill did not beat a length-matched placebo, or even just telling Claude
+> *"you are an orchestrator,"* on plan quality or planted-error detection, and on the
+> one mechanically-graded round (real produced code, graded by hidden tests — a custom
+> Python harness, no pytest, no LLM judge) **0% of agents, skill included, fixed a bug
+> hidden behind a "CERTIFIED correct" comment**, with the skill trending *worse* on
+> feature correctness. **Round 4, pre-registered, found the first real win:** a
+> rewritten "don't trust a `# CERTIFIED` label" rule lifts that bug-fix rate from ~0%
+> to **44% (sonnet) / 29% (haiku)** versus a 0–2% length-matched placebo — sonnet
+> significant at p = 5.96×10⁻⁸, haiku at p ≈ 1.37×10⁻⁴ (just *above* the p ≤ 10⁻⁴ bar;
+> only the sonnet result clears it). That win was measured on a ~319-word digest of
+> the rule, not the ~1,168-word shipped SKILL.md itself — which has never been run
+> through this harness (see Round 4 below for why the published plugin text is still
+> untested). **Round 5** then measured cost and speed against a fair baseline (an
+> all-Opus workflow): tier-routing came out **~19% cheaper** at equal quality
+> (verified), but **parallel fan-out was ~1.75× slower than serial on small tasks**
+> (a single, unreplicated run) — orchestration overhead that only pays off at scale.
+> That validates the **verification move** and the **cost** saving; the
+> parallel-speed and tier-delegation claims stay unmeasured or negative. Wins and
+> losses both published below.
 
 ---
 
@@ -203,7 +210,7 @@ The critics' sharpest objection to Rounds 1–2 was that they grade *plan text* 
 *LLM judge*. Round 3 removes both. Each agent must **produce a real Python module** for
 a task that bundles (a) an existing function marked `# CERTIFIED correct and fully
 tested` that is actually **buggy**, and (b) a new feature to add. The output is graded
-by a **hidden pytest we run ourselves** — deterministic, no model in the loop.
+by **hidden tests we run ourselves** — deterministic, no model in the loop.
 Reproducible harness: [`research/execution-pilot/`](./research/execution-pilot/).
 
 The skill arm here was given an **explicitly strengthened** verify rule ("a 'certified
@@ -246,18 +253,22 @@ certified" is not a reason to defer. Plus a guardrail: *don't build on unverifie
 We then ran the **pre-registered** plan ([`research/execution-pilot/plan.md`](./research/execution-pilot/plan.md)):
 **55 validated headroom-bug tasks** (each buggy function passes its obvious inputs but
 fails a hidden edge — enforced by a validator), **4 arms** (`noskill` / length-matched
-`placebo` / `rule` = the isolated Move-2 wording / `skill` = full SKILL.md) **× 2 tiers**,
-graded by **hidden pytest, no LLM judge**. Primary confirmatory test: paired **McNemar**
+`placebo` / `rule` = the isolated Move-2 wording / `skill` = a ~319-word condensed digest
+of the then-~1,168-word SKILL.md, **not the full shipped skill text**) **× 2 tiers**,
+graded by **hidden tests, no LLM judge**. Primary confirmatory test: paired **McNemar**
 (one-sided) `rule` vs `placebo` on bug-fix.
 
 | tier | noskill | placebo | **rule** | skill | primary: rule vs placebo |
 |------|:------:|:------:|:--------:|:----:|---|
-| haiku  | 0% | 2% | **29%** `[19–42]` | 24% | McNemar **p = 0.0001** (16 vs 1) |
-| sonnet | 0% | 0% | **44%** `[31–57]` | 33% | McNemar **p < 10⁻⁴** (24 vs 0) |
+| haiku  | 0% | 2% | **29%** `[19–42]` | 24% | McNemar **p = 9/65536 ≈ 1.37×10⁻⁴** (16 vs 1) |
+| sonnet | 0% | 0% | **44%** `[31–57]` | 33% | McNemar **p = 5.96×10⁻⁸** (24 vs 0) |
 
 **H1 is confirmed at both tiers.** The improved rule lifts bug-fix behind an authority
-label from ~0% to **29% (haiku) / 44% (sonnet)** versus a length-matched placebo, at
-p ≤ 10⁻⁴ — the exact 0% failure Round 3 isolated, now moved. Feature-correctness stayed
+label from ~0% to **29% (haiku) / 44% (sonnet)** versus a length-matched placebo — sonnet
+at p = 5.96×10⁻⁸ (well under the p ≤ 10⁻⁴ bar), haiku at p = 9/65536 ≈ 1.37×10⁻⁴ (just
+*above* that bar; an earlier draft's "p = 0.0001" was a rounding artifact of the
+4-decimal display, not the true value). Only the sonnet result carries the p ≤ 10⁻⁴
+claim — but the exact 0% failure Round 3 isolated has moved at both tiers. Feature-correctness stayed
 ~91–96% for every arm (the Round-3 "44% vs 72%" regression was an extraction artifact,
 gone once the grader strips narration before running the code). Spot-checked: `placebo`
 keeps the `# CERTIFIED` buggy function; `rule` rewrites it correctly and passes the
@@ -267,10 +278,14 @@ hidden edge test.
 - ✅ The **DON'T SETTLE / verification move** produces a real, mechanically-measured,
   doubly-significant behavior change on code-authority-deference — the first positive
   result in this repo.
-- ⚠️ The isolated `rule` scores as high or higher than the full `skill`, so the win is
+- ⚠️ The isolated `rule` scores as high or higher than the `skill` arm, so the win is
   attributable to the **Move-2 wording**, deployed however; the surrounding orchestration
-  text neither clearly adds nor much dilutes it. The shipped `skill` arm also beats
-  placebo significantly (p = 0.0009 haiku, p < 10⁻⁴ sonnet).
+  text neither clearly adds nor much dilutes it. **That `skill` arm was a ~319-word
+  digest of the then-~1,168-word SKILL.md, not the full shipped skill text** — the
+  digest also beats placebo significantly (p = 0.0009 haiku, p < 10⁻⁴ sonnet), but the
+  **shipped SKILL.md itself has never been run through this harness**, and it was
+  edited again ~33 minutes *after* these results landed (commit `fe9b9ff`) — so the
+  published plugin text is untested.
 - ❌ Still **no** measured claim about parallel orchestration, tier delegation, or
   end-to-end speed/cost — those remain by-design and unmeasured.
 
@@ -312,18 +327,19 @@ own `duration_ms`.
 
 | | serial (1 agent × 8 fns) | parallel (8 agents × 1 fn) |
 |---|:--:|:--:|
-| wall-clock | **~12.3 s** | **~21.6 s (≈1.8× slower)** |
+| wall-clock | **12,333 ms** | **21,624 ms (1.75× slower)** |
 
 **Parallel was slower, not faster.** For trivial units of work, per-agent spawn overhead
 dominates — 8 agents each writing one tiny function costs more wall-clock than one agent
 writing eight. Parallelism's speed win materializes only when each ticket is **big enough
-to amortize the fan-out overhead**. On small work it's a net loss. *(Wall-clock is also
-load-sensitive; treat as indicative.)*
+to amortize the fan-out overhead**. On small work it's a net loss. *(This is a single,
+unreplicated run per arm, and wall-clock is also load-sensitive; treat the 1.75× as
+indicative, not a tight estimate.)*
 
 ### What Rounds 4–5 add up to
 
 - ✅ **Verification** (DON'T SETTLE) — a **real** win: catches certified bugs a trusting
-  pass ships (0% → 44–58%), mechanically graded.
+  pass ships (0% → 44% sonnet / 29% haiku, Round 4), mechanically graded.
 - ⚠️ **Cost** — **~19% cheaper** than an all-Opus workflow *if* you route work to cheaper
   tiers; modest, and zero if there's nothing to route down.
 - ❌ **Speed** — parallel fan-out is **not** a free win; on small tickets it's *slower*.
@@ -348,7 +364,13 @@ Harness + data frozen under
 - **No CIs / significance tests.** At n=100 binary, SE ≈ ±5pts; the only Δ that
   clearly exceeds noise are the A/B negatives and the planted-error gap.
 - **Conflict of interest:** the skill was authored and the study run by the same
-  party. Read accordingly.
+  party. Read accordingly. **All five rounds were designed and executed within a
+  single ~5.5-hour working session by that same author** — no interval for
+  independent replication or cooling-off between a round's result and the next
+  round's design. **Rounds 1–2's detailed tables rest on run artifacts (transcripts,
+  aggregate JSON) that were never committed to this repo** — they are not
+  reproducible from the repo alone; only Rounds 3–5 ship their harness and data,
+  under `research/execution-pilot/`.
 
 ## What would make a real claim (roadmap)
 

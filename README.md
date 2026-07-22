@@ -39,9 +39,9 @@ including the losses. Three things, in plain terms:
 
 | What we measured | Result | What it means for you |
 |---|:--:|---|
-| 🐛 **Catching bugs** behind a "it's fine, trust me" label (`# CERTIFIED correct`) | ✅ **0% → 44–58%** | A plain run **ships** the certified bug. The verify rule **re-checks and fixes** it. Mechanically graded (hidden tests, no AI judge), p ≤ 10⁻⁴. **This is the real win.** |
+| 🐛 **Catching bugs** behind a "it's fine, trust me" label (`# CERTIFIED correct`) | ✅ **0% → 44% (sonnet) · 29% (haiku)** | A plain run **ships** the certified bug. The verify rule **re-checks and fixes** it. Mechanically graded (hidden tests, no AI judge), sonnet McNemar p ≈ 6×10⁻⁸. **This is the real win.** |
 | 💰 **Cost** vs a workflow that runs everything on Opus | ⚠️ **~19% cheaper** | Routing the coding to Sonnet and keeping Opus only for the gate saves money — *only if* you have work to push to cheaper models. Same tokens, cheaper tokens. |
-| ⚡ **Speed** from running tickets in parallel | ❌ **slower on small tasks** | Spawning 8 agents to write 8 tiny functions was **1.8× slower** than one agent doing all 8. Parallelism only wins when each ticket is genuinely big. |
+| ⚡ **Speed** from running tickets in parallel | ❌ **slower on small tasks** | Spawning 8 agents to write 8 tiny functions was **1.75× slower (single-run measurement)** than one agent doing all 8. Parallelism only wins when each ticket is genuinely big. |
 
 **The one thing that's proven:** the **verification move** — don't trust a "certified"
 label, re-run the check, fix what's broken. The parallel/tier machinery has real
@@ -95,16 +95,16 @@ Task: "Migrate off the legacy auth-core module. A report says it's 290KB, 7000 l
 
 ## Benchmark (the honest one)
 
-The strongest test — **executed code, graded by a hidden `pytest` (no LLM judge)**,
+The strongest test — **executed code, graded by hidden tests (no LLM judge)**,
 pre-registered and paired. Each of 55 tasks hides a real bug behind a `# CERTIFIED
 correct` label. Does the arm re-check the label and fix the bug?
 
 ```
-Bug-fix rate behind a "# CERTIFIED" label  (n=55, paired, hidden pytest)
+Bug-fix rate behind a "# CERTIFIED" label  (n=55, paired, hidden tests)
 
 no-skill                 0%   ░░░░░░░░░░░░░░░░░░░░
 length-matched placebo   0–2% ░░░░░░░░░░░░░░░░░░░░
-sommelier verify rule    29%  ███████░░░░░░░░░░░░░  (haiku)
+sommelier verify rule    29%  ███████░░░░░░░░░░░░░  (haiku)     (haiku p ≈ 1.4×10⁻⁴)
 sommelier verify rule    44%  ███████████░░░░░░░░░  (sonnet)   McNemar p ≤ 10⁻⁴ ✅
 ```
 
@@ -138,7 +138,7 @@ It returns a frozen PRD + file-scoped tickets (contract · re-measured metric ·
 
 The `/sommelier-plan` command stops at the plan. To actually *execute* it — dispatch a fleet,
 gate each ticket on re-measured evidence, run the completeness critic — there's a runnable
-[`Workflow`](https://code.claude.com/docs/en/claude-code) script:
+[`Workflow`](./examples/README.md) script:
 
 **[`examples/sommelier-workflow.example.js`](./examples/sommelier-workflow.example.js)**
 
@@ -206,7 +206,7 @@ taste (verify) every claim, pour (assign) each ticket to the bottle that fits, s
 
 소믈리에가 수백 종의 와인을 시음해 **잔에 오를 자격이 있는 것만** 따르듯, 저는 제가 가장 신뢰하는 엔지니어링 원칙들(**Karpathy 미니멀리즘 · YAGNI · PRD 분해 · 적대적 검증 · 모델 티어 위임**)을 하나하나 실제 작업에 시음해보고 **검증을 통과한 것만 블렌딩**해 이 플러그인을 만들었습니다.
 
-소믈리에가 요리를 하지 않듯, **오케스트레이터는 코드를 직접 짜지 않습니다** — 큰 작업을 **PRD + 파일 단위 병렬 티켓**으로 쪼개고, 각 티켓을 **가장 싼 모델 티어**에 페어링하고, **재측정한 증거가 있을 때만** 머지합니다. 그리고 코르크 난 와인은 라벨이 뭐라 하든 뱉습니다 — 그래서 이 스킬 자신도 4번 시음해 뱉은 잔까지 전부 공개했습니다.
+소믈리에가 요리를 하지 않듯, **오케스트레이터는 코드를 직접 짜지 않습니다** — 큰 작업을 **PRD + 파일 단위 병렬 티켓**으로 쪼개고, 각 티켓을 **가장 싼 모델 티어**에 페어링하고, **재측정한 증거가 있을 때만** 머지합니다. 그리고 코르크 난 와인은 라벨이 뭐라 하든 뱉습니다 — 그래서 이 스킬 자신도 5라운드 시음해 뱉은 잔까지 전부 공개했습니다.
 
 ### 세 가지 무브
 | 무브 | 코드네임 | 하는 일 |
@@ -219,9 +219,9 @@ taste (verify) every claim, pour (assign) each ticket to the bottle that fits, s
 
 ### 정직한 검증 결과 (핵심) — 5라운드, 세 축 실측
 쉬운 말로 세 가지:
-- 🐛 **버그 검증 (진짜 승리)**: 개선된 **검증 규칙**이 `# CERTIFIED`(믿어달라) 뒤에 숨은 버그 수정율을 **0% → 44%(sonnet)/29%(haiku)** 로 끌어올림. plain은 인증버그를 그대로 출하, 규칙은 재검증·수정. **LLM 심판 없는 hidden pytest** 기계채점, p ≤ 10⁻⁴.
+- 🐛 **버그 검증 (진짜 승리)**: 개선된 **검증 규칙**이 `# CERTIFIED`(믿어달라) 뒤에 숨은 버그 수정율을 **0% → 44%(sonnet)/29%(haiku)** 로 끌어올림. plain은 인증버그를 그대로 출하, 규칙은 재검증·수정. **LLM 심판 없는 hidden tests** 기계채점, p ≤ 10⁻⁴.
 - 💰 **비용 (~19% 저렴)**: 전부 opus로 돌리는 워크플로 대비, 구현을 sonnet으로 내리고 게이트만 opus로 두면 비용 ~19%↓ (토큰수는 동일, 단가가 쌈). 단, 내릴 작업이 있을 때만.
-- ⚡ **속도 (작은 작업엔 오히려 느림)**: 8개 함수를 8 에이전트로 병렬 = 1 에이전트가 다 쓰는 것보다 **1.8배 느림**(스폰 오버헤드). 병렬 이득은 티켓이 충분히 클 때만.
+- ⚡ **속도 (작은 작업엔 오히려 느림)**: 8개 함수를 8 에이전트로 병렬 = 1 에이전트가 다 쓰는 것보다 **1.75배 느림(단일 실행 측정)**(스폰 오버헤드). 병렬 이득은 티켓이 충분히 클 때만.
 - **결론**: 오케스트레이션 기계장치는 **규모가 클 때만 값어치**를 함. 작은 일엔 단일 에이전트가 싸고 빠름 — 스킬의 YAGNI 원칙 그대로.
 - 자세한 수치와 스킬이 **진** 라운드, 제가 **스스로 정정한 숫자**까지 전부 → [`BENCHMARKS.md`](./BENCHMARKS.md).
 

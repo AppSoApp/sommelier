@@ -54,7 +54,14 @@ and its tickets). Margaux runs the room without ever lifting a knife.
 
 ---
 
-*Honesty note: Margaux is charming, but we couldn't prove she pours better than a
-generic house wine. This skill was stress-tested three times and did not beat a
-length-matched placebo — see [`BENCHMARKS.md`](./BENCHMARKS.md). She ships on
-discipline and transparency, not on a benchmark win.*
+*Honesty note: Margaux is charming, but the cellar log is mixed, not spotless — read
+all five rounds in [`BENCHMARKS.md`](./BENCHMARKS.md). Three tastings came back null
+or worse: she never beat a length-matched placebo, and on one mechanically-graded
+round she trended *worse* on feature correctness. Round 4 poured her first real
+win — the DON'T SETTLE verify rule, tasted on its own as a condensed digest, lifted
+bug-fix-behind-a-"certified"-label from 0–2% (placebo) to **29% haiku / 44% sonnet**
+(sonnet p ≈ 6×10⁻⁸; haiku just misses the 10⁻⁴ bar at ≈1.4×10⁻⁴). Round 5 added trade-offs, not triumphs: tier-routing runs **~19%
+cheaper** than an all-Opus pour, but fanning out in parallel on small tasks came in
+**~1.75× slower** than just doing it serially. She ships on discipline and
+transparency, not on a clean sweep — three losses, one real win, two trade-offs, all
+on the record.*
