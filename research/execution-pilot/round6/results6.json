@@ -1,0 +1,5070 @@
+{
+  "n_items_in_bank": 60,
+  "n_records": 600,
+  "skipped_files": [],
+  "unknown_id_files": [],
+  "records": [
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "haiku",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "noskill",
+      "tier": "sonnet",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": false,
+      "error": "assertion failed: <no message>"
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "haiku",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "placebo-long",
+      "tier": "sonnet",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": false,
+      "error": "assertion failed: <no message>"
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "haiku",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "rule-only",
+      "tier": "sonnet",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "haiku",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-full",
+      "tier": "sonnet",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": false,
+      "error": "assertion failed: <no message>"
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "haiku",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a02",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a06",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a10",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a11",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-a20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b01",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b03",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b04",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b07",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b09",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b12",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b13",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b16",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b17",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b18",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-b20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c01",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c02",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c03",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c04",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c05",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c06",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c07",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c08",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c09",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c10",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c11",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c12",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c13",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c14",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c15",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c16",
+      "kind": "correct",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c17",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c18",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c19",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    },
+    {
+      "arm": "skill-no-imperative",
+      "tier": "sonnet",
+      "id": "r6-c20",
+      "kind": "buggy",
+      "passed": true,
+      "error": null
+    }
+  ],
+  "summary": {
+    "haiku": {
+      "noskill": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "placebo-long": {
+        "fix_rate": {
+          "n": 40,
+          "k": 39,
+          "pct": 97.5,
+          "wilson_ci_pct": [
+            87.1,
+            99.6
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 97.5
+      },
+      "rule-only": {
+        "fix_rate": {
+          "n": 40,
+          "k": 39,
+          "pct": 97.5,
+          "wilson_ci_pct": [
+            87.1,
+            99.6
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 97.5
+      },
+      "skill-full": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "skill-no-imperative": {
+        "fix_rate": {
+          "n": 40,
+          "k": 39,
+          "pct": 97.5,
+          "wilson_ci_pct": [
+            87.1,
+            99.6
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 97.5
+      }
+    },
+    "sonnet": {
+      "noskill": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "placebo-long": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "rule-only": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "skill-full": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      },
+      "skill-no-imperative": {
+        "fix_rate": {
+          "n": 40,
+          "k": 40,
+          "pct": 100.0,
+          "wilson_ci_pct": [
+            91.2,
+            100.0
+          ]
+        },
+        "breakage_rate": {
+          "n": 20,
+          "k": 0,
+          "pct": 0.0,
+          "wilson_ci_pct": [
+            0.0,
+            16.1
+          ]
+        },
+        "net_pct": 100.0
+      }
+    }
+  },
+  "mcnemar": {
+    "haiku": {
+      "skill-full_vs_placebo-long": {
+        "arm_x": "skill-full",
+        "arm_y": "placebo-long",
+        "direction": "H1: skill-full fix-rate > placebo-long fix-rate",
+        "n_paired": 40,
+        "b_x_only": 1,
+        "c_y_only": 0,
+        "p_one_sided_exact_fraction": "1/2",
+        "p_one_sided_exact_decimal": "0.5"
+      },
+      "rule-only_vs_placebo-long": {
+        "arm_x": "rule-only",
+        "arm_y": "placebo-long",
+        "direction": "H1: rule-only fix-rate > placebo-long fix-rate",
+        "n_paired": 40,
+        "b_x_only": 0,
+        "c_y_only": 0,
+        "p_one_sided_exact_fraction": "1/1",
+        "p_one_sided_exact_decimal": "1"
+      }
+    },
+    "sonnet": {
+      "skill-full_vs_placebo-long": {
+        "arm_x": "skill-full",
+        "arm_y": "placebo-long",
+        "direction": "H1: skill-full fix-rate > placebo-long fix-rate",
+        "n_paired": 40,
+        "b_x_only": 0,
+        "c_y_only": 0,
+        "p_one_sided_exact_fraction": "1/1",
+        "p_one_sided_exact_decimal": "1"
+      },
+      "rule-only_vs_placebo-long": {
+        "arm_x": "rule-only",
+        "arm_y": "placebo-long",
+        "direction": "H1: rule-only fix-rate > placebo-long fix-rate",
+        "n_paired": 40,
+        "b_x_only": 0,
+        "c_y_only": 0,
+        "p_one_sided_exact_fraction": "1/1",
+        "p_one_sided_exact_decimal": "1"
+      }
+    }
+  }
+}

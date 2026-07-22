@@ -4,9 +4,9 @@
 > be hypocritical to ship inflated numbers. So here is everything we measured,
 > including the parts where the skill **lost** or the metric **didn't hold up**.
 >
-> **TL;DR (after five rounds, including a paired n=48 test with a length-matched
-> placebo, a mechanically-graded execution pilot, a pre-registered verification test,
-> and a cost/speed pass):** Rounds 1–3 found **no measurable benefit** — the
+> **TL;DR (after six rounds, including a paired n=48 test with a length-matched
+> placebo, a mechanically-graded execution pilot, two pre-registered verification
+> tests, and a cost/speed pass):** Rounds 1–3 found **no measurable benefit** — the
 > `sommelier` skill did not beat a length-matched placebo, or even just telling Claude
 > *"you are an orchestrator,"* on plan quality or planted-error detection, and on the
 > one mechanically-graded round (real produced code, graded by hidden tests — a custom
@@ -23,9 +23,14 @@
 > all-Opus workflow): tier-routing came out **~19% cheaper** at equal quality
 > (verified), but **parallel fan-out was ~1.75× slower than serial on small tasks**
 > (a single, unreplicated run) — orchestration overhead that only pays off at scale.
-> That validates the **verification move** and the **cost** saving; the
-> parallel-speed and tier-delegation claims stay unmeasured or negative. Wins and
-> losses both published below.
+> **Round 6**, pre-registered to finally test the *shipped* SKILL.md text
+> (mutation-generated bugs, negative controls, pinned hashes), came back **null at
+> the ceiling: every arm including no-skill fixed ~100%** — our probe handed agents
+> the full spec, so the task itself did the verifying; instrument failure, published
+> as-is, and the shipped text remains unmeasured pending a corrected probe (E1b).
+> Net: the **verification move** (as a digest) and the **cost** saving are validated;
+> the shipped-text effect, parallel-speed, and tier-delegation claims stay unmeasured
+> or negative. Wins and losses both published below.
 
 ---
 
@@ -351,6 +356,44 @@ to a one-liner.*
 
 Harness + data frozen under
 [`research/execution-pilot/round5/`](./research/execution-pilot/round5/).
+
+## Round 6 — Ship-What-You-Test: **null (ceiling — our instrument failed)**
+
+Round 4's audit left a hole we could not leave open: the arm it tested was a
+~319-word digest, so **the shipped SKILL.md text had never been measured**. Round 6
+was pre-registered (frozen plan + pinned sha256 of every arm text + itembank +
+grader, all committed *before* any output — commit `5cc6292`) to close that hole:
+5 arms (noskill / length-matched placebo / **the literal shipped SKILL.md** /
+rule-only / an imperative-wording ablation) × 2 tiers × 60 items, 40 of them
+certified-buggy via an **AST mutation engine** (no hand-written bugs, rotated
+certification vocabulary, zero lexical overlap with arm texts) plus **20
+correct-certified negative controls** — the two design defects the audit flagged
+in Round 4, both fixed. All 600 outputs committed raw before grading.
+
+**Result: null — a complete ceiling.** Every arm, *including the no-skill
+baseline*, fixed 97.5–100% of the bugs (pre-registered McNemar: sonnet p = 1,
+haiku p = 0.5). Diagnosis: our E1 task template handed each agent the function
+**plus its full edge-case spec** and asked for the final version — so the task
+itself performed the verification, and rewriting from spec was the natural
+completion regardless of any skill text. Round 4 had headroom precisely because
+its certified-buggy function was an **unspecced background dependency** of a
+different task — fixing it required *choosing* to distrust a label. Round 3
+failed at the floor (0% everywhere); Round 6 failed at the ceiling (100%
+everywhere). Same lesson from both sides: **this instrument only measures the
+rule when trusting the label is the path of least resistance.**
+
+Two things Round 6 still established: the shipped skill added nothing when the
+task already forces verification (its own YAGNI clause, measured); and across
+200 correct-certified outputs in the skill/rule arms, **0 were broken** — no
+evidence the rule makes agents vandalize working code. What it did **not**
+establish: whether the shipped text reproduces Round 4's win under a faithful
+propagation probe. That is E1b — same frozen itembank and arms, Round-4-shaped
+template, pre-registration addendum first — and until it runs, the honest status
+line is: *the verification effect is proven for a condensed digest of the rule
+(Round 4); for the shipped full text it remains unmeasured.*
+
+Full write-up, per-arm table, and diagnosis:
+[`research/execution-pilot/round6/`](./research/execution-pilot/round6/README.md).
 
 ## Methodology & threats to validity
 
